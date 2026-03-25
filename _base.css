@@ -122,3 +122,43 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
   .footer-cta-band,.footer-body{padding-left:1.25rem;padding-right:1.25rem}
 }
 @media(max-width:600px){nav{top:.75rem}}
+
+/* Services page card grid fix */
+.svc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.svc-row-checklist { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+@media(max-width: 768px) {
+  .svc-row { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .svc-row-checklist { grid-template-columns: 1fr !important; }
+}
+
+/* Mobile responsive overrides */
+@media(max-width: 768px) {
+  .contact-outer, .about-outer, .geo-outer, .svc-row, #included-outer {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .svc-row-checklist {
+    grid-template-columns: 1fr !important;
+  }
+  /* Fix any inline 2-col grids */
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  /* Form row */
+  [style*="display:grid;grid-template-columns:1fr 1fr;gap:1rem"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Process steps */
+  [style*="grid-template-columns:3rem 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Case bar */
+  .case-bar { flex-direction: column; align-items: flex-start; }
+  /* Page hero padding */
+  .page-hero { padding: 7rem 1.25rem 3rem; }
+  .sec { padding: 4rem 1.25rem; }
+  .footer-cta-band { padding: 3rem 1.25rem; }
+  .footer-body { padding: 3rem 1.25rem 1.5rem; }
+}
