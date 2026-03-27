@@ -182,8 +182,8 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 .nav-dropdown-wrap{position:relative}
 .nav-dropdown-btn{background:none;border:none;cursor:pointer;color:rgba(245,245,240,.65);font-size:.875rem;font-weight:500;padding:.4rem .85rem;border-radius:9999px;transition:all .3s;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:.3rem}
 .nav-dropdown-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
-.nav-dropdown{position:absolute;top:calc(100% + .75rem);left:50%;transform:translateX(-50%);background:rgba(12,12,12,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:.5rem;min-width:220px;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.22,1,.36,1);transform-origin:top center}
-.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav-dropdown{position:absolute;top:calc(100% + .75rem);left:50%;transform:translateX(-50%) translateY(-8px);background:rgba(12,12,12,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:.5rem;min-width:220px;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1);transform-origin:top center;z-index:200}
+.nav-dropdown-wrap.open .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
 .nav-dropdown a{display:block;padding:.6rem 1rem;border-radius:.6rem;color:rgba(245,245,240,.7);font-size:.85rem;font-weight:500;transition:all .2s}
 .nav-dropdown a:hover{background:rgba(255,255,255,.06);color:var(--text)}
 
@@ -337,15 +337,38 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 <script>// Nav scroll
 const nav = document.getElementById('main-nav');
 if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
 // Hamburger
 const hb = document.getElementById('hamburger');
 const mm = document.getElementById('mobile-menu');
 if(hb) hb.addEventListener('click',()=>{const o=mm.classList.toggle('open');hb.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''});
 function closeMenu(){mm.classList.remove('open');hb.classList.remove('open');document.body.style.overflow=''}
+
+// Industries dropdown — click based so it doesn't glitch
+const dropdownWrap = document.querySelector('.nav-dropdown-wrap');
+const dropdownBtn = document.querySelector('.nav-dropdown-btn');
+if(dropdownBtn) {
+  dropdownBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdownWrap.classList.toggle('open');
+  });
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if(!dropdownWrap.contains(e.target)) {
+      dropdownWrap.classList.remove('open');
+    }
+  });
+  // Close when clicking a link inside dropdown
+  document.querySelectorAll('.nav-dropdown a').forEach(link => {
+    link.addEventListener('click', () => dropdownWrap.classList.remove('open'));
+  });
+}
+
 // Reveal
 document.querySelectorAll('.reveal').forEach(el=>{
   new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('visible');e.target._obs&&e.target._obs.disconnect()}},{threshold:.1}).observe(el);
 });
+
 // Form
 const form = document.getElementById('audit-form');
 if(form) form.addEventListener('submit',async e=>{

@@ -1,15 +1,38 @@
 // Nav scroll
 const nav = document.getElementById('main-nav');
 if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
 // Hamburger
 const hb = document.getElementById('hamburger');
 const mm = document.getElementById('mobile-menu');
 if(hb) hb.addEventListener('click',()=>{const o=mm.classList.toggle('open');hb.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''});
 function closeMenu(){mm.classList.remove('open');hb.classList.remove('open');document.body.style.overflow=''}
+
+// Industries dropdown — click based so it doesn't glitch
+const dropdownWrap = document.querySelector('.nav-dropdown-wrap');
+const dropdownBtn = document.querySelector('.nav-dropdown-btn');
+if(dropdownBtn) {
+  dropdownBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdownWrap.classList.toggle('open');
+  });
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if(!dropdownWrap.contains(e.target)) {
+      dropdownWrap.classList.remove('open');
+    }
+  });
+  // Close when clicking a link inside dropdown
+  document.querySelectorAll('.nav-dropdown a').forEach(link => {
+    link.addEventListener('click', () => dropdownWrap.classList.remove('open'));
+  });
+}
+
 // Reveal
 document.querySelectorAll('.reveal').forEach(el=>{
   new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('visible');e.target._obs&&e.target._obs.disconnect()}},{threshold:.1}).observe(el);
 });
+
 // Form
 const form = document.getElementById('audit-form');
 if(form) form.addEventListener('submit',async e=>{
