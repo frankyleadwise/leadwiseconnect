@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Roofing Marketing Agency | Websites & SEO for Roofing Companies | LeadWise Connect</title>
+<meta name="description" content="We build SEO-optimized websites and lead generation systems exclusively for Roofing Companies. Stop paying for shared leads — own your Google rankings instead."/>
+<meta property="og:title" content="Roofing Marketing Agency | Websites & SEO for Roofing Companies | LeadWise Connect"/>
+<meta property="og:description" content="We build SEO-optimized websites and lead generation systems exclusively for Roofing Companies. Stop paying for shared leads — own your Google rankings instead."/>
+<meta property="og:url" content="https://leadwiseconnect.com/roofing-marketing.html"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://leadwiseconnect.com/roofing-marketing.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#E8A020;--gold-light:#F5C060;--gold-dark:#B87818;
+  --black:#080808;--surface:#111111;--surface2:#1A1A1A;
+  --border:rgba(255,255,255,0.07);--border-gold:rgba(232,160,32,0.25);
+  --text:#F5F5F0;--text2:#9A9890;--text3:#5A5856;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:2px}
+.serif{font-family:'DM Serif Display',serif}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:1.25rem;left:50%;transform:translateX(-50%);z-index:100;width:min(860px,calc(100vw - 2rem));transition:all .5s cubic-bezier(.22,1,.36,1)}
+nav.scrolled{width:min(680px,calc(100vw - 2rem))}
+.nav-inner{background:rgba(8,8,8,.6);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:9999px;padding:.6rem .75rem .6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .5s cubic-bezier(.22,1,.36,1)}
+nav.scrolled .nav-inner{background:rgba(8,8,8,.92);box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.nav-logo{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.1rem;letter-spacing:-.02em;color:var(--text)}
+.nav-logo .gold{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-links a{color:rgba(245,245,240,.65);font-size:.875rem;font-weight:500;padding:.4rem .85rem;border-radius:9999px;transition:all .3s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-nav{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold);color:#080808;font-weight:600;font-size:.85rem;padding:.55rem 1.25rem;border-radius:9999px;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif}
+.btn-nav:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,160,32,.3)}
+.hamburger{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:50%;width:2.25rem;height:2.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:.55rem}
+.hamburger span{display:block;width:14px;height:1.5px;background:var(--text);transition:all .4s cubic-bezier(.22,1,.36,1);transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.menu-overlay{position:fixed;inset:0;z-index:99;background:rgba(8,8,8,.97);backdrop-filter:blur(24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.22,1,.36,1)}
+.menu-overlay.open{opacity:1;pointer-events:all}
+.menu-overlay a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;letter-spacing:-.03em;opacity:0;transform:translateY(24px);transition:all .5s cubic-bezier(.22,1,.36,1)}
+.menu-overlay.open a{opacity:1;transform:translateY(0)}
+.menu-overlay a.gold{color:var(--gold)}
+.menu-overlay.open a:nth-child(1){transition-delay:0ms}
+.menu-overlay.open a:nth-child(2){transition-delay:60ms}
+.menu-overlay.open a:nth-child(3){transition-delay:120ms}
+.menu-overlay.open a:nth-child(4){transition-delay:180ms}
+.menu-overlay.open a:nth-child(5){transition-delay:240ms}
+
+/* BUTTONS */
+.btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#080808;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:9999px;border:none;cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 12px 32px rgba(232,160,32,.3)}
+.btn-gold:active{transform:scale(.98)}
+.icon-wrap{width:1.75rem;height:1.75rem;border-radius:50%;background:rgba(0,0,0,.15);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text);font-weight:500;font-size:1rem;padding:1rem 2rem;border-radius:9999px;border:1px solid var(--border);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif}
+.btn-ghost:hover{border-color:var(--border-gold);color:var(--gold-light)}
+
+/* LAYOUT */
+.sec{padding:8rem 2rem}
+.container{max-width:1280px;margin:0 auto}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:1.5rem;padding:2rem}
+.card-gold{background:rgba(232,160,32,.04);border:1px solid rgba(232,160,32,.12);border-radius:1.5rem}
+
+/* PILLS */
+.pills{display:flex;flex-wrap:wrap;gap:.75rem}
+.pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9999px;padding:.5rem 1.25rem;font-size:.875rem;color:var(--text2)}
+
+/* FORM */
+.fg{margin-bottom:1.25rem}
+.fg label{display:block;font-size:.8rem;font-weight:500;color:var(--text2);margin-bottom:.5rem}
+.fg input,.fg select,.fg textarea{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;color:var(--text);padding:.875rem 1.25rem;outline:none;font-family:'Outfit',sans-serif;font-size:.95rem;width:100%;transition:border-color .3s}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text3)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--border-gold);box-shadow:0 0 0 3px rgba(232,160,32,.08)}
+.fg select{appearance:none;cursor:pointer}
+.fg select option{background:#1A1A1A}
+.fg textarea{resize:vertical}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.fadein{animation:fadeUp .8s cubic-bezier(.22,1,.36,1) both}
+.d1{animation-delay:80ms}.d2{animation-delay:160ms}.d3{animation-delay:240ms}.d4{animation-delay:320ms}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.06)}
+.footer-cta-band{background:rgba(232,160,32,.06);border-bottom:1px solid rgba(232,160,32,.12);padding:4rem 2rem}
+.footer-cta-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem}
+.footer-cta-inner h3{font-size:clamp(1.75rem,3vw,2.5rem);color:var(--text);line-height:1.1}
+.footer-body{max-width:1280px;margin:0 auto;padding:4rem 2rem 2rem}
+.footer-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3rem;margin-bottom:3rem}
+.footer-col-label{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;display:block}
+.footer-col-links{display:flex;flex-direction:column;gap:.6rem}
+.footer-col-links a{color:var(--text2);font-size:.875rem;transition:color .2s}
+.footer-col-links a:hover{color:var(--gold)}
+.footer-brand-desc{color:var(--text3);font-size:.875rem;line-height:1.7;max-width:220px;margin-top:1rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.footer-bottom p,.footer-bottom a{color:#3A3836;font-size:.8rem}
+.footer-bottom-links{display:flex;gap:1.5rem}
+
+/* MARQUEE */
+.marquee-wrap{border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:1.25rem 0;overflow:hidden;background:rgba(232,160,32,.03)}
+.marquee-track{display:flex;gap:3rem;width:max-content;animation:marquee 28s linear infinite}
+.marquee-item{display:flex;align-items:center;gap:3rem;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
+.mdot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+/* PAGE HERO */
+.page-hero{padding:10rem 2rem 5rem}
+.page-hero h1{font-size:clamp(2.5rem,5vw,4.5rem);color:var(--text);line-height:1.0;max-width:800px;margin-bottom:1.75rem}
+.page-hero p{color:var(--text2);font-size:1.1rem;max-width:580px;line-height:1.75}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:.6rem}
+.check-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.875rem;color:var(--text2);line-height:1.4}
+.check-item svg{color:var(--gold);flex-shrink:0;margin-top:.1rem}
+
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pulse-gold{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:900px){
+  .nav-links,.btn-nav-desktop{display:none!important}
+  .sec{padding:5rem 1.25rem}
+  .page-hero{padding:8rem 1.25rem 4rem}
+  .footer-cta-band,.footer-body{padding-left:1.25rem;padding-right:1.25rem}
+}
+@media(max-width:600px){nav{top:.75rem}}
+
+/* Services page card grid fix */
+.svc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.svc-row-checklist { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+@media(max-width: 768px) {
+  .svc-row { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .svc-row-checklist { grid-template-columns: 1fr !important; }
+}
+
+/* Mobile responsive overrides */
+@media(max-width: 768px) {
+  .contact-outer, .about-outer, .geo-outer, .svc-row, #included-outer {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .svc-row-checklist {
+    grid-template-columns: 1fr !important;
+  }
+  /* Fix any inline 2-col grids */
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  /* Form row */
+  [style*="display:grid;grid-template-columns:1fr 1fr;gap:1rem"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Process steps */
+  [style*="grid-template-columns:3rem 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Case bar */
+  .case-bar { flex-direction: column; align-items: flex-start; }
+  /* Page hero padding */
+  .page-hero { padding: 7rem 1.25rem 3rem; }
+  .sec { padding: 4rem 1.25rem; }
+  .footer-cta-band { padding: 3rem 1.25rem; }
+  .footer-body { padding: 3rem 1.25rem 1.5rem; }
+}
+
+/* Industries dropdown */
+.nav-dropdown-wrap{position:relative}
+.nav-dropdown-btn{background:none;border:none;cursor:pointer;color:rgba(245,245,240,.65);font-size:.875rem;font-weight:500;padding:.4rem .85rem;border-radius:9999px;transition:all .3s;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:.3rem}
+.nav-dropdown-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-dropdown{position:absolute;top:calc(100% + .75rem);left:50%;transform:translateX(-50%);background:rgba(12,12,12,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:.5rem;min-width:220px;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.22,1,.36,1);transform-origin:top center}
+.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav-dropdown a{display:block;padding:.6rem 1rem;border-radius:.6rem;color:rgba(245,245,240,.7);font-size:.85rem;font-weight:500;transition:all .2s}
+.nav-dropdown a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+
+</style>
+</head>
+<body>
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>
+      LEADWISE<span class="gold">.</span>
+    </a>
+    <div class="nav-links">
+      <a href="services.html">Services</a>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-dropdown-btn">Industries <span style="font-size:.65rem;opacity:.6">▾</span></button>
+        <div class="nav-dropdown">
+          <a href="hvac-marketing.html">HVAC</a>
+          <a href="plumber-marketing.html">Plumbing</a>
+          <a href="roofing-marketing.html">Roofing</a>
+          <a href="electrician-marketing.html">Electrical</a>
+          <a href="pest-control-marketing.html">Pest Control</a>
+          <a href="landscaping-marketing.html">Landscaping</a>
+          <a href="painting-contractor-marketing.html">Painting</a>
+          <a href="general-contractor-marketing.html">General Contractors</a>
+          <div style="border-top:1px solid rgba(255,255,255,.07);margin:.25rem 0"></div>
+          <a href="vs-angi-homeadvisor.html" style="color:var(--gold)!important">vs. Angi & HomeAdvisor</a>
+        </div>
+      </div>
+      <a href="results.html">Results</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-nav btn-nav-desktop">Get Free Audit <span style="font-size:.75rem">↗</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="menu-overlay" id="mobile-menu">
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="hvac-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">HVAC</a>
+  <a href="plumber-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Plumbing</a>
+  <a href="roofing-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Roofing</a>
+  <a href="results.html" onclick="closeMenu()">Results</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
+  <a href="contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
+</div>
+
+</nav>
+<div class="menu-overlay" id="mobile-menu">
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="results.html" onclick="closeMenu()">Results</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
+  <a href="contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
+</div>
+
+
+<section class="page-hero" style="background:radial-gradient(ellipse 60% 50% at 50% -10%,rgba(232,160,32,.12) 0%,transparent 70%);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:80px 80px;pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.2);border-radius:9999px;padding:.35rem .85rem .35rem .5rem;margin-bottom:1.5rem" class="fadein">
+      <span style="width:6px;height:6px;border-radius:50%;background:#E8A020;animation:pulse-gold 2s ease-in-out infinite"></span>
+      <span style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#E8A020">Roofing Marketing Specialists</span>
+    </div>
+    <h1 class="serif fadein d1" style="font-size:clamp(2.75rem,6vw,5.5rem);color:var(--text);line-height:1;max-width:900px;margin-bottom:1.75rem">
+      Stop renting leads.<br><span style="background:linear-gradient(135deg,#F5C060 0%,#E8A020 50%,#B87818 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Own your rankings</span><br>instead.
+    </h1>
+    <p class="fadein d2" style="font-size:clamp(1rem,2vw,1.2rem);color:var(--text2);max-width:580px;line-height:1.75;margin-bottom:2.5rem">Roofing is a high-ticket, high-competition market. The companies winning the most jobs are not the ones spending the most on lead platforms — they are the ones who own page one of Google. We build SEO-optimized websites and lead systems that put your roofing companies company at the top of Google — so customers call you directly, not a lead broker.</p>
+    <div class="fadein d3" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:4rem">
+      <a href="contact.html" class="btn-gold" style="font-size:1rem;padding:1rem 2rem">Get Your Free Roofing Audit <span class="icon-wrap">↗</span></a>
+      <a href="results.html" class="btn-ghost" style="font-size:1rem;padding:1rem 2rem">See Our Work</a>
+    </div>
+    <div class="fadein d4" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:600px" id="hero-stats">
+      <div style="background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.15);border-radius:1rem;padding:1.25rem;text-align:center">
+        <p style="font-size:2rem;font-weight:800;color:var(--gold);letter-spacing:-.04em;line-height:1">$12k+</p>
+        <p style="font-size:.75rem;color:var(--text2);margin-top:.35rem;line-height:1.4">average roofing job value — one organic lead pays for months of SEO</p>
+      </div>
+      <div style="background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.15);border-radius:1rem;padding:1.25rem;text-align:center">
+        <p style="font-size:2rem;font-weight:800;color:var(--gold);letter-spacing:-.04em;line-height:1">68%</p>
+        <p style="font-size:.75rem;color:var(--text2);margin-top:.35rem;line-height:1.4">of homeowners pick the first contractor they find on Google</p>
+      </div>
+      <div style="background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.15);border-radius:1rem;padding:1.25rem;text-align:center">
+        <p style="font-size:2rem;font-weight:800;color:var(--gold);letter-spacing:-.04em;line-height:1">5x</p>
+        <p style="font-size:.75rem;color:var(--text2);margin-top:.35rem;line-height:1.4">higher close rate on organic leads vs. shared platform leads</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:rgba(232,160,32,.03);border-top:1px solid rgba(232,160,32,.08);border-bottom:1px solid rgba(232,160,32,.08)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center" id="pain-grid">
+      <div class="reveal">
+        <span class="eyebrow">The Problem</span>
+        <h2 class="serif" style="font-size:clamp(1.75rem,3vw,2.75rem);color:var(--text);margin-bottom:1.5rem">Angi and HomeAdvisor are not your friends.</h2>
+        <p style="color:var(--text2);line-height:1.8;margin-bottom:1.5rem">Storm season brings door-knockers and lead sellers flooding the market simultaneously. Angi roofing leads can cost $100–$300 each, get sold to multiple contractors, and convert at a fraction of organic leads. Homeowners who find you directly through Google already trust you enough to call — they did not get your number from a platform that sent them five other options first.</p>
+        <p style="color:var(--text2);line-height:1.8">Every dollar you spend on shared leads is a dollar that could be building your own Google rankings — an asset you own forever, not a tap that turns off the moment you stop paying.</p>
+      </div>
+      <div class="reveal">
+        <div style="display:flex;flex-direction:column;gap:.75rem">
+          <p style="font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem">Lead platforms vs. owning your rankings</p>
+          <div style="background:var(--surface);border:1px solid rgba(255,87,87,.2);border-radius:1rem;padding:1.5rem">
+            <p style="font-weight:700;color:#F87171;font-size:.9rem;margin-bottom:1rem">❌ Angi / HomeAdvisor / Thumbtack</p>
+            <div style="display:flex;flex-direction:column;gap:.6rem">
+              <div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem;color:#F87171"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg><span style="font-size:.875rem;color:var(--text2)">$50–$200 per shared lead — split with 3–5 competitors</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem;color:#F87171"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg><span style="font-size:.875rem;color:var(--text2)">Leads go cold fast — you're one of many calling</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem;color:#F87171"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg><span style="font-size:.875rem;color:var(--text2)">Zero brand building — customers remember the platform, not you</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem;color:#F87171"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg><span style="font-size:.875rem;color:var(--text2)">Pricing goes up every year — you have no leverage</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem;color:#F87171"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg><span style="font-size:.875rem;color:var(--text2)">Turn it off and the phone goes silent immediately</span></div>
+            </div>
+          </div>
+          <div style="background:var(--surface);border:1px solid rgba(232,160,32,.2);border-radius:1rem;padding:1.5rem">
+            <p style="font-weight:700;color:var(--gold);font-size:.9rem;margin-bottom:1rem">✓ LeadWise: Own Your Google Rankings</p>
+            <div style="display:flex;flex-direction:column;gap:.6rem">
+              <div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg><span style="font-size:.875rem;color:var(--text2)">Customers find YOU directly — no middleman</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg><span style="font-size:.875rem;color:var(--text2)">Exclusive leads — they called your number, nobody else</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg><span style="font-size:.875rem;color:var(--text2)">Every month your rankings compound and get stronger</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg><span style="font-size:.875rem;color:var(--text2)">Your site is an asset that works while you sleep</span></div><div style="display:flex;align-items:flex-start;gap:.6rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg><span style="font-size:.875rem;color:var(--text2)">Stop paying and the rankings stay — you built something real</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="reveal">
+      <span class="eyebrow">What We Build for Roofing Companies</span>
+      <h2 class="serif" style="font-size:clamp(1.75rem,3vw,2.75rem);color:var(--text);max-width:600px;margin-bottom:1rem">Everything a roofing company needs to dominate local search</h2>
+      <p style="color:var(--text2);margin-bottom:3rem;max-width:560px;line-height:1.7">We have built our entire system around how roofing companies get found online. Every page we create, every keyword we target, every automation we configure is specific to your trade.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:1rem"><div style="flex-shrink:0;margin-top:.1rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div><div><p style="font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.25rem">Roofing service pages that rank</p><p style="color:var(--text2);font-size:.85rem;line-height:1.6">Dedicated pages for roof replacement, roof repair, storm damage, flat roofing, gutters, and every service you offer — each built around the keywords homeowners and insurance adjusters search.</p></div></div><div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:1rem"><div style="flex-shrink:0;margin-top:.1rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div><div><p style="font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.25rem">Storm damage SEO surge strategy</p><p style="color:var(--text2);font-size:.85rem;line-height:1.6">When a major storm hits your market, we have a playbook ready to push your storm damage pages to the top of search results within 48 hours.</p></div></div><div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:1rem"><div style="flex-shrink:0;margin-top:.1rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div><div><p style="font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.25rem">Insurance claim content</p><p style="color:var(--text2);font-size:.85rem;line-height:1.6">We create content that educates homeowners on the insurance claim process and positions your company as the expert guide — the highest-converting roofing leads in the market.</p></div></div><div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:1rem"><div style="flex-shrink:0;margin-top:.1rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div><div><p style="font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.25rem">AI call answering</p><p style="color:var(--text2);font-size:.85rem;line-height:1.6">Every call answered instantly. Every lead qualified. Every appointment booked — even during the post-storm rush when your phone is ringing off the hook.</p></div></div><div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:1rem"><div style="flex-shrink:0;margin-top:.1rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div><div><p style="font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.25rem">Reputation building system</p><p style="color:var(--text2);font-size:.85rem;line-height:1.6">Roofing is a referral-heavy trade. Our automated review system turns every satisfied customer into a 5-star Google review that drives the next job.</p></div></div><div style="display:flex;align-items:flex-start;gap:.75rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:1rem"><div style="flex-shrink:0;margin-top:.1rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div><div><p style="font-weight:600;color:var(--text);font-size:.95rem;margin-bottom:.25rem">City and neighborhood pages</p><p style="color:var(--text2);font-size:.85rem;line-height:1.6">We build location pages targeting every community you serve, so you rank for 'roofing contractor [city]' searches across your entire market.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:#0D0D0D;border-top:1px solid rgba(255,255,255,.04)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start" id="why-grid">
+      <div class="reveal">
+        <span class="eyebrow">Why LeadWise</span>
+        <h2 class="serif" style="font-size:clamp(1.75rem,3vw,2.75rem);color:var(--text);margin-bottom:3rem">Why Roofing Companies choose us over a generalist agency</h2>
+        <div style="display:flex;flex-direction:column;gap:1.5rem">
+          <div style="display:flex;gap:1rem"><div style="width:2px;background:rgba(232,160,32,.3);border-radius:9999px;flex-shrink:0"></div><div><p style="font-weight:600;color:var(--text);margin-bottom:.25rem;font-size:.95rem">We understand the roofing sales cycle</p><p style="color:var(--text2);font-size:.875rem;line-height:1.6">From the initial inspection through the insurance claim to the final walkthrough — we know how roofing jobs are won and we build your digital presence around that process.</p></div></div><div style="display:flex;gap:1rem"><div style="width:2px;background:rgba(232,160,32,.3);border-radius:9999px;flex-shrink:0"></div><div><p style="font-weight:600;color:var(--text);margin-bottom:.25rem;font-size:.95rem">Storm season ready</p><p style="color:var(--text2);font-size:.875rem;line-height:1.6">We build your SEO foundation before storm season so when hail hits your market, you are already ranking — not scrambling to catch up.</p></div></div><div style="display:flex;gap:1rem"><div style="width:2px;background:rgba(232,160,32,.3);border-radius:9999px;flex-shrink:0"></div><div><p style="font-weight:600;color:var(--text);margin-bottom:.25rem;font-size:.95rem">High-ticket means high ROI</p><p style="color:var(--text2);font-size:.875rem;line-height:1.6">One organic roofing lead that closes is worth $8,000–$25,000. The math on owning your rankings vs. renting leads is overwhelming.</p></div></div><div style="display:flex;gap:1rem"><div style="width:2px;background:rgba(232,160,32,.3);border-radius:9999px;flex-shrink:0"></div><div><p style="font-weight:600;color:var(--text);margin-bottom:.25rem;font-size:.95rem">No door-knockers, no lead brokers</p><p style="color:var(--text2);font-size:.875rem;line-height:1.6">Your customers found your website, read about your company, and chose to call you. That is a completely different quality of lead.</p></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div style="background:rgba(232,160,32,.05);border:1px solid rgba(232,160,32,.15);border-radius:1.5rem;padding:2.5rem">
+          <span class="eyebrow">Free audit included</span>
+          <h3 class="serif" style="font-size:1.75rem;color:var(--text);margin-bottom:1rem">See how much revenue you are leaving on the table with your current online presence.</h3>
+          <p style="color:var(--text2);line-height:1.7;margin-bottom:2rem;font-size:.95rem">We will audit your current website, Google rankings, and competitor landscape — then show you exactly what it would take to rank above them. No pitch. No pressure. Just data.</p>
+          <a href="contact.html" class="btn-gold" style="width:100%;justify-content:center;font-size:1rem">Get My Free Roofing Audit <span class="icon-wrap">↗</span></a>
+          <p style="font-size:.75rem;color:var(--text3);text-align:center;margin-top:1rem">Responds within 24 hours · No obligation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-cta-band">
+    <div class="footer-cta-inner">
+      <div>
+        <span class="eyebrow">Ready to dominate your market?</span>
+        <h3 class="serif">Let's build something that works<br>while you sleep.</h3>
+      </div>
+      <a href="contact.html" class="btn-gold">Get Your Free Audit <span class="icon-wrap">↗</span></a>
+    </div>
+  </div>
+  <div class="footer-body">
+    <div class="footer-cols">
+      <div>
+        <a href="index.html" class="nav-logo"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>LEADWISE<span class="gold">.</span></a>
+        <p class="footer-brand-desc">Premium digital marketing for local service contractors. Based in Tampa, FL. Serving the US.</p>
+      </div>
+      <div>
+        <span class="footer-col-label">Services</span>
+        <div class="footer-col-links">
+          <a href="services/smart-websites.html">Smart Websites</a>
+          <a href="services/ai-voice-agents.html">AI Voice Agents</a>
+          <a href="services/lead-generation.html">Lead Generation</a>
+          <a href="services/crm-automation.html">CRM &amp; Automation</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Markets</span>
+        <div class="footer-col-links">
+          <a href="contact.html">Tampa, FL</a>
+          <a href="contact.html">Houston, TX</a>
+          <a href="contact.html">Atlanta, GA</a>
+          <a href="contact.html">Dallas, TX</a>
+          <a href="contact.html">Phoenix, AZ</a>
+          <a href="contact.html">Charlotte, NC</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Company</span>
+        <div class="footer-col-links">
+          <a href="about.html">About</a>
+          <a href="results.html">Results</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 LeadWise Connect LLC. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="sitemap.xml">Sitemap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>// Nav scroll
+const nav = document.getElementById('main-nav');
+if(nav) window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+// Hamburger
+const hb = document.getElementById('hamburger');
+const mm = document.getElementById('mobile-menu');
+if(hb) hb.addEventListener('click',()=>{const o=mm.classList.toggle('open');hb.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''});
+function closeMenu(){mm.classList.remove('open');hb.classList.remove('open');document.body.style.overflow=''}
+// Reveal
+document.querySelectorAll('.reveal').forEach(el=>{
+  new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('visible');e.target._obs&&e.target._obs.disconnect()}},{threshold:.1}).observe(el);
+});
+// Form
+const form = document.getElementById('audit-form');
+if(form) form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=form.querySelector('button[type="submit"]');
+  btn.textContent='Sending...';btn.disabled=true;
+  try{
+    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(res.ok){document.getElementById('form-card').innerHTML='<div style="text-align:center;padding:3rem 1rem"><div style="width:3.5rem;height:3.5rem;border-radius:50%;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.4rem;color:#E8A020">✓</div><h3 style="font-size:1.5rem;font-weight:700;color:#F5F5F0;margin-bottom:.75rem">You\'re on the list.</h3><p style="color:#9A9890;line-height:1.7">We\'ll review your site and reach out within 24 hours with your free audit.</p></div>'}
+    else{btn.textContent='Get My Free Audit';btn.disabled=false}
+  }catch{btn.textContent='Get My Free Audit';btn.disabled=false}
+});
+</script>
+</body>
+</html>

@@ -162,3 +162,12 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
   .footer-cta-band { padding: 3rem 1.25rem; }
   .footer-body { padding: 3rem 1.25rem 1.5rem; }
 }
+
+/* Industries dropdown */
+.nav-dropdown-wrap{position:relative}
+.nav-dropdown-btn{background:none;border:none;cursor:pointer;color:rgba(245,245,240,.65);font-size:.875rem;font-weight:500;padding:.4rem .85rem;border-radius:9999px;transition:all .3s;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:.3rem}
+.nav-dropdown-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-dropdown{position:absolute;top:calc(100% + .75rem);left:50%;transform:translateX(-50%);background:rgba(12,12,12,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:.5rem;min-width:220px;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.22,1,.36,1);transform-origin:top center}
+.nav-dropdown-wrap:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav-dropdown a{display:block;padding:.6rem 1rem;border-radius:.6rem;color:rgba(245,245,240,.7);font-size:.85rem;font-weight:500;transition:all .2s}
+.nav-dropdown a:hover{background:rgba(255,255,255,.06);color:var(--text)}

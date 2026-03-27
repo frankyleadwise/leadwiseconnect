@@ -1,11 +1,47 @@
 <nav id="main-nav">
   <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>
       LEADWISE<span class="gold">.</span>
     </a>
     <div class="nav-links">
-      <a href="../services.html">Services</a>
+      <a href="services.html">Services</a>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-dropdown-btn">Industries <span style="font-size:.65rem;opacity:.6">▾</span></button>
+        <div class="nav-dropdown">
+          <a href="hvac-marketing.html">HVAC</a>
+          <a href="plumber-marketing.html">Plumbing</a>
+          <a href="roofing-marketing.html">Roofing</a>
+          <a href="electrician-marketing.html">Electrical</a>
+          <a href="pest-control-marketing.html">Pest Control</a>
+          <a href="landscaping-marketing.html">Landscaping</a>
+          <a href="painting-contractor-marketing.html">Painting</a>
+          <a href="general-contractor-marketing.html">General Contractors</a>
+          <div style="border-top:1px solid rgba(255,255,255,.07);margin:.25rem 0"></div>
+          <a href="vs-angi-homeadvisor.html" style="color:var(--gold)!important">vs. Angi & HomeAdvisor</a>
+        </div>
+      </div>
+      <a href="results.html">Results</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-nav btn-nav-desktop">Get Free Audit <span style="font-size:.75rem">↗</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="menu-overlay" id="mobile-menu">
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="hvac-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">HVAC</a>
+  <a href="plumber-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Plumbing</a>
+  <a href="roofing-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Roofing</a>
+  <a href="results.html" onclick="closeMenu()">Results</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
+  <a href="contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
+</div>
+
       <a href="../results.html">Results</a>
       <a href="../about.html">About</a>
       <a href="../blog.html">Blog</a>
@@ -18,6 +54,9 @@
 </nav>
 <div class="menu-overlay" id="mobile-menu">
   <a href="../services.html" onclick="closeMenu()">Services</a>
+  <a href="../hvac-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">HVAC</a>
+  <a href="../plumber-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Plumbing</a>
+  <a href="../roofing-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Roofing</a>
   <a href="../results.html" onclick="closeMenu()">Results</a>
   <a href="../about.html" onclick="closeMenu()">About</a>
   <a href="../blog.html" onclick="closeMenu()">Blog</a>
