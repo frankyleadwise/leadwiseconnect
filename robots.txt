@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /audit-tool.html
 Sitemap: https://leadwiseconnect.com/sitemap.xml
