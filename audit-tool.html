@@ -387,7 +387,8 @@ async function runAudit(){
   const hasWebsite = website && website.length > 2;
 
   const searchInstructions = [];
-  searchInstructions.push(`Search Google for "${biz}" ${location !== 'Unknown location' ? 'in '+location : ''} to find their online presence — Google Business Profile, directory listings, reviews, social media pages, and any mentions.`);
+  searchInstructions.push(`Search Google for "${biz}" ${location !== 'Unknown location' ? 'in '+location : ''} to find their online presence — directory listings, reviews, social media pages, and any mentions.`);
+  searchInstructions.push(`Search Google for "${biz}" Google Maps ${location !== 'Unknown location' ? location : ''} to specifically find their Google Business Profile listing, review count, rating, and business category.`);
   searchInstructions.push(`Search Google for "${trade.toLowerCase()} ${location !== 'Unknown location' ? 'in '+location : ''}" and related service keywords (like "${trade.toLowerCase()} repair ${location}", "${trade.toLowerCase()} near me ${location}") to see who dominates the local results and whether ${biz} appears.`);
   if(hasWebsite){
     searchInstructions.push(`Search for "site:${website}" to see how many pages are indexed.`);
