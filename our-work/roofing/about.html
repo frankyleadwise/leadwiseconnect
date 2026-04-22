@@ -508,42 +508,17 @@
   var banner=document.getElementById('lw-banner');
   if(!banner)return;
   var KEY='lwBannerDismissed_v1';
-  var shown=false;
   // Respect prior dismiss within session
   try{if(sessionStorage.getItem(KEY))return}catch(e){}
 
-  function show(){
-    if(shown)return;shown=true;
-    banner.classList.add('lw-show');
-    cleanup();
-  }
+  function show(){banner.classList.add('lw-show');}
   function hide(){
     banner.classList.remove('lw-show');
     try{sessionStorage.setItem(KEY,'1')}catch(e){}
   }
-  function cleanup(){
-    window.removeEventListener('scroll',onScroll,{passive:true});
-    document.removeEventListener('mouseout',onExit);
-    clearTimeout(timer);
-  }
 
-  // Trigger 1: scroll past 50% of page
-  function onScroll(){
-    var h=document.documentElement;
-    var scrolled=(h.scrollTop||document.body.scrollTop)+window.innerHeight;
-    var total=h.scrollHeight||document.body.scrollHeight;
-    if(total>0 && scrolled/total>=0.5)show();
-  }
-  window.addEventListener('scroll',onScroll,{passive:true});
-
-  // Trigger 2: exit intent — cursor leaves viewport through the top
-  function onExit(e){
-    if(e.clientY<=0 && !e.relatedTarget && !e.toElement)show();
-  }
-  document.addEventListener('mouseout',onExit);
-
-  // Trigger 3: hard fallback — 20s timeout
-  var timer=setTimeout(show,20000);
+  // Auto-show after 3 seconds
+  setTimeout(show,3000);
 
   // Close button
   banner.querySelector('.lw-close').addEventListener('click',hide);
