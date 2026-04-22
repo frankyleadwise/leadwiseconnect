@@ -3,193 +3,994 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Our work — custom-built websites for Tampa Bay contractors. See example sites across HVAC, roofing, plumbing, electrical, landscaping, and excavation.">
-<title>Our Work | LeadWise Connect</title>
+<meta name="description" content="Our work — see the caliber of websites LeadWise Connect builds for local service contractors. Six trade-specific demo sites across HVAC, plumbing, roofing, electrical, landscaping, and excavation.">
+<title>Our Work | LeadWise Connect — Marketing Agency for Local Contractors</title>
+<link rel="canonical" href="https://leadwiseconnect.com/our-work/">
+<meta property="og:title" content="Our Work | LeadWise Connect">
+<meta property="og:description" content="See the caliber of websites LeadWise Connect builds for local service contractors — six trade demos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: #0a0a0a;
-    color: #f5f0e6;
-    min-height: 100vh;
-    padding: 6rem 2rem;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #E8A020;
+  --gold-light: #F5C060;
+  --gold-dark: #B87818;
+  --black: #080808;
+  --surface: #111111;
+  --surface2: #1A1A1A;
+  --surface3: #242424;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-gold: rgba(232, 160, 32, 0.25);
+  --text: #F5F5F0;
+  --text2: #9A9890;
+  --text3: #5A5856;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+.serif { font-family: 'DM Serif Display', serif; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(860px, calc(100vw - 2rem));
+  transition: all .5s cubic-bezier(.22,1,.36,1);
+}
+nav.scrolled { width: min(680px, calc(100vw - 2rem)); }
+.nav-inner {
+  background: rgba(8,8,8,.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: .6rem .75rem .6rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all .5s cubic-bezier(.22,1,.36,1);
+}
+nav.scrolled .nav-inner {
+  background: rgba(8,8,8,.92);
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.nav-logo .gold { color: var(--gold); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+.nav-links a {
+  color: rgba(245,245,240,.65);
+  font-size: .8rem;
+  font-weight: 500;
+  padding: .4rem .65rem;
+  border-radius: 9999px;
+  transition: all .3s;
+}
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.nav-links a.active { color: var(--gold); }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: var(--gold);
+  color: #080808;
+  font-weight: 600;
+  font-size: .8rem;
+  padding: .5rem 1rem;
+  border-radius: 9999px;
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn-nav:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(232,160,32,.3);
+}
+.hamburger {
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: .55rem;
+}
+.hamburger span {
+  display: block;
+  width: 14px;
+  height: 1.5px;
+  background: var(--text);
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(8,8,8,.97);
+  backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s cubic-bezier(.22,1,.36,1);
+}
+.menu-overlay.open { opacity: 1; pointer-events: all; }
+.menu-overlay a {
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all .5s cubic-bezier(.22,1,.36,1);
+}
+.menu-overlay.open a { opacity: 1; transform: translateY(0); }
+.menu-overlay a.gold { color: var(--gold); }
+.menu-overlay.open a:nth-child(1) { transition-delay: 0ms; }
+.menu-overlay.open a:nth-child(2) { transition-delay: 60ms; }
+.menu-overlay.open a:nth-child(3) { transition-delay: 120ms; }
+.menu-overlay.open a:nth-child(4) { transition-delay: 180ms; }
+.menu-overlay.open a:nth-child(5) { transition-delay: 240ms; }
+
+@media (max-width: 680px) {
+  .nav-links { display: none; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 10rem 2rem 5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  margin-bottom: 2rem;
+  max-width: 14ch;
+  font-weight: 400;
+}
+.hero h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+.hero-lede {
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text2);
+  max-width: 60ch;
+  margin-bottom: 3rem;
+}
+.hero-meta-row {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.meta-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.meta-num em { color: var(--gold); font-style: italic; }
+.meta-label {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: var(--text3);
+  font-weight: 600;
+}
+
+/* ===== GALLERY ===== */
+.gallery {
+  padding: 5rem 2rem 8rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.gallery-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: end;
+}
+.gallery-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  font-weight: 400;
+}
+.gallery-head h2 em { color: var(--gold); font-style: italic; }
+.gallery-head p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text2);
+  max-width: 48ch;
+}
+@media (max-width: 768px) {
+  .gallery-head { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* ===== CARD GRID ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media (max-width: 840px) {
+  .cards { grid-template-columns: 1fr; }
+}
+
+.card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 500ms cubic-bezier(.22,1,.36,1);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  isolation: isolate;
+}
+.card:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -25px rgba(0,0,0,.6), 0 0 0 1px var(--border-gold);
+}
+
+.card-media {
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface2);
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 800ms cubic-bezier(.22,1,.36,1);
+  filter: saturate(1.05);
+}
+.card:hover .card-media img { transform: scale(1.04); }
+
+.card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(8,8,8,0.82) 100%);
+  pointer-events: none;
+}
+
+.card-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 2;
+  background: rgba(8, 8, 8, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(232, 160, 32, 0.35);
+  border-radius: 9999px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.card-demo-tag {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  background: rgba(232, 160, 32, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(232, 160, 32, 0.4);
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.85rem;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+.card-title em { color: var(--gold); font-style: italic; }
+
+.card-desc {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--text2);
+  margin-bottom: 1.5rem;
+}
+
+.card-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.spec {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text2);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.card-link svg {
+  transition: transform 400ms cubic-bezier(.22,1,.36,1);
+}
+.card:hover .card-link svg { transform: translateX(4px); }
+
+.card-meta {
+  font-size: 0.72rem;
+  color: var(--text3);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* ===== HOW WE BUILD ===== */
+.process-sec {
+  background: linear-gradient(180deg, transparent 0%, rgba(232, 160, 32, 0.02) 50%, transparent 100%);
+  padding: 6rem 2rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.process-inner { max-width: 1280px; margin: 0 auto; }
+.process-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: end;
+}
+.process-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  font-weight: 400;
+}
+.process-head h2 em { color: var(--gold); font-style: italic; }
+.process-head p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text2);
+  max-width: 48ch;
+}
+@media (max-width: 768px) { .process-head { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 840px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+
+.process-step {
+  padding: 2rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  transition: all 400ms;
+}
+.process-step:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-3px);
+}
+.process-num {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.process-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.process-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text2);
+}
+
+/* ===== CTA ===== */
+.cta-sec {
+  padding: 6rem 2rem 8rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.cta {
+  background: linear-gradient(135deg, rgba(232, 160, 32, 0.08) 0%, rgba(232, 160, 32, 0.02) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: 2rem;
+  padding: clamp(3rem, 6vw, 5rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232, 160, 32, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  max-width: 18ch;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+  position: relative;
+}
+.cta h2 em { color: var(--gold); font-style: italic; }
+.cta p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text2);
+  max-width: 56ch;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.cta-row {
+  display: inline-flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+.btn-gold-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: var(--gold);
+  color: #080808;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1.1rem 2.25rem;
+  border-radius: 9999px;
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+.btn-gold-lg:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(232, 160, 32, .3);
+}
+.btn-ghost-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  background: transparent;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 1.1rem 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  transition: all .4s cubic-bezier(.22,1,.36,1);
+}
+.btn-ghost-lg:hover {
+  border-color: var(--border-gold);
+  color: var(--gold-light);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 4rem 2rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-logo {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+.footer-logo .gold { color: var(--gold); }
+.footer-tagline {
+  color: var(--text2);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 40ch;
+}
+.footer-col h4 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col a {
+  color: var(--text2);
+  font-size: 0.88rem;
+  transition: color 300ms;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.78rem;
+  color: var(--text3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
-  .wrap { max-width: 1200px; margin: 0 auto; }
-  .back {
-    display: inline-block;
-    color: rgba(245, 240, 230, 0.6);
-    font-size: 0.82rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    text-decoration: none;
-    margin-bottom: 3rem;
-    transition: color 300ms;
-  }
-  .back:hover { color: #d4af37; }
-  .eyebrow {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.28em;
-    color: #d4af37;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-    max-width: 16ch;
-  }
-  h1 em { color: #d4af37; }
-  .lede {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: rgba(245, 240, 230, 0.7);
-    max-width: 58ch;
-    margin-bottom: 5rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5rem;
-  }
-  .card {
-    display: block;
-    background: rgba(245, 240, 230, 0.03);
-    border: 1px solid rgba(245, 240, 230, 0.1);
-    border-radius: 1.25rem;
-    padding: 2rem;
-    text-decoration: none;
-    color: inherit;
-    transition: all 400ms cubic-bezier(0.32, 0.72, 0, 1);
-    position: relative;
-    overflow: hidden;
-  }
-  .card.active:hover {
-    transform: translateY(-4px);
-    border-color: #d4af37;
-    background: rgba(212, 175, 55, 0.05);
-  }
-  .card.soon {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  .card-badge {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #d4af37;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-  .card-badge.soon { color: rgba(245, 240, 230, 0.5); }
-  .card-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.75rem;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.75rem;
-  }
-  .card-trade {
-    font-size: 0.9rem;
-    color: rgba(245, 240, 230, 0.6);
-    margin-bottom: 2rem;
-  }
-  .card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.82rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 600;
-    color: #d4af37;
-    border-top: 1px solid rgba(245, 240, 230, 0.1);
-    padding-top: 1.25rem;
-  }
-  .card.active:hover .card-cta-arrow {
-    transform: translate(3px, -2px);
-  }
-  .card-cta-arrow {
-    transition: transform 400ms cubic-bezier(0.32, 0.72, 0, 1);
-  }
+}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <a href="/" class="back">← LeadWise Connect</a>
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">LeadWise <span class="gold">Connect</span></a>
+    <div class="nav-links">
+      <a href="/#services">Services</a>
+      <a href="/#how">How It Works</a>
+      <a href="/our-work/" class="active">Our Work</a>
+      <a href="/#about">About</a>
+    </div>
+    <div class="nav-right">
+      <a href="/#contact" class="btn-nav">
+        Book a Call
+        <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
 
-  <div class="eyebrow">Our Work</div>
-  <h1>Sites we've built for <em>Tampa contractors</em>.</h1>
-  <p class="lede">We design and build custom websites for local service contractors across Tampa Bay. Below are example projects showing what a premium, conversion-focused contractor site looks like when it's built from scratch — not dragged and dropped from a template marketplace.</p>
+<div class="menu-overlay" id="menuOverlay">
+  <a href="/">Home</a>
+  <a href="/#services">Services</a>
+  <a href="/#how">How It Works</a>
+  <a href="/our-work/" class="gold">Our Work</a>
+  <a href="/#contact">Book a Call</a>
+</div>
 
-  <div class="grid">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Portfolio · 6 Trades</div>
+  <h1>Sites that close the <em>trust gap</em> — and then the sale.</h1>
+  <p class="hero-lede">Six trade-specific demo sites, each hand-built to show the caliber of work LeadWise Connect ships for local service contractors. Real structure, real SEO, real conversion architecture — not Wix templates with a logo swap.</p>
 
-    <a href="/our-work/roofing/" class="card active">
-      <div class="card-badge">Live Example</div>
-      <h2 class="card-name">Cornerstone Roofing Co.</h2>
-      <div class="card-trade">Roofing · Tampa, FL</div>
-      <div class="card-cta">
-        View Site
-        <svg class="card-cta-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+  <div class="hero-meta-row">
+    <div class="meta-item">
+      <span class="meta-num">6</span>
+      <span class="meta-label">Trade templates</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-num">30<em>+</em></span>
+      <span class="meta-label">Pages built</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-num">100<em>%</em></span>
+      <span class="meta-label">Custom code</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-num">0</span>
+      <span class="meta-label">Page-builder fluff</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="gallery-head">
+    <h2>Six trades. Six distinct <em>design systems</em>.</h2>
+    <p>Each site is built to the aesthetic that the trade demands — clean editorial for therapists, brutalist industrial for excavation, botanical elegance for landscape. Click any card to view the live demo.</p>
+  </div>
+
+  <div class="cards">
+
+    <!-- HVAC -->
+    <a href="/our-work/hvac/" class="card">
+      <div class="card-media">
+        <img src="https://images.pexels.com/photos/8005389/pexels-photo-8005389.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Ironclad Heating & Cooling" loading="lazy">
+        <div class="card-badge">HVAC</div>
+        <div class="card-demo-tag">Demo Site</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Ironclad <em>Heating &amp; Cooling</em></h3>
+        <p class="card-desc">NATE-certified HVAC contractor positioning. Editorial split hero, alternating service rows, architectural navy with orange accents. Built for trust + emergency CTAs.</p>
+        <div class="card-specs">
+          <span class="spec">Instrument Serif + Manrope</span>
+          <span class="spec">Navy / Orange</span>
+          <span class="spec">Editorial split hero</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            View Live Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="card-meta">5 pages</span>
+        </div>
       </div>
     </a>
 
-    <div class="card soon">
-      <div class="card-badge soon">Coming Soon</div>
-      <h2 class="card-name">Ironclad Heating &amp; Cooling</h2>
-      <div class="card-trade">HVAC · Tampa, FL</div>
-      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
-        In Production
+    <!-- Roofing -->
+    <a href="/our-work/roofing/" class="card">
+      <div class="card-media">
+        <img src="https://images.pexels.com/photos/7078666/pexels-photo-7078666.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Cornerstone Roofing Co." loading="lazy">
+        <div class="card-badge">Roofing</div>
+        <div class="card-demo-tag">Demo Site</div>
       </div>
-    </div>
+      <div class="card-body">
+        <h3 class="card-title">Cornerstone <em>Roofing Co.</em></h3>
+        <p class="card-desc">3rd-generation roofer brand. Cinematic full-bleed hero, forest + copper palette, craftsman narrative. Positions against the volume storm-chase roofers every homeowner distrusts.</p>
+        <div class="card-specs">
+          <span class="spec">Fraunces + Inter Tight</span>
+          <span class="spec">Forest / Copper</span>
+          <span class="spec">Cinematic full-bleed</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            View Live Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="card-meta">5 pages</span>
+        </div>
+      </div>
+    </a>
 
-    <div class="card soon">
-      <div class="card-badge soon">Coming Soon</div>
-      <h2 class="card-name">Honest Work Plumbing</h2>
-      <div class="card-trade">Plumbing · Tampa, FL</div>
-      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
-        In Production
+    <!-- Plumbing -->
+    <a href="/our-work/plumbing/" class="card">
+      <div class="card-media">
+        <img src="https://images.pexels.com/photos/1212407/pexels-photo-1212407.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Honest Work Plumbing" loading="lazy">
+        <div class="card-badge">Plumbing</div>
+        <div class="card-demo-tag">Demo Site</div>
       </div>
-    </div>
+      <div class="card-body">
+        <h3 class="card-title">Honest Work <em>Plumbing</em></h3>
+        <p class="card-desc">Master plumber brand built on old-school craftsmanship. Industrial services grid, numbered problem list, flat utilitarian header. Charcoal + bone + brass.</p>
+        <div class="card-specs">
+          <span class="spec">Bricolage Grotesque + Inter</span>
+          <span class="spec">Charcoal / Brass</span>
+          <span class="spec">Craftsman asymmetric</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            View Live Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="card-meta">5 pages</span>
+        </div>
+      </div>
+    </a>
 
-    <div class="card soon">
-      <div class="card-badge soon">Coming Soon</div>
-      <h2 class="card-name">Watt &amp; Co. Electric</h2>
-      <div class="card-trade">Electrical · Tampa, FL</div>
-      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
-        In Production
+    <!-- Electrical -->
+    <a href="/our-work/electrical/" class="card">
+      <div class="card-media">
+        <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Watt & Co. Electric" loading="lazy">
+        <div class="card-badge">Electrical</div>
+        <div class="card-demo-tag">Demo Site</div>
       </div>
-    </div>
+      <div class="card-body">
+        <h3 class="card-title">Watt <em>&amp; Co.</em> Electric</h3>
+        <p class="card-desc">Modern electrical contractor brand. Bento-grid hero at 6×2, grid texture overlay, voltage-yellow accents against deep black. Master electrician positioning.</p>
+        <div class="card-specs">
+          <span class="spec">Space Grotesk + IBM Plex</span>
+          <span class="spec">Black / Voltage yellow</span>
+          <span class="spec">Bento grid hero</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            View Live Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="card-meta">5 pages</span>
+        </div>
+      </div>
+    </a>
 
-    <div class="card soon">
-      <div class="card-badge soon">Coming Soon</div>
-      <h2 class="card-name">Greenwell Landscape</h2>
-      <div class="card-trade">Lawn Care · Tampa, FL</div>
-      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
-        In Production
+    <!-- Lawn Care -->
+    <a href="/our-work/lawn-care/" class="card">
+      <div class="card-media">
+        <img src="https://images.pexels.com/photos/589818/pexels-photo-589818.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Greenwell Landscape" loading="lazy">
+        <div class="card-badge">Lawn Care</div>
+        <div class="card-demo-tag">Demo Site</div>
       </div>
-    </div>
+      <div class="card-body">
+        <h3 class="card-title">Greenwell <em>Landscape</em></h3>
+        <p class="card-desc">FCLP-certified landscape design firm. Botanical split hero, editorial plant-card services, generous serif display with italic terracotta accents. Premium design-forward positioning.</p>
+        <div class="card-specs">
+          <span class="spec">Cormorant + Outfit</span>
+          <span class="spec">Emerald / Terracotta</span>
+          <span class="spec">Botanical split hero</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            View Live Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="card-meta">5 pages</span>
+        </div>
+      </div>
+    </a>
 
-    <div class="card soon">
-      <div class="card-badge soon">Coming Soon</div>
-      <h2 class="card-name">Bedrock Excavation</h2>
-      <div class="card-trade">Excavation · Tampa, FL</div>
-      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
-        In Production
+    <!-- Excavation -->
+    <a href="/our-work/excavation/" class="card">
+      <div class="card-media">
+        <img src="https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Bedrock Excavation" loading="lazy">
+        <div class="card-badge">Excavation</div>
+        <div class="card-demo-tag">Demo Site</div>
       </div>
-    </div>
+      <div class="card-body">
+        <h3 class="card-title">Bedrock <em>Excavation</em></h3>
+        <p class="card-desc">3rd-gen operator brand with industrial brutalist design. Full-bleed video hero, oversized Archivo Narrow type, border-heavy service grid, safety orange + hazard yellow.</p>
+        <div class="card-specs">
+          <span class="spec">Archivo Narrow + Archivo</span>
+          <span class="spec">Concrete / Orange / Black</span>
+          <span class="spec">Brutalist impact</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-link">
+            View Live Demo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="card-meta">5 pages</span>
+        </div>
+      </div>
+    </a>
 
   </div>
-</div>
+</section>
 
+<!-- HOW WE BUILD -->
+<section class="process-sec">
+  <div class="process-inner">
+    <div class="process-head">
+      <h2>Every site built on the same <em>conversion spine</em>.</h2>
+      <p>The designs look different because the trades are different. But under the hood, every LeadWise site is structured for the same three jobs: rank in local search, close the trust gap, and convert the call.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num">i.</div>
+        <div class="process-title">Local SEO First</div>
+        <div class="process-desc">Location pages, service schema, local business markup, Google Business Profile integration.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">ii.</div>
+        <div class="process-title">Trust Architecture</div>
+        <div class="process-desc">License numbers visible, owner narrative upfront, real reviews, insurance badges — the things homeowners actually check.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">iii.</div>
+        <div class="process-title">Conversion CTAs</div>
+        <div class="process-desc">Call-optimized headers, form + phone on every page, emergency bar where the trade calls for it. No dead ends.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">iv.</div>
+        <div class="process-title">Custom Code</div>
+        <div class="process-desc">No WordPress, no page builders, no bloat. Hand-coded HTML/CSS or Next.js where the brand needs it. Lightning fast on mobile.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta">
+    <h2>Want your business to <em>look like this</em>?</h2>
+    <p>If you run a local service business in Tampa Bay or beyond and you're tired of a website that looks like every other one in your trade — let's talk. Free 20-minute discovery call, no pitch deck, no sales theater.</p>
+    <div class="cta-row">
+      <a href="/#contact" class="btn-gold-lg">
+        Book a Discovery Call
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/" class="btn-ghost-lg">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">LeadWise <span class="gold">Connect</span></div>
+      <p class="footer-tagline">Helping local service contractors own their search rankings — so they stop renting leads from Angi, HomeAdvisor, and Thumbtack.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Trades</h4>
+      <ul>
+        <li><a href="/our-work/hvac/">HVAC</a></li>
+        <li><a href="/our-work/roofing/">Roofing</a></li>
+        <li><a href="/our-work/plumbing/">Plumbing</a></li>
+        <li><a href="/our-work/electrical/">Electrical</a></li>
+        <li><a href="/our-work/lawn-care/">Lawn Care</a></li>
+        <li><a href="/our-work/excavation/">Excavation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>LeadWise</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#how">How It Works</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 LeadWise Connect · Tampa, FL</div>
+    <div>Built in Tampa · Serving contractors nationwide</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('menuOverlay');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+</script>
 </body>
 </html>
