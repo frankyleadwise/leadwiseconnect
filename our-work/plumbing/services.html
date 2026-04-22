@@ -300,5 +300,136 @@
     toggle.classList.remove('open'); menu.classList.remove('open'); document.body.style.overflow = '';
   }));
 </script>
+<!-- ═══════════════════════════════════════════════════════════════
+     LeadWise Connect — Demo Banner
+     Drops onto any demo site to funnel prospects back to leadwiseconnect.com
+     Triggers: exit-intent OR scroll past 50% OR 20s timeout (whichever first)
+     Dismissable for the session (sessionStorage)
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+  #lw-banner{
+    position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%) translateY(calc(100% + 2rem));
+    z-index:99998;width:min(720px,calc(100vw - 1.5rem));
+    background:linear-gradient(135deg,#0F0F0F 0%,#1A1510 100%);
+    border:1px solid rgba(232,160,32,.45);
+    border-radius:1rem;
+    padding:1.25rem 1.5rem;
+    display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;
+    box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px rgba(232,160,32,.15),0 0 40px rgba(232,160,32,.08);
+    opacity:0;pointer-events:none;
+    transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .55s cubic-bezier(.22,1,.36,1);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  }
+  #lw-banner.lw-show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+  #lw-banner .lw-badge{
+    flex-shrink:0;width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(135deg,#E8A020 0%,#F5C060 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  #lw-banner .lw-badge svg{width:24px;height:24px}
+  #lw-banner .lw-text{flex:1;min-width:200px;color:#F5F5F0;line-height:1.35}
+  #lw-banner .lw-eyebrow{
+    font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:#E8A020;margin-bottom:.25rem;display:block;
+  }
+  #lw-banner .lw-title{font-size:1rem;font-weight:600;color:#F5F5F0}
+  #lw-banner .lw-title strong{color:#F5C060;font-weight:700}
+  #lw-banner .lw-actions{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  #lw-banner a.lw-btn{
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.65rem 1.1rem;border-radius:9999px;font-size:.82rem;font-weight:600;
+    text-decoration:none;white-space:nowrap;
+    transition:transform .2s cubic-bezier(.22,1,.36,1),box-shadow .2s,background .2s,color .2s;
+  }
+  #lw-banner a.lw-btn-primary{background:#E8A020;color:#0F0F0F;border:1px solid #E8A020}
+  #lw-banner a.lw-btn-primary:hover{background:#F5C060;box-shadow:0 8px 20px rgba(232,160,32,.35);transform:translateY(-1px)}
+  #lw-banner a.lw-btn-ghost{background:transparent;color:#F5F5F0;border:1px solid rgba(245,245,240,.22)}
+  #lw-banner a.lw-btn-ghost:hover{border-color:#F5C060;color:#F5C060}
+  #lw-banner .lw-close{
+    position:absolute;top:.5rem;right:.6rem;width:26px;height:26px;border-radius:50%;
+    background:transparent;border:1px solid rgba(245,245,240,.15);color:rgba(245,245,240,.5);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;font-size:0;
+    transition:all .2s;
+  }
+  #lw-banner .lw-close:hover{color:#F5F5F0;border-color:rgba(245,245,240,.4)}
+  #lw-banner .lw-close svg{width:11px;height:11px}
+  @media(max-width:560px){
+    #lw-banner{padding:1rem 1rem 1.1rem;border-radius:.85rem;bottom:.85rem}
+    #lw-banner .lw-badge{width:36px;height:36px;border-radius:8px}
+    #lw-banner .lw-badge svg{width:20px;height:20px}
+    #lw-banner .lw-eyebrow{font-size:.55rem}
+    #lw-banner .lw-title{font-size:.9rem}
+    #lw-banner a.lw-btn{padding:.6rem .9rem;font-size:.78rem;flex:1 1 auto;justify-content:center}
+    #lw-banner .lw-actions{width:100%}
+  }
+  @media(prefers-reduced-motion:reduce){#lw-banner{transition:opacity .2s}}
+</style>
+<div id="lw-banner" role="dialog" aria-live="polite" aria-label="LeadWise Connect — this is a demo site">
+  <button class="lw-close" type="button" aria-label="Dismiss">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 2l8 8M10 2l-8 8"/></svg>
+  </button>
+  <div class="lw-badge" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#0F0F0F" opacity=".95"/><path d="M50 40 L90 20 L70 75 Z" fill="#0F0F0F" opacity=".55"/></svg>
+  </div>
+  <div class="lw-text">
+    <span class="lw-eyebrow">This is a demo · LeadWise Connect</span>
+    <div class="lw-title">Like what you see? <strong>We'll build you one.</strong></div>
+  </div>
+  <div class="lw-actions">
+    <a href="https://leadwiseconnect.com/contact.html" class="lw-btn lw-btn-primary" rel="noopener">
+      Get a site like this
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="https://leadwiseconnect.com/" class="lw-btn lw-btn-ghost" rel="noopener">Back to site</a>
+  </div>
+</div>
+<script>
+(function(){
+  var banner=document.getElementById('lw-banner');
+  if(!banner)return;
+  var KEY='lwBannerDismissed_v1';
+  var shown=false;
+  // Respect prior dismiss within session
+  try{if(sessionStorage.getItem(KEY))return}catch(e){}
+
+  function show(){
+    if(shown)return;shown=true;
+    banner.classList.add('lw-show');
+    cleanup();
+  }
+  function hide(){
+    banner.classList.remove('lw-show');
+    try{sessionStorage.setItem(KEY,'1')}catch(e){}
+  }
+  function cleanup(){
+    window.removeEventListener('scroll',onScroll,{passive:true});
+    document.removeEventListener('mouseout',onExit);
+    clearTimeout(timer);
+  }
+
+  // Trigger 1: scroll past 50% of page
+  function onScroll(){
+    var h=document.documentElement;
+    var scrolled=(h.scrollTop||document.body.scrollTop)+window.innerHeight;
+    var total=h.scrollHeight||document.body.scrollHeight;
+    if(total>0 && scrolled/total>=0.5)show();
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  // Trigger 2: exit intent — cursor leaves viewport through the top
+  function onExit(e){
+    if(e.clientY<=0 && !e.relatedTarget && !e.toElement)show();
+  }
+  document.addEventListener('mouseout',onExit);
+
+  // Trigger 3: hard fallback — 20s timeout
+  var timer=setTimeout(show,20000);
+
+  // Close button
+  banner.querySelector('.lw-close').addEventListener('click',hide);
+})();
+</script>
+<!-- ═══════ /LeadWise Demo Banner ═══════ -->
+
 </body>
 </html>
