@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ironclad Heating & Cooling serves the entire Tampa Bay region. 24/7 emergency HVAC service across Hillsborough, Pinellas, and Pasco counties.">
-<title>Service Areas | Ironclad Heating &amp; Cooling — Tampa Bay</title>
+<meta name="description" content="Ironclad Heating & Cooling services the Tampa Bay region — Hillsborough, Pinellas, and Pasco counties. Same-day dispatch on most calls.">
+<title>Service Areas | Ironclad Heating &amp; Cooling — Tampa HVAC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,10 +17,10 @@
     <a href="index.html" class="brand">
       <div class="brand-mark">
         <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 3l4 6h-3v6h3l-4 6-4-6h3V9H8l4-6z" fill="#FDFCF8"/>
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="#F5F0E2" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
       </div>
-      <span class="brand-name">Ironclad <em>Heating &amp; Cooling</em></span>
+      <span class="brand-name">Ironclad <span class="accent">Heating &amp; Cooling</span></span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -29,9 +29,9 @@
       <li><a href="service-areas.html" class="active">Service Areas</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">
-      Schedule Service
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <a href="tel:+18135550195" class="nav-cta">
+      Book a Tech
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu"><span></span><span></span></button>
   </div>
@@ -44,7 +44,7 @@
     <li><a href="about.html">About</a></li>
     <li><a href="service-areas.html">Service Areas</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html"><em>Schedule Service →</em></a></li>
+    <li><a href="tel:+18135550195"><span class="accent">Call (813) 555-0195 →</span></a></li>
   </ul>
 </nav>
 
@@ -56,8 +56,8 @@
       <span>Service Areas</span>
     </div>
     <div class="eyebrow eyebrow-light">Where We Work</div>
-    <h1>Cooling <em>all of</em> Tampa Bay. Every day of the week.</h1>
-    <p class="lede">Home base on East Columbus Drive. Techs dispatched across Hillsborough, Pinellas, and Pasco — same-day response for most service calls, 45-minute emergency dispatch anywhere in the service area.</p>
+    <h1>All of <span class="accent">Tampa Bay.</span> Three counties.</h1>
+    <p class="lede">Shop on East Columbus. Trucks dispatched daily across Hillsborough, Pinellas, and Pasco. Same-day service most days.</p>
   </div>
 </section>
 
@@ -71,8 +71,8 @@
 
     <div>
       <div class="eyebrow">Primary Service Areas</div>
-      <h2 class="h-section" style="margin-bottom: 2rem;">25<em>+</em> cities covered.</h2>
-      <p class="lede" style="margin-bottom: 2.5rem;">Don't see your city? Call us anyway — we dispatch beyond this list on a case-by-case basis, and for emergency work we extend the radius.</p>
+      <h2 class="h-section" style="margin-bottom: 2rem;">24 <span class="accent">cities.</span> Counting.</h2>
+      <p class="lede" style="margin-bottom: 2.5rem;">Don't see your area? Call — we service beyond this list case-by-case, especially for commercial contracts and larger replacement jobs.</p>
 
       <ul class="areas-list">
         <li class="area-item"><span>Tampa</span><span class="area-item-meta">Home base</span></li>
@@ -108,18 +108,18 @@
   <div class="quote-content">
     <div class="quote-text">
       <div class="eyebrow eyebrow-light">Check</div>
-      <h2 class="h-section">Your area <em>covered</em>?</h2>
-      <p class="quote-sub">Send us your ZIP and we'll confirm coverage and give you a time window. Most of the Bay is same-day scheduling, 45-minute response for live emergencies.</p>
+      <h2 class="h-section">Your area <span class="accent">covered?</span></h2>
+      <p class="quote-sub">Send your ZIP and the issue. We'll confirm coverage and dispatch if available same-day.</p>
     </div>
-    <form class="quote-form" onsubmit="event.preventDefault(); alert('Thanks — we\\'ll be in touch within the hour.');">
-      <div class="quote-form-head">Check your <em>coverage</em>.</div>
+    <form class="quote-form" onsubmit="event.preventDefault(); alert('Thanks — we\\'ll be in touch within the hour during business hours.');">
+      <div class="quote-form-head">Check your <span class="accent">area</span>.</div>
       <div class="form-field"><label>Name</label><input type="text" required></div>
       <div class="form-field"><label>Phone</label><input type="tel" required></div>
       <div class="form-field"><label>ZIP</label><input type="text" placeholder="33605" required></div>
-      <div class="form-field"><label>Reason</label><input type="text" placeholder="Emergency? Install? Maintenance?"></div>
+      <div class="form-field"><label>Issue</label><input type="text" placeholder="AC failure? Quote? Annual PM?"></div>
       <button type="submit" class="form-submit">
-        Check My Area
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Check Coverage
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </form>
   </div>
@@ -129,55 +129,53 @@
   <div class="footer-top">
     <div>
       <div class="footer-brand">
-        <div style="width: 34px; height: 34px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l4 6h-3v6h3l-4 6-4-6h3V9H8l4-6z" fill="#FDFCF8"/></svg>
+        <div style="width: 40px; height: 40px; background: var(--orange); border: 2px solid var(--paper); display: flex; align-items: center; justify-content: center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="#F5F0E2" stroke-width="2.5" stroke-linecap="round"/></svg>
         </div>
-        Ironclad <em>Heating &amp; Cooling</em>
+        Ironclad <span class="accent">HVAC</span>
       </div>
-      <p class="footer-tagline">Family-run HVAC for Tampa Bay homes and businesses since 2011.</p>
+      <p class="footer-tagline">Tampa's NATE-certified heating and cooling shop. Family-run, 24/7 emergency service, since 2011.</p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
-        <li><a href="services.html#emergency">24/7 Emergency</a></li>
-        <li><a href="services.html#install">System Install</a></li>
-        <li><a href="services.html#repair">Repair</a></li>
-        <li><a href="services.html#duct">Ductwork</a></li>
+        <li><a href="services.html#ac-repair">AC Repair</a></li>
+        <li><a href="services.html#replacement">System Replacement</a></li>
+        <li><a href="services.html#ductwork">Ductwork</a></li>
         <li><a href="services.html#maintenance">Maintenance</a></li>
-        <li><a href="services.html#commercial">Commercial</a></li>
+        <li><a href="services.html#indoor-air">Indoor Air Quality</a></li>
+        <li><a href="services.html#commercial">Commercial HVAC</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4>The Shop</h4>
       <ul>
         <li><a href="about.html">About Us</a></li>
         <li><a href="service-areas.html">Service Areas</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="#">Financing</a></li>
-        <li><a href="#">Maintenance Plans</a></li>
+        <li><a href="#">Careers</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
+      <h4>Emergency 24/7</h4>
       <div class="footer-contact-block">
         <strong>(813) 555-0195</strong>
-        hello@ironcladheating.com<br><br>
+        dispatch@ironcladhvac.com<br><br>
         4417 E Columbus Dr<br>
         Tampa, FL 33605<br><br>
-        24/7 Emergency Service<br>
-        Office: Mon-Fri 7a-6p
+        Office: Mon–Fri · 7a–7p<br>
+        Emergency: 24/7
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <div>© 2026 Ironclad Heating &amp; Cooling · FL License #CAC1822094</div>
+    <div>© 2026 Ironclad Heating &amp; Cooling · FL Lic. CAC1822094 · EPA 608</div>
     <div>Privacy · Terms · Service Agreement</div>
   </div>
 </footer>
 
 <script>
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
   const toggle = document.getElementById('mobileToggle'), menu = document.getElementById('mobileMenu');
   toggle.addEventListener('click', () => {
     toggle.classList.toggle('open'); menu.classList.toggle('open');
