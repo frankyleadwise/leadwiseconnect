@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Our work — custom-built websites for Tampa Bay contractors. See example sites across HVAC, roofing, plumbing, electrical, landscaping, and excavation.">
+<title>Our Work | LeadWise Connect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: #0a0a0a;
+    color: #f5f0e6;
+    min-height: 100vh;
+    padding: 6rem 2rem;
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  .back {
+    display: inline-block;
+    color: rgba(245, 240, 230, 0.6);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    margin-bottom: 3rem;
+    transition: color 300ms;
+  }
+  .back:hover { color: #d4af37; }
+  .eyebrow {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: #d4af37;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    max-width: 16ch;
+  }
+  h1 em { color: #d4af37; }
+  .lede {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(245, 240, 230, 0.7);
+    max-width: 58ch;
+    margin-bottom: 5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    display: block;
+    background: rgba(245, 240, 230, 0.03);
+    border: 1px solid rgba(245, 240, 230, 0.1);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 400ms cubic-bezier(0.32, 0.72, 0, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card.active:hover {
+    transform: translateY(-4px);
+    border-color: #d4af37;
+    background: rgba(212, 175, 55, 0.05);
+  }
+  .card.soon {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .card-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #d4af37;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  .card-badge.soon { color: rgba(245, 240, 230, 0.5); }
+  .card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .card-trade {
+    font-size: 0.9rem;
+    color: rgba(245, 240, 230, 0.6);
+    margin-bottom: 2rem;
+  }
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    color: #d4af37;
+    border-top: 1px solid rgba(245, 240, 230, 0.1);
+    padding-top: 1.25rem;
+  }
+  .card.active:hover .card-cta-arrow {
+    transform: translate(3px, -2px);
+  }
+  .card-cta-arrow {
+    transition: transform 400ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a href="/" class="back">← LeadWise Connect</a>
+
+  <div class="eyebrow">Our Work</div>
+  <h1>Sites we've built for <em>Tampa contractors</em>.</h1>
+  <p class="lede">We design and build custom websites for local service contractors across Tampa Bay. Below are example projects showing what a premium, conversion-focused contractor site looks like when it's built from scratch — not dragged and dropped from a template marketplace.</p>
+
+  <div class="grid">
+
+    <a href="/our-work/roofing/" class="card active">
+      <div class="card-badge">Live Example</div>
+      <h2 class="card-name">Cornerstone Roofing Co.</h2>
+      <div class="card-trade">Roofing · Tampa, FL</div>
+      <div class="card-cta">
+        View Site
+        <svg class="card-cta-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </a>
+
+    <div class="card soon">
+      <div class="card-badge soon">Coming Soon</div>
+      <h2 class="card-name">Ironclad Heating &amp; Cooling</h2>
+      <div class="card-trade">HVAC · Tampa, FL</div>
+      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
+        In Production
+      </div>
+    </div>
+
+    <div class="card soon">
+      <div class="card-badge soon">Coming Soon</div>
+      <h2 class="card-name">Honest Work Plumbing</h2>
+      <div class="card-trade">Plumbing · Tampa, FL</div>
+      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
+        In Production
+      </div>
+    </div>
+
+    <div class="card soon">
+      <div class="card-badge soon">Coming Soon</div>
+      <h2 class="card-name">Watt &amp; Co. Electric</h2>
+      <div class="card-trade">Electrical · Tampa, FL</div>
+      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
+        In Production
+      </div>
+    </div>
+
+    <div class="card soon">
+      <div class="card-badge soon">Coming Soon</div>
+      <h2 class="card-name">Greenwell Landscape</h2>
+      <div class="card-trade">Lawn Care · Tampa, FL</div>
+      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
+        In Production
+      </div>
+    </div>
+
+    <div class="card soon">
+      <div class="card-badge soon">Coming Soon</div>
+      <h2 class="card-name">Bedrock Excavation</h2>
+      <div class="card-trade">Excavation · Tampa, FL</div>
+      <div class="card-cta" style="color: rgba(245, 240, 230, 0.4);">
+        In Production
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
