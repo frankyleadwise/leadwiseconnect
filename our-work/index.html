@@ -59,10 +59,10 @@ nav {
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  width: min(860px, calc(100vw - 2rem));
+  width: min(1020px, calc(100vw - 2rem));
   transition: all .5s cubic-bezier(.22,1,.36,1);
 }
-nav.scrolled { width: min(680px, calc(100vw - 2rem)); }
+nav.scrolled { width: min(840px, calc(100vw - 2rem)); }
 .nav-inner {
   background: rgba(8,8,8,.6);
   backdrop-filter: blur(20px);
@@ -957,38 +957,84 @@ footer {
   background: var(--border);
 }
 
+/* ===== NAV DROPDOWN (unified with main site) ===== */
+.nav-dropdown-wrap{position:relative}
+.nav-dropdown-btn{background:none;border:none;cursor:pointer;color:rgba(245,245,240,.65);font-size:.8rem;font-weight:500;padding:.4rem .65rem;border-radius:9999px;transition:all .3s;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:.3rem}
+.nav-dropdown-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-dropdown{position:absolute;top:calc(100% + .75rem);left:50%;transform:translateX(-50%) translateY(-8px);background:rgba(12,12,12,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:.5rem;min-width:220px;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1);transform-origin:top center;z-index:200}
+.nav-dropdown-wrap.open .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav-dropdown a{display:block;padding:.6rem 1rem;border-radius:.6rem;color:rgba(245,245,240,.7);font-size:.85rem;font-weight:500;transition:all .2s}
+.nav-dropdown a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+@media(max-width:900px){.nav-links,.btn-nav-desktop{display:none!important}}
+
+/* ===== FOOTER (unified with main site) ===== */
+footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(--black)}
+.footer-cta-band{background:rgba(232,160,32,.06);border-bottom:1px solid rgba(232,160,32,.12);padding:4rem 2rem}
+.footer-cta-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem}
+.footer-cta-inner h3{font-size:clamp(1.75rem,3vw,2.5rem);color:var(--text);line-height:1.1;font-family:'DM Serif Display',serif;font-weight:400;letter-spacing:-.02em}
+.footer-body{max-width:1280px;margin:0 auto;padding:4rem 2rem 2rem}
+.footer-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3rem;margin-bottom:3rem}
+.footer-col-label{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;display:block}
+.footer-col-links{display:flex;flex-direction:column;gap:.6rem}
+.footer-col-links a{color:var(--text2);font-size:.875rem;transition:color .2s}
+.footer-col-links a:hover{color:var(--gold)}
+.footer-brand-desc{color:var(--text3);font-size:.875rem;line-height:1.7;max-width:220px;margin-top:1rem}
+.footer-bottom-unified{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.footer-bottom-unified p,.footer-bottom-unified a{color:#3A3836;font-size:.8rem}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.btn-gold-footer{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#080808;font-weight:600;font-size:1rem;padding:1rem 2rem;border-radius:9999px;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif}
+.btn-gold-footer:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 12px 32px rgba(232,160,32,.3)}
+.icon-wrap{width:1.75rem;height:1.75rem;border-radius:50%;background:rgba(0,0,0,.15);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.eyebrow-small{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+@media(max-width:900px){.footer-cta-band,.footer-body{padding-left:1.25rem;padding-right:1.25rem}}
+
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
+<!-- NAV (unified with main site) -->
+<nav id="main-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">LeadWise <span class="gold">Connect</span></a>
+    <a href="/" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>
+      LEADWISE<span class="gold">.</span>
+    </a>
     <div class="nav-links">
-      <a href="/#services">Services</a>
-      <a href="/#how">How It Works</a>
+      <a href="/services.html">Services</a>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-dropdown-btn">Industries <span style="font-size:.65rem;opacity:.6">▾</span></button>
+        <div class="nav-dropdown">
+          <a href="/hvac-marketing.html">HVAC</a>
+          <a href="/plumber-marketing.html">Plumbing</a>
+          <a href="/roofing-marketing.html">Roofing</a>
+          <a href="/electrician-marketing.html">Electrical</a>
+          <a href="/pest-control-marketing.html">Pest Control</a>
+          <a href="/landscaping-marketing.html">Landscaping</a>
+          <a href="/painting-contractor-marketing.html">Painting</a>
+          <a href="/general-contractor-marketing.html">General Contractors</a>
+          <div style="border-top:1px solid rgba(255,255,255,.07);margin:.25rem 0"></div>
+          <a href="/vs-angi-homeadvisor.html" style="color:var(--gold)!important">vs. Angi &amp; HomeAdvisor</a>
+        </div>
+      </div>
       <a href="/our-work/" class="active">Our Work</a>
-      <a href="/#about">About</a>
+      <a href="/about.html">About</a>
+      <a href="/blog.html">Blog</a>
     </div>
     <div class="nav-right">
-      <a href="/#contact" class="btn-nav">
-        Book a Call
-        <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="/contact.html" class="btn-nav btn-nav-desktop">Get Free Audit <span style="font-size:.75rem">↗</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
-
-<div class="menu-overlay" id="menuOverlay">
-  <a href="/">Home</a>
-  <a href="/#services">Services</a>
-  <a href="/#how">How It Works</a>
-  <a href="/our-work/" class="gold">Our Work</a>
-  <a href="/#contact">Book a Call</a>
+<div class="menu-overlay" id="mobile-menu">
+  <a href="/services.html" onclick="closeMenu()">Services</a>
+  <a href="/hvac-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">HVAC</a>
+  <a href="/plumber-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Plumbing</a>
+  <a href="/roofing-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Roofing</a>
+  <a href="/our-work/" class="gold" onclick="closeMenu()">Our Work</a>
+  <a href="/about.html" onclick="closeMenu()">About</a>
+  <a href="/blog.html" onclick="closeMenu()">Blog</a>
+  <a href="/contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
 </div>
 
 <!-- HERO -->
@@ -1310,59 +1356,96 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo">LeadWise <span class="gold">Connect</span></div>
-      <p class="footer-tagline">Helping local service contractors own their search rankings — so they stop renting leads from Angi, HomeAdvisor, and Thumbtack.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Trades</h4>
-      <ul>
-        <li><a href="/our-work/hvac/">HVAC</a></li>
-        <li><a href="/our-work/roofing/">Roofing</a></li>
-        <li><a href="/our-work/plumbing/">Plumbing</a></li>
-        <li><a href="/our-work/electrical/">Electrical</a></li>
-        <li><a href="/our-work/lawn-care/">Lawn Care</a></li>
-        <li><a href="/our-work/excavation/">Excavation</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>LeadWise</h4>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/#services">Services</a></li>
-        <li><a href="/#how">How It Works</a></li>
-        <li><a href="/#about">About</a></li>
-        <li><a href="/#contact">Contact</a></li>
-      </ul>
+<!-- FOOTER (unified with main site) -->
+<footer class="unified-footer">
+  <div class="footer-cta-band">
+    <div class="footer-cta-inner">
+      <div>
+        <span class="eyebrow-small">Ready to dominate your market?</span>
+        <h3>Let's build something that works<br>while you sleep.</h3>
+      </div>
+      <a href="/contact.html" class="btn-gold-footer">Get Your Free Audit <span class="icon-wrap">↗</span></a>
     </div>
   </div>
-  <div class="footer-bottom">
-    <div>© 2026 LeadWise Connect · Tampa, FL</div>
-    <div>Built in Tampa · Serving contractors nationwide</div>
+  <div class="footer-body">
+    <div class="footer-cols">
+      <div>
+        <a href="/" class="nav-logo">
+          <svg width="20" height="20" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>
+          LEADWISE<span class="gold">.</span>
+        </a>
+        <p class="footer-brand-desc">Premium digital marketing for local service contractors. Based in Tampa, FL. Serving the US.</p>
+      </div>
+      <div>
+        <span class="footer-col-label">Services</span>
+        <div class="footer-col-links">
+          <a href="/services.html">Smart Websites</a>
+          <a href="/services.html">AI Voice Agents</a>
+          <a href="/services.html">Lead Generation</a>
+          <a href="/services.html">CRM &amp; Automation</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Our Work</span>
+        <div class="footer-col-links">
+          <a href="/our-work/">Case Study + Templates</a>
+          <a href="/our-work/hvac/">HVAC Demo</a>
+          <a href="/our-work/plumbing/">Plumbing Demo</a>
+          <a href="/our-work/roofing/">Roofing Demo</a>
+          <a href="/our-work/electrical/">Electrical Demo</a>
+          <a href="/our-work/lawn-care/">Lawn Care Demo</a>
+          <a href="/our-work/excavation/">Excavation Demo</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Company</span>
+        <div class="footer-col-links">
+          <a href="/about.html">About</a>
+          <a href="/our-work/">Our Work</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom-unified">
+      <p>© 2026 LeadWise Connect LLC. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="/sitemap.xml">Sitemap</a></div>
+    </div>
   </div>
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
+  // Nav scroll
+  const nav = document.getElementById('main-nav');
+  if(nav) window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  const hamburger = document.getElementById('hamburger');
-  const overlay = document.getElementById('menuOverlay');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+  // Hamburger + mobile menu
+  const hb = document.getElementById('hamburger');
+  const mm = document.getElementById('mobile-menu');
+  if(hb) hb.addEventListener('click', () => {
+    const o = mm.classList.toggle('open');
+    hb.classList.toggle('open', o);
+    document.body.style.overflow = o ? 'hidden' : '';
   });
-  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }));
+  function closeMenu(){ mm.classList.remove('open'); hb.classList.remove('open'); document.body.style.overflow=''; }
+
+  // Industries dropdown — click-based so it doesn't glitch
+  const dropdownWrap = document.querySelector('.nav-dropdown-wrap');
+  const dropdownBtn = document.querySelector('.nav-dropdown-btn');
+  if(dropdownBtn) {
+    dropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownWrap.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if(!dropdownWrap.contains(e.target)) dropdownWrap.classList.remove('open');
+    });
+    document.querySelectorAll('.nav-dropdown a').forEach(link => {
+      link.addEventListener('click', () => dropdownWrap.classList.remove('open'));
+    });
+  }
 </script>
 </body>
 </html>
