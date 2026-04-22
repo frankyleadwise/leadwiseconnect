@@ -236,41 +236,92 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
   <a href="contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
 </div>
 
-</nav>
-<div class="menu-overlay" id="mobile-menu">
-  <a href="services.html" onclick="closeMenu()">Services</a>
-  <a href="/our-work/" onclick="closeMenu()">Our Work</a>
-  <a href="about.html" onclick="closeMenu()">About</a>
-  <a href="blog.html" onclick="closeMenu()">Blog</a>
-  <a href="contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
-</div>
 
+<section id="home-hero" style="position:relative;min-height:100dvh;display:grid;grid-template-columns:1.05fr 1fr;gap:4rem;align-items:center;padding:9rem 2rem 5rem;max-width:1440px;margin:0 auto;overflow:hidden">
+  <!-- AMBIENT GLOW -->
+  <div aria-hidden="true" style="position:absolute;top:50%;right:-10%;width:80%;height:120%;background:radial-gradient(ellipse,rgba(232,160,32,.12),transparent 60%);transform:translateY(-50%);pointer-events:none;z-index:0;filter:blur(40px)"></div>
+  <!-- GRID OVERLAY (kept from prior hero) -->
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0"></div>
+  <!-- TOP VIGNETTE GLOW -->
+  <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(232,160,32,.12) 0%,transparent 70%);pointer-events:none;z-index:0"></div>
 
-<section style="min-height:100dvh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:8rem 2rem 6rem">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% -10%,rgba(232,160,32,.14) 0%,transparent 70%);pointer-events:none"></div>
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none"></div>
-  <div class="container" style="position:relative;z-index:1">
+  <!-- LEFT: CONTENT -->
+  <div style="position:relative;z-index:2">
     <div class="fadein" style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.2);border-radius:9999px;padding:.35rem .85rem .35rem .5rem;margin-bottom:2rem">
       <span style="width:6px;height:6px;border-radius:50%;background:#E8A020;animation:pulse-gold 2s ease-in-out infinite"></span>
       <span style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#E8A020">Tampa, FL — Serving Contractors Nationwide</span>
     </div>
-    <h1 class="serif fadein d1" style="font-size:clamp(3rem,7vw,6.5rem);line-height:1;letter-spacing:-.02em;color:var(--text);max-width:900px;margin-bottom:2rem">
-      Your competitors are<br>
-      <span style="background:linear-gradient(135deg,#F5C060 0%,#E8A020 50%,#B87818 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">losing leads</span> you<br>
-      could be closing.
+    <h1 class="serif fadein d1" style="font-size:clamp(2.75rem,5.5vw,5.25rem);line-height:.98;letter-spacing:-.022em;color:var(--text);margin-bottom:1.75rem;font-weight:400">
+      Your website should be <span style="color:var(--gold);font-style:italic;position:relative">closing jobs<span aria-hidden="true" style="position:absolute;left:0;right:0;bottom:-.08em;height:.1em;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5"></span></span>, not collecting <span style="position:relative;color:var(--text2);white-space:nowrap">dust<span aria-hidden="true" style="position:absolute;left:-.05em;right:-.05em;top:52%;height:.08em;background:var(--gold);transform:rotate(-3deg)"></span></span>.
     </h1>
-    <p class="fadein d2" style="font-size:clamp(1rem,2vw,1.2rem);color:var(--text2);max-width:540px;line-height:1.7;margin-bottom:2.5rem">We build SEO-optimized websites, AI automation, and lead systems for local service contractors — engineered to rank, convert, and scale.</p>
-    <div class="fadein d3" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:4rem">
-      <a href="contact.html" class="btn-gold" style="font-size:1rem;padding:1rem 2rem">Get Your Free Audit <span class="icon-wrap">↗</span></a>
-      <a href="/our-work/" class="btn-ghost" style="font-size:1rem;padding:1rem 2rem">See Our Work</a>
+    <p class="fadein d2" style="font-size:clamp(1.05rem,1.2vw,1.18rem);line-height:1.65;color:var(--text2);max-width:46ch;margin-bottom:2.5rem">We build SEO-optimized websites, AI automation, and lead systems for local service contractors — engineered to rank, convert, and scale. No page builders. No templates. No compromises.</p>
+    <div class="fadein d3" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem">
+      <a href="contact.html" class="btn-gold" style="font-size:1rem;padding:1rem 1.75rem">Audit My Site in 48 Hours <span class="icon-wrap">↗</span></a>
+      <a href="/our-work/" class="btn-ghost" style="font-size:1rem;padding:1rem 1.75rem">See Our Work</a>
     </div>
-    <div class="fadein d4" style="display:flex;flex-wrap:wrap;gap:1.5rem">
-      <span style="display:flex;align-items:center;gap:.5rem;color:var(--text2);font-size:.85rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg> No contracts — results or you walk</span>
-      <span style="display:flex;align-items:center;gap:.5rem;color:var(--text2);font-size:.85rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg> Free website audit included</span>
-      <span style="display:flex;align-items:center;gap:.5rem;color:var(--text2);font-size:.85rem"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="flex-shrink:0;margin-top:.15rem"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg> Built on proven SEO architecture</span>
+    <!-- RECEIPTS STRIP -->
+    <div class="fadein d4" style="display:flex;flex-wrap:wrap;gap:2.5rem;padding-top:2rem;border-top:1px solid var(--border)">
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <div class="serif" style="font-size:1.65rem;line-height:1;letter-spacing:-.01em;color:var(--gold);font-style:italic">250%</div>
+        <div style="font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)">Review Growth · 6 mo</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <div class="serif" style="font-size:1.65rem;line-height:1;letter-spacing:-.01em;color:var(--gold);font-style:italic">30+</div>
+        <div style="font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)">SEO Pages Shipped</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <div class="serif" style="font-size:1.65rem;line-height:1;letter-spacing:-.01em;color:var(--gold);font-style:italic">5.0</div>
+        <div style="font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)">Google Rating</div>
+      </div>
     </div>
   </div>
+
+  <!-- RIGHT: INTERACTIVE MOCKUP -->
+  <div id="hero-visual" style="position:relative;z-index:2;perspective:1800px">
+    <!-- LIVE PILL BADGE -->
+    <div aria-hidden="true" style="position:absolute;top:8%;left:-6%;z-index:10;background:var(--gold);color:var(--black);font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:.5rem .9rem;border-radius:9999px;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 8px 24px rgba(232,160,32,.35);transform:translateZ(40px);animation:float-pulse 3s ease-in-out infinite">
+      <span style="width:7px;height:7px;background:var(--black);border-radius:50%;animation:pulse-gold 1.8s ease-in-out infinite"></span>
+      Live Client
+    </div>
+    <!-- FLOATING METRIC CARD: REVIEWS -->
+    <div aria-hidden="true" style="position:absolute;top:22%;right:-4%;z-index:11;background:rgba(17,17,17,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border-gold);border-radius:.85rem;padding:.85rem 1.1rem;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:translateZ(60px);animation:float-a 6s ease-in-out infinite">
+      <div style="font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem">Google Reviews</div>
+      <div class="serif" style="font-size:1.4rem;line-height:1;color:var(--text);display:flex;align-items:baseline;gap:.4rem">
+        <span style="font-size:.8rem;color:var(--text3);text-decoration:line-through;font-family:'Outfit',sans-serif">10</span>
+        <span style="color:var(--text3);font-size:.65rem">→</span>
+        <span style="color:var(--gold);font-style:italic">35</span>
+      </div>
+    </div>
+    <!-- FLOATING METRIC CARD: RATING -->
+    <div aria-hidden="true" style="position:absolute;bottom:18%;left:-8%;z-index:11;background:rgba(17,17,17,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border-gold);border-radius:.85rem;padding:.85rem 1.1rem;box-shadow:0 20px 50px rgba(0,0,0,.5);transform:translateZ(80px);animation:float-b 7s ease-in-out infinite">
+      <div style="font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem">Star Rating</div>
+      <div class="serif" style="font-size:1.4rem;line-height:1;color:var(--text);display:flex;align-items:baseline;gap:.4rem">
+        <span style="font-size:.8rem;color:var(--text3);text-decoration:line-through;font-family:'Outfit',sans-serif">4.2</span>
+        <span style="color:var(--text3);font-size:.65rem">→</span>
+        <span style="color:var(--gold);font-style:italic">5.0</span>
+      </div>
+    </div>
+    <!-- THE MOCKUP -->
+    <a href="/our-work/" id="mockup-stage" style="display:block;position:relative;width:100%;aspect-ratio:16/11;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.22,1,.36,1);will-change:transform;text-decoration:none">
+      <img src="/assets/our-work-previews/mockups/northeast-hvac.png" alt="Northeast Heating & Cooling — live client site" style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55)) drop-shadow(0 0 40px rgba(232,160,32,.08));transition:filter .4s">
+    </a>
+  </div>
 </section>
+
+<!-- HERO KEYFRAMES + MOBILE FALLBACK -->
+<style>
+@keyframes float-pulse{0%,100%{transform:translateZ(40px) translateY(0)}50%{transform:translateZ(40px) translateY(-4px)}}
+@keyframes float-a{0%,100%{transform:translateZ(60px) translateY(0)}50%{transform:translateZ(60px) translateY(-8px)}}
+@keyframes float-b{0%,100%{transform:translateZ(80px) translateY(0)}50%{transform:translateZ(80px) translateY(6px)}}
+@media(max-width:1024px){
+  #home-hero{grid-template-columns:1fr !important;gap:3rem !important;padding:8rem 1.5rem 3rem !important}
+}
+@media(max-width:600px){
+  #home-hero [style*="top:22%"],#home-hero [style*="bottom:18%"]{padding:.6rem .8rem !important}
+  #home-hero [style*="top:22%"] .serif,#home-hero [style*="bottom:18%"] .serif{font-size:1.1rem !important}
+  #home-hero > div:last-child [style*="top:8%"]{left:0 !important}
+}
+</style>
 
 <div class="marquee-wrap">
   <div class="marquee-track">
@@ -466,8 +517,25 @@ if(form) form.addEventListener('submit',async e=>{
     const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
     if(res.ok){document.getElementById('form-card').innerHTML='<div style="text-align:center;padding:3rem 1rem"><div style="width:3.5rem;height:3.5rem;border-radius:50%;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.4rem;color:#E8A020">✓</div><h3 style="font-size:1.5rem;font-weight:700;color:#F5F5F0;margin-bottom:.75rem">You\'re on the list.</h3><p style="color:#9A9890;line-height:1.7">We\'ll review your site and reach out within 24 hours with your free audit.</p></div>'}
     else{btn.textContent='Get My Free Audit';btn.disabled=false}
-  }catch{btn.textContent='Get My Free Audit';btn.disabled=false}
-});
+// Hero mockup parallax tilt
+const heroVisual = document.getElementById('hero-visual');
+const mockupStage = document.getElementById('mockup-stage');
+if (heroVisual && mockupStage && window.matchMedia('(min-width: 1025px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let raf = null;
+  heroVisual.addEventListener('mousemove', e => {
+    const rect = heroVisual.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      mockupStage.style.transform = `rotateX(${-y * 8}deg) rotateY(${x * 12}deg) translateZ(20px)`;
+    });
+  });
+  heroVisual.addEventListener('mouseleave', () => {
+    if (raf) cancelAnimationFrame(raf);
+    mockupStage.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+  });
+}
 </script>
 </body>
 </html>
