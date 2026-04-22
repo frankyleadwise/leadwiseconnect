@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Variants · LeadWise Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#080808;color:#F5F5F0;font-family:'Outfit',sans-serif;
+  min-height:100vh;padding:5rem 2rem;
+}
+.wrap{max-width:980px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1rem;margin-bottom:3rem}
+.brand svg{width:22px;height:22px}
+.brand .gold{color:#E8A020}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,5vw,4rem);line-height:1;letter-spacing:-.025em;margin-bottom:1rem;font-weight:400}
+h1 em{color:#E8A020;font-style:italic}
+.lede{color:#9A9890;font-size:1.1rem;line-height:1.65;max-width:58ch;margin-bottom:3rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.card{
+  display:block;background:#111;border:1px solid rgba(255,255,255,.08);
+  border-radius:1.25rem;padding:2rem 1.75rem;text-decoration:none;color:inherit;
+  transition:all .4s cubic-bezier(.22,1,.36,1);
+}
+.card:hover{border-color:rgba(232,160,32,.4);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.5),0 0 40px rgba(232,160,32,.08)}
+.card-num{font-family:'DM Serif Display',serif;font-size:2.5rem;line-height:1;color:#E8A020;font-style:italic;margin-bottom:1rem;display:block}
+.card-name{font-size:1.15rem;font-weight:700;color:#F5F5F0;margin-bottom:.5rem}
+.card-desc{font-size:.9rem;color:#9A9890;line-height:1.55;margin-bottom:1rem}
+.card-meta{font-size:.7rem;color:#5A5856;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+.note{margin-top:3rem;padding:1.5rem;background:rgba(232,160,32,.05);border:1px solid rgba(232,160,32,.2);border-radius:1rem;font-size:.88rem;line-height:1.65;color:#9A9890}
+.note strong{color:#E8A020}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <svg viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>
+    LEADWISE<span class="gold">.</span> Hero Previews
+  </div>
+
+  <h1>Three <em>directions</em> — pick one, or we mix.</h1>
+  <p class="lede">Each variant is a fully interactive preview of a different hero direction. Hover the mockups, feel the parallax tilt, click through. Nothing is shipped to the live site yet — just click around and tell me which one clicks.</p>
+
+  <div class="cards">
+    <a class="card" href="variant-a.html">
+      <span class="card-num">A</span>
+      <div class="card-name">Bold Promise + Single Mockup</div>
+      <div class="card-desc">Side-by-side layout. Strong headline ("closing jobs, not collecting dust") on the left, a single floating iMac+iPhone mockup of Northeast on the right with parallax tilt, floating metric cards, and a "Live Client" pulsing pill. Three real receipts under the CTAs (250%, 30+, 5.0).</div>
+      <div class="card-meta">Focused · Clean · Direct</div>
+    </a>
+
+    <a class="card" href="variant-c.html">
+      <span class="card-num">C</span>
+      <div class="card-name">Portfolio Wall</div>
+      <div class="card-desc">Centered headline ("We rank contractors #1 in their city"), and below it a 3D tilted wall of 5 client mockups layered and overlapping at angles. The whole wall parallaxes with your mouse. Hover a tile to make it zoom forward.</div>
+      <div class="card-meta">Maximalist · Portfolio-forward</div>
+    </a>
+
+    <a class="card" href="variant-hybrid.html">
+      <span class="card-num">H</span>
+      <div class="card-name">Featured + Orbit (Hybrid)</div>
+      <div class="card-desc">The one I'd personally ship. Left side has the full headline + lede + CTAs + receipts. Right side has one FEATURED Northeast mockup (with Live Client badge and a "10→35" stat tag) plus 3 supporting trade tiles orbiting around it — all parallax-reactive as a unit, all hover-interactive individually.</div>
+      <div class="card-meta">Best of both · Most interactive</div>
+    </a>
+  </div>
+
+  <div class="note">
+    <strong>How to evaluate:</strong> Open each in a new tab, move your mouse around the right-side visual area, and notice the parallax + hover interactions. Check them on your phone too (tap any tile). The headline copy is a first pass — we can tune any of it independently.
+  </div>
+</div>
+</body>
+</html>
