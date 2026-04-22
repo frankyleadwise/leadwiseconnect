@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Greenwell Landscape serves the entire Tampa Bay region. Design, install, and maintenance across Hillsborough, Pinellas, and Pasco counties.">
+<meta name="description" content="Greenwell Landscape services the entire Tampa Bay region across Hillsborough, Pinellas, and Pasco counties.">
 <title>Service Areas | Greenwell Landscape — Tampa Bay</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,12 +16,11 @@
   <div class="nav-inner">
     <a href="index.html" class="brand">
       <div class="brand-mark">
-        <svg viewBox="0 0 20 20" fill="none">
-          <path d="M10 2c0 4-3 6-3 9s3 5 3 5 3-2 3-5-3-5-3-9z" fill="#F5EFE1"/>
-          <path d="M10 11c-2 0-4-1.5-4-3 0 3 2 5 4 5s4-2 4-5c0 1.5-2 3-4 3z" fill="#C85A3E"/>
+        <svg viewBox="0 0 22 22" fill="none">
+          <path d="M11 2L7 9c-1.5 2.5 0 5.5 2 7 1.5 1 3 1 4.5 0 2-1.5 3.5-4.5 2-7L11 2z" fill="#1F2419"/>
         </svg>
       </div>
-      <span class="brand-name">Greenwell <em>Landscape</em></span>
+      <span class="brand-name">Greenwell <span class="accent">Landscape</span></span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -31,8 +30,8 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">
-      Request Estimate
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Get a Quote
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu"><span></span><span></span></button>
   </div>
@@ -45,7 +44,7 @@
     <li><a href="about.html">About</a></li>
     <li><a href="service-areas.html">Service Areas</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html"><em>Request Estimate →</em></a></li>
+    <li><a href="contact.html"><span class="accent">Get a Quote →</span></a></li>
   </ul>
 </nav>
 
@@ -57,8 +56,8 @@
       <span>Service Areas</span>
     </div>
     <div class="eyebrow eyebrow-light">Where We Work</div>
-    <h1>Working across <em>all of</em> Tampa Bay.</h1>
-    <p class="lede">Studio on West Gandy. Crews dispatched daily across Hillsborough, Pinellas, and Pasco counties. Design consultations typically scheduled within the week.</p>
+    <h1>All of <span class="accent">Tampa Bay.</span> Three counties.</h1>
+    <p class="lede">Shop on West Gandy. Crews dispatched daily across Hillsborough, Pinellas, and Pasco. Most consultations scheduled within the week.</p>
   </div>
 </section>
 
@@ -72,8 +71,8 @@
 
     <div>
       <div class="eyebrow">Primary Service Areas</div>
-      <h2 class="h-section" style="margin-bottom: 2rem;">24 <em>cities</em> &amp; counting.</h2>
-      <p class="lede" style="margin-bottom: 2.5rem;">Don't see your area? Call us. We service beyond this list on a case-by-case basis — especially for larger design and commercial projects.</p>
+      <h2 class="h-section" style="margin-bottom: 2rem;">24 <span class="accent">cities.</span> Counting.</h2>
+      <p class="lede" style="margin-bottom: 2.5rem;">Don't see your area? Call. We service beyond this list case-by-case — especially for larger design and commercial projects.</p>
 
       <ul class="areas-list">
         <li class="area-item"><span>Tampa</span><span class="area-item-meta">Home base</span></li>
@@ -109,18 +108,18 @@
   <div class="quote-content">
     <div class="quote-text">
       <div class="eyebrow eyebrow-light">Check</div>
-      <h2 class="h-section">Your area <em>covered</em>?</h2>
-      <p class="quote-sub">Send us your ZIP and the scope. We'll confirm coverage and get you on the consultation calendar within a business day.</p>
+      <h2 class="h-section">Your area <span class="accent">covered?</span></h2>
+      <p class="quote-sub">Send your ZIP and the scope. We'll confirm coverage and schedule a consult within a business day.</p>
     </div>
     <form class="quote-form" onsubmit="event.preventDefault(); alert('Thanks — we\\'ll be in touch within a business day.');">
-      <div class="quote-form-head">Check your <em>coverage</em>.</div>
+      <div class="quote-form-head">Check your <span class="accent">area</span>.</div>
       <div class="form-field"><label>Name</label><input type="text" required></div>
       <div class="form-field"><label>Phone</label><input type="tel" required></div>
       <div class="form-field"><label>ZIP</label><input type="text" placeholder="33611" required></div>
       <div class="form-field"><label>Scope</label><input type="text" placeholder="Redesign? Maintenance? Irrigation?"></div>
       <button type="submit" class="form-submit">
         Check My Area
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </form>
   </div>
@@ -130,12 +129,12 @@
   <div class="footer-top">
     <div>
       <div class="footer-brand">
-        <div style="width: 36px; height: 36px; background: var(--terracotta); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2c0 4-3 6-3 9s3 5 3 5 3-2 3-5-3-5-3-9z" fill="#F5EFE1"/></svg>
+        <div style="width: 40px; height: 40px; background: var(--safety); border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center;">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L7 9c-1.5 2.5 0 5.5 2 7 1.5 1 3 1 4.5 0 2-1.5 3.5-4.5 2-7L11 2z" fill="#1F2419"/></svg>
         </div>
-        Greenwell <em>Landscape</em>
+        Greenwell <span class="accent">Landscape</span>
       </div>
-      <p class="footer-tagline">Design-forward landscape for Tampa Bay's oldest gardens and its newest homes.</p>
+      <p class="footer-tagline">Tampa Bay's family-run lawn and landscape crew. Same crew, every visit, since 2005.</p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
@@ -144,25 +143,25 @@
         <li><a href="services.html#design">Design &amp; Install</a></li>
         <li><a href="services.html#hardscape">Hardscape</a></li>
         <li><a href="services.html#irrigation">Irrigation</a></li>
-        <li><a href="services.html#lighting">Lighting</a></li>
+        <li><a href="services.html#tree-work">Tree Work</a></li>
         <li><a href="services.html#commercial">Commercial</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Studio</h4>
+      <h4>The Shop</h4>
       <ul>
         <li><a href="about.html">About Us</a></li>
         <li><a href="service-areas.html">Service Areas</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="#">Careers</a></li>
         <li><a href="#">Portfolio</a></li>
-        <li><a href="#">Plant Palette</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
       <div class="footer-contact-block">
         <strong>(813) 555-0182</strong>
-        studio@greenwelllandscape.com<br><br>
+        hello@greenwelllandscape.com<br><br>
         3312 W Gandy Blvd<br>
         Tampa, FL 33611<br><br>
         Mon–Fri · 7a–5p<br>
@@ -177,8 +176,6 @@
 </footer>
 
 <script>
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
   const toggle = document.getElementById('mobileToggle'), menu = document.getElementById('mobileMenu');
   toggle.addEventListener('click', () => {
     toggle.classList.toggle('open'); menu.classList.toggle('open');
