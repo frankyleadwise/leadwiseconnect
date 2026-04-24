@@ -56,6 +56,14 @@ nav.scrolled .nav-inner{background:rgba(8,8,8,.92);box-shadow:0 8px 40px rgba(0,
 .menu-overlay a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;letter-spacing:-.03em;opacity:0;transform:translateY(24px);transition:all .5s cubic-bezier(.22,1,.36,1)}
 .menu-overlay.open a{opacity:1;transform:translateY(0)}
 .menu-overlay a.gold{color:var(--gold)}
+.nav-dropdown-wrap{position:relative}
+.nav-dropdown-btn{background:none;border:none;cursor:pointer;color:rgba(245,245,240,.65);font-size:.8rem;font-weight:500;padding:.4rem .65rem;border-radius:9999px;transition:all .3s;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:.3rem}
+.nav-dropdown-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-dropdown{position:absolute;top:calc(100% + .75rem);left:50%;transform:translateX(-50%) translateY(-8px);background:rgba(12,12,12,.97);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:.5rem;min-width:220px;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1);transform-origin:top center;z-index:200}
+.nav-dropdown-wrap.open .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav-dropdown a{display:block;padding:.6rem 1rem;border-radius:.6rem;color:rgba(245,245,240,.7);font-size:.85rem;font-weight:500;transition:all .2s}
+.nav-dropdown a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+
 
 /* BUTTONS */
 .btn-gold{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--gold);color:#080808;font-weight:600;font-size:1rem;padding:.95rem 1.85rem;border-radius:9999px;border:none;cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif}
@@ -332,9 +340,33 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
       LEADWISE<span class="gold">.</span>
     </a>
     <div class="nav-links">
-      <a href="../services.html">Services</a>
-      <a href="../hvac-marketing.html">HVAC</a>
-      <a href="../results.html">Results</a>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-dropdown-btn">Services <span style="font-size:.65rem;opacity:.6">▾</span></button>
+        <div class="nav-dropdown">
+          <a href="../services.html" style="color:var(--gold)!important">All Services</a>
+          <div style="border-top:1px solid rgba(255,255,255,.07);margin:.25rem 0"></div>
+          <a href="../services/smart-websites.html">Smart Websites</a>
+          <a href="../services/ai-voice-agents.html">AI Voice Agents</a>
+          <a href="../services/lead-generation.html">Lead Generation</a>
+          <a href="../services/crm-automation.html">CRM &amp; Automation</a>
+        </div>
+      </div>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-dropdown-btn">Industries <span style="font-size:.65rem;opacity:.6">▾</span></button>
+        <div class="nav-dropdown">
+          <a href="../hvac-marketing.html">HVAC</a>
+          <a href="../plumber-marketing.html">Plumbing</a>
+          <a href="../roofing-marketing.html">Roofing</a>
+          <a href="../electrician-marketing.html">Electrical</a>
+          <a href="../pest-control-marketing.html">Pest Control</a>
+          <a href="../landscaping-marketing.html">Landscaping</a>
+          <a href="../painting-contractor-marketing.html">Painting</a>
+          <a href="../general-contractor-marketing.html">General Contractors</a>
+          <div style="border-top:1px solid rgba(255,255,255,.07);margin:.25rem 0"></div>
+          <a href="../vs-angi-homeadvisor.html" style="color:var(--gold)!important">vs. Angi &amp; HomeAdvisor</a>
+        </div>
+      </div>
+      <a href="/our-work/">Our Work</a>
       <a href="../about.html">About</a>
       <a href="../blog.html">Blog</a>
     </div>
@@ -346,9 +378,13 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 </nav>
 <div class="menu-overlay" id="mobile-menu">
   <a href="../services.html" onclick="closeMenu()">Services</a>
+  <a href="../services/smart-websites.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Smart Websites</a>
+  <a href="../services/ai-voice-agents.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">AI Voice Agents</a>
+  <a href="../services/lead-generation.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Lead Generation</a>
+  <a href="../services/crm-automation.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">CRM &amp; Automation</a>
   <a href="../hvac-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">HVAC</a>
   <a href="../plumber-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Plumbing</a>
-  <a href="../results.html" onclick="closeMenu()">Results</a>
+  <a href="/our-work/" onclick="closeMenu()">Our Work</a>
   <a href="../about.html" onclick="closeMenu()">About</a>
   <a href="../blog.html" onclick="closeMenu()">Blog</a>
   <a href="../contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
@@ -721,9 +757,9 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
       <div>
         <span class="footer-col-label">Free Tools</span>
         <div class="footer-col-links">
+          <a href="./">All Tools</a>
           <a href="hvac-estimate-generator.html">HVAC Estimate Generator</a>
           <a href="commercial-estimate-builder.html">Commercial Bid Builder</a>
-          <a href="../contact.html">Free Website Audit</a>
         </div>
       </div>
       <div>
@@ -752,6 +788,26 @@ window.addEventListener('scroll',()=>{navEl.classList.toggle('scrolled',window.s
 const ham=document.getElementById('hamburger'),menu=document.getElementById('mobile-menu');
 ham.addEventListener('click',()=>{ham.classList.toggle('open');menu.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':''});
 function closeMenu(){ham.classList.remove('open');menu.classList.remove('open');document.body.style.overflow=''}
+// Dropdown menus (Services, Industries) — click based so they don't glitch
+document.querySelectorAll('.nav-dropdown-wrap').forEach(wrap => {
+  const btn = wrap.querySelector('.nav-dropdown-btn');
+  if (!btn) return;
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelectorAll('.nav-dropdown-wrap.open').forEach(other => {
+      if (other !== wrap) other.classList.remove('open');
+    });
+    wrap.classList.toggle('open');
+  });
+  wrap.querySelectorAll('.nav-dropdown a').forEach(link => {
+    link.addEventListener('click', () => wrap.classList.remove('open'));
+  });
+});
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('.nav-dropdown-wrap.open').forEach(wrap => {
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+});
 
 /* ===================================================================
    UNIT COST DEFAULTS + REGIONAL MULTIPLIERS
