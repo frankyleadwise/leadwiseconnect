@@ -140,27 +140,26 @@ nav.scrolled .nav-inner{background:rgba(8,8,8,.92);box-shadow:0 8px 40px rgba(0,
 .pv-footer{margin-top:1rem;padding-top:.75rem;border-top:1px solid #e5e0d0;display:flex;justify-content:space-between;align-items:center;font-size:.65rem;color:#888}
 .pv-footer .lwc-tag{color:#B87818;font-weight:600}
 
-/* DOWNLOAD BAR */
-.dl-bar{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1rem;padding:1.25rem;margin-top:1.25rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
-.dl-bar-text{flex:1;min-width:200px}
-.dl-bar-text .ttl{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
-.dl-bar-text .sub{font-size:.78rem;color:var(--text2)}
-.dl-bar-actions{display:flex;gap:.6rem;flex-wrap:wrap}
-
-/* GATE OVERLAY */
-.gate-overlay{position:fixed;inset:0;background:rgba(8,8,8,.92);backdrop-filter:blur(16px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .4s ease}
-.gate-overlay.active{opacity:1;pointer-events:all}
-.gate-card{background:var(--surface);border:1px solid var(--border-gold);border-radius:1.5rem;padding:2.5rem 2rem;max-width:480px;width:100%;text-align:center;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 0 1px rgba(232,160,32,.1)}
-.gate-icon{width:3.5rem;height:3.5rem;border-radius:50%;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.4rem}
-.gate-card h2{font-size:1.6rem;font-weight:700;color:var(--text);line-height:1.15;margin-bottom:.6rem;letter-spacing:-.01em}
-.gate-card .gate-sub{color:var(--text2);font-size:.95rem;line-height:1.6;margin-bottom:1.75rem}
-.gate-card .gate-sub strong{color:var(--gold-light);font-weight:600}
-.gate-form{text-align:left}
-.gate-fineprint{font-size:.7rem;color:var(--text3);margin-top:1rem;line-height:1.5;text-align:center}
-
-/* SUCCESS BANNER */
-.success-banner{background:rgba(232,160,32,.06);border:1px solid var(--border-gold);border-radius:1rem;padding:1rem 1.25rem;margin:0 auto 2rem;max-width:680px;display:flex;align-items:center;gap:.85rem;font-size:.9rem;color:var(--text)}
-.success-banner .check{width:1.6rem;height:1.6rem;border-radius:50%;background:rgba(232,160,32,.15);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:700;flex-shrink:0}
+/* INLINE LEAD CAPTURE */
+.capture-card{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1.25rem;padding:1.75rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.capture-card::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(232,160,32,.1),transparent 70%);pointer-events:none}
+.capture-head{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1.25rem;position:relative}
+.capture-icon{width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.capture-title{font-size:1rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.2rem}
+.capture-sub{font-size:.82rem;color:var(--text2);line-height:1.55}
+.capture-form{position:relative}
+.capture-form .fg{margin-bottom:.85rem}
+.capture-form .fg label{font-size:.72rem;color:var(--text2);font-weight:500;margin-bottom:.3rem;letter-spacing:.02em}
+.capture-form .fg label .req{color:var(--gold);font-weight:700}
+.capture-form .fg input{background:var(--surface2);border:1px solid var(--border);padding:.7rem .95rem;font-size:.88rem;border-radius:.55rem;color:var(--text);width:100%;outline:none;font-family:'Outfit',sans-serif;transition:border-color .3s}
+.capture-form .fg input::placeholder{color:var(--text3)}
+.capture-form .fg input:focus{border-color:var(--border-gold);box-shadow:0 0 0 3px rgba(232,160,32,.08)}
+.capture-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.capture-submit{width:100%;margin-top:.5rem;justify-content:center}
+.capture-submit:disabled{background:var(--surface2);color:var(--text3);border:1px solid var(--border);box-shadow:none}
+.capture-submit:disabled:hover{background:var(--surface2);color:var(--text3);transform:none}
+.capture-finep{font-size:.7rem;color:var(--text3);line-height:1.5;margin-top:.85rem;text-align:center;max-width:460px;margin-left:auto;margin-right:auto}
+@media(max-width:600px){.capture-form .row2{grid-template-columns:1fr}}
 
 /* HOW IT WORKS */
 .hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
@@ -283,14 +282,6 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
   </div>
 </section>
 
-<!-- SUCCESS BANNER (shows after gate unlock) -->
-<div id="success-banner" style="display:none">
-  <div class="success-banner">
-    <div class="check">✓</div>
-    <div>You're in. Build your first estimate below — your free PDF download is unlocked.</div>
-  </div>
-</div>
-
 <!-- TOOL -->
 <div class="tool-wrap">
   <div class="tool-grid">
@@ -365,13 +356,31 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
           <textarea id="f_terms" placeholder="Payment terms, warranty info, exclusions...">Includes 10-year parts warranty and 2-year labor warranty. Permit fees included. Old equipment removed and recycled. 50% deposit due at signing, balance due upon completion. All work performed by licensed and insured technicians.</textarea>
         </div>
 
-        <div class="dl-bar">
-          <div class="dl-bar-text">
-            <div class="ttl">Estimate ready?</div>
-            <div class="sub">Download as PDF — print, email, or send to your customer.</div>
+        <div class="capture-card">
+          <div class="capture-head">
+            <div class="capture-icon">📧</div>
+            <div>
+              <div class="capture-title">Download your estimate</div>
+              <div class="capture-sub">We just need to know who's using this — it takes 10 seconds.</div>
+            </div>
           </div>
-          <div class="dl-bar-actions">
-            <button type="button" class="btn-gold" id="dl-pdf-btn" onclick="downloadPDF()" disabled>Download PDF <span class="icon-wrap">↓</span></button>
+          <div class="capture-form">
+            <div class="row2">
+              <div class="fg"><label>First name <span class="req">*</span></label><input type="text" id="cap_first_name" placeholder="Your first name" autocomplete="given-name" required/></div>
+              <div class="fg"><label>Last name <span class="req">*</span></label><input type="text" id="cap_last_name" placeholder="Your last name" autocomplete="family-name" required/></div>
+            </div>
+            <div class="row2">
+              <div class="fg"><label>Work email <span class="req">*</span></label><input type="email" id="cap_email" placeholder="you@yourcompany.com" autocomplete="email" required/></div>
+              <div class="fg"><label>Phone <span class="req">*</span></label><input type="tel" id="cap_phone" placeholder="(813) 555-0100" autocomplete="tel" required/></div>
+            </div>
+            <div class="fg"><label>Company name <span class="req">*</span></label><input type="text" id="cap_business" placeholder="ACME Heating &amp; Cooling" autocomplete="organization" required/></div>
+
+            <button type="button" class="btn-gold capture-submit" id="dl-pdf-btn" onclick="downloadPDF()" disabled>
+              <span id="dl-btn-label">Fill in fields above to enable download</span>
+              <span class="icon-wrap" id="dl-btn-icon">↓</span>
+            </button>
+
+            <p class="capture-finep">By downloading you agree to receive occasional contractor tips from LeadWise Connect and allow us to follow up about your business. No spam. Unsubscribe anytime.</p>
           </div>
         </div>
 
@@ -584,26 +593,6 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
   </div>
 </footer>
 
-<!-- GATE OVERLAY -->
-<div class="gate-overlay active" id="gate">
-  <div class="gate-card">
-    <div class="gate-icon">🔒</div>
-    <h2>One quick step to unlock the tool.</h2>
-    <p class="gate-sub">Drop your name and email and we'll unlock the <strong>full estimate generator + free PDF download</strong>. No spam, no sales calls — pinky promise.</p>
-    <form class="gate-form" id="gate-form" autocomplete="on">
-      <div class="row2">
-        <div class="fg"><label>First name</label><input type="text" name="first_name" required placeholder="Franky"/></div>
-        <div class="fg"><label>Last name</label><input type="text" name="last_name" required placeholder="Smith"/></div>
-      </div>
-      <div class="fg"><label>Work email</label><input type="email" name="email" required placeholder="you@yourcompany.com"/></div>
-      <div class="fg"><label>Company name</label><input type="text" name="business_name" required placeholder="ACME Heating &amp; Cooling"/></div>
-      <div class="fg"><label>Phone (optional)</label><input type="tel" name="phone" placeholder="(813) 555-0100"/></div>
-      <button type="submit" class="btn-gold" style="width:100%;margin-top:.5rem" id="gate-submit">Unlock The Tool <span class="icon-wrap">→</span></button>
-      <div class="gate-fineprint">By unlocking you agree to receive occasional emails from LeadWise Connect. Unsubscribe anytime.</div>
-    </form>
-  </div>
-</div>
-
 <script>
 // ===== Nav =====
 const navEl=document.getElementById('main-nav');
@@ -612,63 +601,49 @@ const ham=document.getElementById('hamburger'),menu=document.getElementById('mob
 ham.addEventListener('click',()=>{ham.classList.toggle('open');menu.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':''});
 function closeMenu(){ham.classList.remove('open');menu.classList.remove('open');document.body.style.overflow=''}
 
-// ===== Gate =====
-const gate=document.getElementById('gate');
-const successBanner=document.getElementById('success-banner');
+// ===== Inline lead capture =====
 const dlBtn=document.getElementById('dl-pdf-btn');
+const dlLabel=document.getElementById('dl-btn-label');
+const capFields=['cap_first_name','cap_last_name','cap_email','cap_phone','cap_business'];
 let userInfo=null;
-let unlocked=false;
 
-// Restore prior unlock if same browser
+// Restore prior capture values for returning visitors (UX nicety)
 try{
-  const saved=localStorage.getItem('lwc_hvac_estimator_unlock');
+  const saved=localStorage.getItem('lwc_hvac_estimator_lead');
   if(saved){
-    userInfo=JSON.parse(saved);
-    unlock(false);
+    const prev=JSON.parse(saved);
+    if(prev.first_name) document.getElementById('cap_first_name').value=prev.first_name;
+    if(prev.last_name) document.getElementById('cap_last_name').value=prev.last_name;
+    if(prev.email) document.getElementById('cap_email').value=prev.email;
+    if(prev.phone) document.getElementById('cap_phone').value=prev.phone;
+    if(prev.business_name) document.getElementById('cap_business').value=prev.business_name;
+    userInfo=prev;
+    validateCapture();
   }
 }catch(e){}
 
-document.getElementById('gate-form').addEventListener('submit',async e=>{
-  e.preventDefault();
-  const btn=document.getElementById('gate-submit');
-  btn.textContent='Unlocking...';btn.disabled=true;
-  const form=e.target;
-  const data={
-    first_name:form.first_name.value.trim(),
-    last_name:form.last_name.value.trim(),
-    email:form.email.value.trim(),
-    business_name:form.business_name.value.trim(),
-    phone:form.phone.value.trim(),
-    lead_source:'hvac-estimate-generator',
-    lead_magnet:'Free HVAC Estimate Generator',
-    page_url:window.location.href,
-    submitted_at:new Date().toISOString()
-  };
-  try{
-    await fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
-    });
-  }catch(err){/* don't block unlock on network failure */}
-  userInfo=data;
-  try{localStorage.setItem('lwc_hvac_estimator_unlock',JSON.stringify(data))}catch(e){}
-  unlock(true);
+// Wire up live validation
+capFields.forEach(id=>{
+  document.getElementById(id).addEventListener('input',validateCapture);
+  document.getElementById(id).addEventListener('blur',validateCapture);
 });
 
-function unlock(showBanner){
-  unlocked=true;
-  gate.classList.remove('active');
-  document.body.style.overflow='';
-  dlBtn.disabled=false;
-  if(showBanner){
-    successBanner.style.display='block';
-    setTimeout(()=>{successBanner.style.transition='opacity .6s ease';successBanner.style.opacity='0';setTimeout(()=>{successBanner.style.display='none'},700)},6000);
-  }
+function validateCapture(){
+  const vals={
+    first_name:document.getElementById('cap_first_name').value.trim(),
+    last_name:document.getElementById('cap_last_name').value.trim(),
+    email:document.getElementById('cap_email').value.trim(),
+    phone:document.getElementById('cap_phone').value.trim(),
+    business_name:document.getElementById('cap_business').value.trim()
+  };
+  const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vals.email);
+  const phoneDigits=vals.phone.replace(/\D/g,'');
+  const phoneOk=phoneDigits.length>=10;
+  const allFilled=vals.first_name && vals.last_name && vals.business_name && emailOk && phoneOk;
+  dlBtn.disabled=!allFilled;
+  dlLabel.textContent=allFilled ? 'Download PDF' : 'Fill in fields above to enable download';
+  return allFilled ? vals : null;
 }
-
-// Lock body scroll while gate is open
-if(!unlocked) document.body.style.overflow='hidden';
 
 // ===== Estimate builder =====
 const startingLines=[
@@ -804,12 +779,33 @@ startingLines.forEach(l=>addLine(l.desc,l.qty,l.price));
 render();
 
 // ===== PDF Generation =====
-function downloadPDF(){
-  if(!unlocked){
-    gate.classList.add('active');
-    document.body.style.overflow='hidden';
+async function downloadPDF(){
+  const vals=validateCapture();
+  if(!vals){
+    // Shouldn't happen since button is disabled, but bulletproof it
     return;
   }
+
+  // Capture lead FIRST — fire to GHL before PDF generation starts.
+  // This is atomic with the download: you can't get the PDF without us getting your data.
+  userInfo={
+    ...vals,
+    lead_source:'hvac-estimate-generator',
+    lead_magnet:'Free HVAC Estimate Generator',
+    page_url:window.location.href,
+    submitted_at:new Date().toISOString()
+  };
+  // Remember for UX on repeat visits
+  try{localStorage.setItem('lwc_hvac_estimator_lead',JSON.stringify(vals))}catch(e){}
+  // Fire-and-forget webhook (doesn't block download)
+  try{
+    fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(userInfo)
+    }).catch(()=>{});
+  }catch(e){}
+
   const d=window._estData;
   const { jsPDF } = window.jspdf;
   const doc=new jsPDF({unit:'pt',format:'letter'});

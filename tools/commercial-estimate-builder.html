@@ -207,17 +207,29 @@ nav.scrolled .nav-inner{background:rgba(8,8,8,.92);box-shadow:0 8px 40px rgba(0,
 .api-key-wrap input:focus{border-color:var(--border-gold)}
 .api-key-wrap button{background:var(--gold);color:#080808;border:none;border-radius:.55rem;padding:.6rem 1rem;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer}
 
-/* DOWNLOAD GATE */
-.dl-gate{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1rem;padding:1.75rem;margin-top:1.5rem}
-.dl-gate h3{font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
-.dl-gate p{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:1.25rem}
-.dl-gate .gate-form{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem}
-.dl-gate .gate-form .full{grid-column:1/-1}
-.dl-gate .btn-gold{width:100%}
-.dl-gate.unlocked{background:rgba(111,207,151,.05);border-color:rgba(111,207,151,.25)}
-
-/* WATERMARK ON PREVIEW */
-.watermark-tag{display:inline-block;background:rgba(232,160,32,.08);color:var(--gold);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .55rem;border-radius:9999px;margin-left:.5rem;vertical-align:middle}
+/* INLINE LEAD CAPTURE (final panel) */
+.capture-card{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1.25rem;padding:1.75rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.capture-card::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(232,160,32,.1),transparent 70%);pointer-events:none}
+.capture-head{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1.25rem;position:relative}
+.capture-icon{width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.capture-title{font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.25rem}
+.capture-sub{font-size:.85rem;color:var(--text2);line-height:1.55}
+.capture-form{position:relative}
+.capture-form .fg{margin-bottom:.85rem}
+.capture-form .fg label{font-size:.72rem;color:var(--text2);font-weight:500;margin-bottom:.3rem;letter-spacing:.02em}
+.capture-form .fg label .req{color:var(--gold);font-weight:700}
+.capture-form .fg input{background:var(--surface2);border:1px solid var(--border);padding:.7rem .95rem;font-size:.88rem;border-radius:.55rem;color:var(--text);width:100%;outline:none;font-family:'Outfit',sans-serif;transition:border-color .3s}
+.capture-form .fg input::placeholder{color:var(--text3)}
+.capture-form .fg input:focus{border-color:var(--border-gold);box-shadow:0 0 0 3px rgba(232,160,32,.08)}
+.capture-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.dl-actions-row{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.btn-capture{flex:1;min-width:180px;justify-content:center}
+.btn-capture:disabled{background:var(--surface2);color:var(--text3);border:1px solid var(--border);box-shadow:none}
+.btn-capture:disabled:hover{background:var(--surface2);color:var(--text3);transform:none}
+.dl-disabled-notice{font-size:.78rem;color:var(--text3);text-align:center;margin-top:.6rem;font-style:italic;display:block}
+.dl-disabled-notice.hidden{display:none}
+.capture-finep{font-size:.7rem;color:var(--text3);line-height:1.5;margin-top:1rem;text-align:center;max-width:500px;margin-left:auto;margin-right:auto}
+@media(max-width:600px){.capture-form .row2{grid-template-columns:1fr}.dl-actions-row{flex-direction:column}.btn-capture{flex:unset;width:100%}}
 
 /* FOOTER */
 footer{border-top:1px solid rgba(255,255,255,.06)}
@@ -247,7 +259,6 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
   .stepper-wrap{padding:1rem 1.25rem 0}
   .footer-cta-band,.footer-body{padding-left:1.25rem;padding-right:1.25rem}
   .row2,.row3{grid-template-columns:1fr}
-  .dl-gate .gate-form{grid-template-columns:1fr}
 }
 @media(max-width:600px){nav{top:.75rem}.hiw-grid{grid-template-columns:1fr}}
 </style>
@@ -453,36 +464,53 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
     <div class="panel-head">
       <div>
         <span class="step-badge" style="background:rgba(111,207,151,.12);color:var(--ok)">✓ Bid package complete</span>
-        <h2>Your complete bid package <span class="watermark-tag" id="wm-tag">LeadWise · Watermark</span></h2>
-        <div class="sub" id="final-project-name">Review below, then download Word or PDF to send with your bid.</div>
+        <h2>Your complete bid package</h2>
+        <div class="sub" id="final-project-name">Review below, then download as Word or PDF to send with your bid.</div>
       </div>
     </div>
     <div class="panel-body">
       <div id="final-sections"></div>
 
-      <div class="dl-gate" id="dl-gate">
-        <h3>📩 Enter your email to remove the watermark and download.</h3>
-        <p>Get a clean Word + PDF of your bid package. You'll also get our weekly "How to Win More Bids" email (unsubscribe anytime — we hate spam too).</p>
-        <div class="gate-form">
-          <input type="text" id="g_first_name" placeholder="First name" class="fg-input"/>
-          <input type="text" id="g_last_name" placeholder="Last name" class="fg-input"/>
-          <input type="email" id="g_email" placeholder="Work email" class="full fg-input"/>
-          <input type="text" id="g_business" placeholder="Company name" class="full fg-input"/>
-          <input type="tel" id="g_phone" placeholder="Phone (optional)" class="full fg-input"/>
+      <div class="capture-card">
+        <div class="capture-head">
+          <div class="capture-icon">📧</div>
+          <div>
+            <div class="capture-title">Download your bid package</div>
+            <div class="capture-sub">We just need to know who's using this — it takes 10 seconds. We'll follow up with bid-winning tips you can actually use.</div>
+          </div>
         </div>
-        <button class="btn-gold" id="btn-unlock" onclick="unlockDownload()">Unlock downloads <span class="icon-wrap">→</span></button>
+        <div class="capture-form">
+          <div class="row2">
+            <div class="fg"><label>First name <span class="req">*</span></label><input type="text" id="cap_first_name" placeholder="Your first name" autocomplete="given-name" required/></div>
+            <div class="fg"><label>Last name <span class="req">*</span></label><input type="text" id="cap_last_name" placeholder="Your last name" autocomplete="family-name" required/></div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>Work email <span class="req">*</span></label><input type="email" id="cap_email" placeholder="you@yourcompany.com" autocomplete="email" required/></div>
+            <div class="fg"><label>Phone <span class="req">*</span></label><input type="tel" id="cap_phone" placeholder="(813) 555-0100" autocomplete="tel" required/></div>
+          </div>
+          <div class="fg"><label>Company name <span class="req">*</span></label><input type="text" id="cap_business" placeholder="Your MEP company" autocomplete="organization" required/></div>
+
+          <div class="dl-actions-row">
+            <button class="btn-gold btn-capture" id="dl-word-btn" onclick="downloadWord()" disabled>
+              <span class="dl-btn-label">Download Word</span>
+              <span class="icon-wrap">↓</span>
+            </button>
+            <button class="btn-gold btn-capture" id="dl-pdf-btn" onclick="downloadPDF()" disabled>
+              <span class="dl-btn-label">Download PDF</span>
+              <span class="icon-wrap">↓</span>
+            </button>
+          </div>
+          <div class="dl-disabled-notice" id="dl-notice">Fill in fields above to enable downloads</div>
+
+          <p class="capture-finep">By downloading you agree to receive occasional bid-winning tips from LeadWise Connect and allow us to follow up about your business. No spam. Unsubscribe anytime.</p>
+        </div>
       </div>
 
-      <div id="dl-actions" style="display:none">
-        <div class="action-row" style="margin-top:.5rem">
-          <div class="action-row-left">
-            <button class="btn-ghost btn-sm" onclick="startOver()">← Start a new bid package</button>
-          </div>
-          <div class="action-row-right">
-            <button class="btn-gold btn-sm" onclick="downloadWord()">Download Word <span class="icon-wrap">↓</span></button>
-            <button class="btn-gold btn-sm" onclick="downloadPDF()">Download PDF <span class="icon-wrap">↓</span></button>
-          </div>
+      <div class="action-row" style="margin-top:1rem">
+        <div class="action-row-left">
+          <button class="btn-ghost btn-sm" onclick="startOver()">← Start a new bid package</button>
         </div>
+        <div class="action-row-right"></div>
       </div>
     </div>
   </div>
@@ -490,8 +518,6 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 </div>
 
 <style>
-.dl-gate input.fg-input{background:var(--surface2);border:1px solid var(--border);border-radius:.55rem;color:var(--text);padding:.65rem .9rem;font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;width:100%}
-.dl-gate input.fg-input:focus{border-color:var(--border-gold)}
 .final-section{background:var(--surface2);border:1px solid var(--border);border-radius:.85rem;padding:1.5rem 1.75rem;margin-bottom:1rem}
 .final-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
 .final-section-head h4{font-size:.95rem;font-weight:700;color:var(--gold);letter-spacing:.02em;text-transform:uppercase;font-size:.8rem;letter-spacing:.1em}
@@ -675,8 +701,7 @@ const state = {
   results: {},     // { summary:'...', scope:'...', etc. }
   editing: false,
   currentGeneration: null, // { raw, approved:false }
-  unlocked: false,
-  userInfo: null
+  userInfo: null   // captured lead info (from inline capture form at final step)
 };
 
 // Restore prior session if any
@@ -686,7 +711,7 @@ try {
     const prev = JSON.parse(saved);
     if (prev.results) state.results = prev.results;
     if (prev.projectInfo) Object.assign(state.projectInfo, prev.projectInfo);
-    if (prev.userInfo) { state.userInfo = prev.userInfo; state.unlocked = true; }
+    if (prev.userInfo) state.userInfo = prev.userInfo;
   }
 } catch(e){}
 
@@ -1110,29 +1135,64 @@ function showFinal(){
   }).join('');
   document.getElementById('final-sections').innerHTML = sections;
 
-  // Fire lead webhook event (anonymous — tool completed)
+  // Fire webhook: tool completed (anonymous event — helps track tool-completion rate)
   fireWebhook({ event: 'bid_package_complete', project_name: proj });
 
-  if (state.unlocked) {
-    document.getElementById('dl-gate').style.display='none';
-    document.getElementById('dl-actions').style.display='block';
-    document.getElementById('wm-tag').style.display='none';
+  // Pre-fill capture form if we have prior userInfo (returning visitor UX)
+  if (state.userInfo) {
+    if (state.userInfo.first_name) document.getElementById('cap_first_name').value = state.userInfo.first_name;
+    if (state.userInfo.last_name) document.getElementById('cap_last_name').value = state.userInfo.last_name;
+    if (state.userInfo.email) document.getElementById('cap_email').value = state.userInfo.email;
+    if (state.userInfo.phone) document.getElementById('cap_phone').value = state.userInfo.phone;
+    if (state.userInfo.business_name) document.getElementById('cap_business').value = state.userInfo.business_name;
   }
+
+  // Wire up the inline capture validation
+  const capFields = ['cap_first_name','cap_last_name','cap_email','cap_phone','cap_business'];
+  capFields.forEach(id=>{
+    const el = document.getElementById(id);
+    if (el && !el._wired) {
+      el.addEventListener('input', validateCapture);
+      el.addEventListener('blur', validateCapture);
+      el._wired = true;
+    }
+  });
+  validateCapture();
+
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // ============================================================
-// DOWNLOAD GATE
+// INLINE LEAD CAPTURE VALIDATION
 // ============================================================
-async function unlockDownload(){
-  const data = {
-    first_name: document.getElementById('g_first_name').value.trim(),
-    last_name: document.getElementById('g_last_name').value.trim(),
-    email: document.getElementById('g_email').value.trim(),
-    business_name: document.getElementById('g_business').value.trim(),
-    phone: document.getElementById('g_phone').value.trim(),
-    lead_source:'commercial-estimate-builder',
-    lead_magnet:'Commercial MEP Bid Package Builder',
+function validateCapture(){
+  const vals = {
+    first_name: document.getElementById('cap_first_name').value.trim(),
+    last_name: document.getElementById('cap_last_name').value.trim(),
+    email: document.getElementById('cap_email').value.trim(),
+    phone: document.getElementById('cap_phone').value.trim(),
+    business_name: document.getElementById('cap_business').value.trim()
+  };
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vals.email);
+  const phoneDigits = vals.phone.replace(/\D/g,'');
+  const phoneOk = phoneDigits.length >= 10;
+  const allFilled = vals.first_name && vals.last_name && vals.business_name && emailOk && phoneOk;
+  document.getElementById('dl-word-btn').disabled = !allFilled;
+  document.getElementById('dl-pdf-btn').disabled = !allFilled;
+  document.getElementById('dl-notice').classList.toggle('hidden', allFilled);
+  return allFilled ? vals : null;
+}
+
+// Atomic capture: called by each download button BEFORE generating the file.
+// Captures lead, fires webhook, saves to state+localStorage.
+// Returns true if capture succeeded; false otherwise (shouldn't happen since buttons are disabled).
+function captureLeadAtomic(){
+  const vals = validateCapture();
+  if (!vals) return false;
+  state.userInfo = {
+    ...vals,
+    lead_source: 'commercial-estimate-builder',
+    lead_magnet: 'Commercial MEP Bid Package Builder',
     project_name: state.projectInfo.project_name,
     trades_bid: state.projectInfo.trades.join(','),
     bldg_type: state.projectInfo.bldg_type,
@@ -1140,24 +1200,16 @@ async function unlockDownload(){
     page_url: window.location.href,
     submitted_at: new Date().toISOString()
   };
-  if (!data.email || !data.first_name || !data.business_name) {
-    alert('Please fill in first name, email, and company name.');
-    return;
-  }
-  const btn = document.getElementById('btn-unlock');
-  btn.textContent = 'Unlocking...'; btn.disabled = true;
-  try {
-    await fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
-      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)
-    });
-  } catch(e){}
-  state.userInfo = data;
-  state.unlocked = true;
   persist();
-  document.getElementById('dl-gate').classList.add('unlocked');
-  document.getElementById('dl-gate').innerHTML = '<div style="display:flex;align-items:center;gap:.75rem;color:var(--ok)"><span style="font-size:1.25rem">✓</span><div><strong style="color:var(--text)">You\'re in.</strong> <span style="color:var(--text2)">Download your bid package below — watermark removed.</span></div></div>';
-  document.getElementById('dl-actions').style.display='block';
-  document.getElementById('wm-tag').style.display='none';
+  // Fire-and-forget webhook (doesn't block download)
+  try {
+    fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(state.userInfo)
+    }).catch(()=>{});
+  } catch(e){}
+  return true;
 }
 
 function fireWebhook(payload){
@@ -1199,11 +1251,14 @@ Delivery: ${proj.delivery || '—'}
     if (!c) return '';
     return `\n\n============================================================\n${s.title.toUpperCase()}\n============================================================\n\n${c}`;
   }).join('');
-  const footer = state.unlocked ? '\n\n---\nGenerated with LeadWise Connect · https://leadwiseconnect.com' : '';
+  const footer = '\n\n---\nGenerated with LeadWise Connect · https://leadwiseconnect.com';
   return header + body + footer;
 }
 
 function downloadPDF(){
+  // Atomic lead capture: must succeed before we generate anything
+  if (!captureLeadAtomic()) return;
+
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({unit:'pt',format:'letter'});
   const pageW = doc.internal.pageSize.getWidth();
@@ -1270,19 +1325,7 @@ function downloadPDF(){
     addSpace(16);
   });
 
-  // Watermark footer if not unlocked
-  if (!state.unlocked) {
-    const totalPages = doc.internal.getNumberOfPages();
-    for (let i=1; i<=totalPages; i++) {
-      doc.setPage(i);
-      doc.saveGraphicsState();
-      doc.setGState(new doc.GState({opacity:.08}));
-      doc.setFont('helvetica','bold');doc.setFontSize(70);doc.setTextColor(232,160,32);
-      doc.text('LEADWISE', pageW/2, pageH/2, {align:'center', angle:-30});
-      doc.restoreGraphicsState();
-    }
-  }
-  // Footer on every page
+  // Footer on every page (subtle attribution, not a watermark)
   const totalPages = doc.internal.getNumberOfPages();
   for (let i=1; i<=totalPages; i++) {
     doc.setPage(i);
@@ -1298,6 +1341,9 @@ function downloadPDF(){
 }
 
 function downloadWord(){
+  // Atomic lead capture: must succeed before we generate anything
+  if (!captureLeadAtomic()) return;
+
   const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = window.docx;
   const proj = state.projectInfo;
   const tradeNames = {hvac:'HVAC / Mechanical',plumbing:'Plumbing',piping:'Hydronic / Process Piping',electrical:'Electrical',lowvoltage:'Low Voltage / Controls',fire:'Fire Protection'};
@@ -1356,12 +1402,10 @@ function downloadWord(){
 }
 
 function startOver(){
-  if (!confirm('Start over? This will clear your current bid package (your API key is kept).')) return;
+  if (!confirm('Start over? This will clear your current bid package (your API key and contact info are kept).')) return;
   state.results = {};
   state.projectInfo = {project_name:'',bid_date:'',gc:'',contractor:'',trades:[],bldg_type:'',size:'',delivery:'',notes:''};
   state.currentStepIdx = 0;
-  state.unlocked = false;
-  state.userInfo = null;
   localStorage.removeItem('lwc_commercial_session');
   location.reload();
 }
