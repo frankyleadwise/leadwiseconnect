@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Commercial MEP Bid Package Builder — AI Scope, Assumptions & Exclusions | LeadWise Connect</title>
-<meta name="description" content="Upload your plans and specs. AI reads them and builds a professional bid package — scope of work, equipment schedule, assumptions, exclusions, alternates, RFIs, and qualification letter. Free for commercial MEP contractors."/>
+<title>Commercial MEP Bid Package Builder — Free ROM Estimator + Bid Documents | LeadWise Connect</title>
+<meta name="description" content="Free for commercial MEP contractors. Get a rough order of magnitude budget, schedule estimate, and a full bid package — scope, assumptions, exclusions, alternates, RFIs, qualification letter — in 5 minutes. No signup to use, no AI, no API keys, no subscription."/>
 <meta property="og:title" content="Commercial MEP Bid Package Builder | LeadWise Connect"/>
-<meta property="og:description" content="Upload plans. AI builds your scope, assumptions, exclusions, and qualification letter in minutes."/>
+<meta property="og:description" content="Free forever tool for commercial MEP contractors. ROM budget + full bid package in minutes."/>
 <meta property="og:url" content="https://leadwiseconnect.com/tools/commercial-estimate-builder.html"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://leadwiseconnect.com/tools/commercial-estimate-builder.html"/>
@@ -247,20 +247,152 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 .footer-bottom p,.footer-bottom a{color:#3A3836;font-size:.8rem}
 .footer-bottom-links{display:flex;gap:1.5rem}
 
+/* WORKSPACE LAYOUT */
+.workspace{padding:2rem 2rem 5rem}
+.workspace-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:1.5rem;align-items:start}
+
+/* Tighter form fields inside the left form pane */
+.form-pane .fg{margin-bottom:.85rem}
+.form-pane .fg label{font-size:.72rem;margin-bottom:.3rem}
+.form-pane .fg input,.form-pane .fg select,.form-pane .fg textarea{padding:.65rem .85rem;font-size:.88rem;border-radius:.55rem}
+.form-pane .fg select{padding-right:2.2rem;background-position:right .85rem center}
+.form-pane .row2{gap:.6rem}
+
+/* LEFT PANE (FORM) */
+.form-pane{background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;overflow:hidden;position:sticky;top:5rem;max-height:calc(100vh - 6rem);overflow-y:auto}
+.form-pane::-webkit-scrollbar{width:4px}
+.form-pane::-webkit-scrollbar-thumb{background:rgba(232,160,32,.2);border-radius:2px}
+.form-section{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border)}
+.form-section:last-child{border-bottom:none}
+.form-section-title{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.form-section-title .num{width:1.2rem;height:1.2rem;border-radius:50%;background:rgba(232,160,32,.12);color:var(--gold);display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700}
+
+.trade-checks{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.trade-check{background:var(--surface2);border:1px solid var(--border);border-radius:.55rem;padding:.65rem .8rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.45rem;font-size:.82rem;color:var(--text2);user-select:none}
+.trade-check:hover{border-color:rgba(232,160,32,.2)}
+.trade-check.sel{background:rgba(232,160,32,.06);border-color:var(--border-gold);color:var(--text)}
+.trade-check .chk{width:1rem;height:1rem;border-radius:.25rem;border:1.5px solid var(--text3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.6rem;font-weight:700;background:transparent;transition:all .2s}
+.trade-check.sel .chk{background:var(--gold);border-color:var(--gold);color:#080808}
+.trade-check.sel .chk::before{content:'✓'}
+
+.trade-rom{background:rgba(232,160,32,.03);border:1px solid rgba(232,160,32,.1);border-radius:.6rem;padding:1rem 1.15rem;margin-top:.75rem;display:none}
+.trade-rom.active{display:block}
+.trade-rom-head{font-size:.75rem;font-weight:700;color:var(--gold-light);margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.override-toggle{font-size:.65rem;color:var(--text3);background:transparent;border:1px solid var(--border);border-radius:9999px;padding:.2rem .55rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.override-toggle:hover,.override-toggle.on{color:var(--gold);border-color:var(--border-gold);background:rgba(232,160,32,.06)}
+.unit-row{display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:center;margin-bottom:.5rem;font-size:.78rem}
+.unit-row .lbl{color:var(--text2)}
+.unit-row .val{color:var(--gold-light);font-weight:600;font-variant-numeric:tabular-nums}
+.unit-row input{background:var(--surface2);border:1px solid var(--border);border-radius:.35rem;padding:.3rem .5rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.78rem;width:5.5rem;text-align:right;outline:none}
+.unit-row input:focus{border-color:var(--border-gold)}
+
+.mini-drop{border:1.5px dashed rgba(232,160,32,.2);background:rgba(232,160,32,.02);border-radius:.55rem;padding:.9rem;text-align:center;cursor:pointer;transition:all .2s;font-size:.78rem;color:var(--text2);display:block}
+.mini-drop:hover,.mini-drop.dragover{border-color:rgba(232,160,32,.5);background:rgba(232,160,32,.04);color:var(--text)}
+.mini-drop .emj{font-size:1rem;margin-right:.35rem}
+.mini-drop input{display:none}
+.file-chip{display:flex;align-items:center;gap:.5rem;background:rgba(232,160,32,.08);border:1px solid var(--border-gold);border-radius:.45rem;padding:.45rem .65rem;margin-top:.5rem;font-size:.75rem;color:var(--text)}
+.file-chip .name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-chip .meta{color:var(--text3);font-size:.68rem;flex-shrink:0}
+.file-chip .x{background:rgba(255,255,255,.06);border:none;color:var(--text3);width:1rem;height:1rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:.7rem;line-height:1;transition:all .2s;flex-shrink:0}
+.file-chip .x:hover{background:rgba(255,107,107,.15);color:#ff6b6b}
+
+.fg label .opt{color:var(--text3);font-weight:400;margin-left:.25rem}
+
+/* RIGHT PANE (PREVIEW) */
+.preview-pane{display:flex;flex-direction:column;gap:1.25rem;min-width:0}
+
+.rom-card{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1.25rem;padding:1.5rem 1.75rem;position:relative;overflow:hidden}
+.rom-card::before{content:'';position:absolute;top:-30px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,160,32,.1),transparent 70%);pointer-events:none}
+.rom-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;position:relative;flex-wrap:wrap}
+.rom-head h3{font-size:1.1rem;font-weight:700;color:var(--text);line-height:1.2}
+.rom-head .pill-badge{display:inline-block;background:rgba(232,160,32,.12);color:var(--gold);font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .65rem;border-radius:9999px;white-space:nowrap}
+.rom-total{display:flex;align-items:baseline;gap:.65rem;margin-bottom:.4rem}
+.rom-total .amt{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:700;color:var(--gold);line-height:1;letter-spacing:-.02em;font-family:'DM Serif Display',serif;font-style:italic}
+.rom-caveat{color:var(--text3);font-size:.72rem;line-height:1.5;margin-bottom:1.25rem}
+.rom-caveat strong{color:var(--text2);font-weight:600}
+.rom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-bottom:1rem}
+.rom-item{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:.6rem;padding:.75rem .9rem}
+.rom-item .tl{font-size:.65rem;color:var(--text2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem;font-weight:600}
+.rom-item .vl{font-size:1rem;color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+.rom-item.total .vl{color:var(--gold-light)}
+.rom-sched{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem}
+.rom-sched .rom-item{background:rgba(0,0,0,.15)}
+.rom-empty{padding:2rem;text-align:center;color:var(--text3);font-style:italic;font-size:.9rem}
+
+.bid-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;padding:0 .25rem}
+.bid-head h3{font-size:.95rem;font-weight:700;color:var(--text);letter-spacing:-.01em}
+.bid-head .note{font-size:.72rem;color:var(--text3)}
+
+.bid-section{background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:border-color .2s;margin-bottom:.75rem}
+.bid-section:hover{border-color:rgba(232,160,32,.15)}
+.bid-section-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.95rem 1.25rem;background:rgba(232,160,32,.025);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.bid-section-head .l{display:flex;align-items:center;gap:.65rem}
+.bid-section-head .num{width:1.5rem;height:1.5rem;border-radius:50%;background:rgba(232,160,32,.1);color:var(--gold);font-size:.72rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.bid-section-head h4{font-size:.88rem;font-weight:700;color:var(--text);letter-spacing:.01em}
+.bid-section-head .r{display:flex;align-items:center;gap:.5rem}
+.bid-section-head .edit-btn{background:transparent;border:1px solid var(--border);color:var(--text2);font-size:.7rem;padding:.25rem .65rem;border-radius:9999px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.bid-section-head .edit-btn:hover{color:var(--gold-light);border-color:var(--border-gold)}
+.bid-section-head .edit-btn.editing{color:var(--gold);border-color:var(--border-gold);background:rgba(232,160,32,.06)}
+.bid-section-head .chev{color:var(--text3);font-size:.75rem;transition:transform .3s}
+.bid-section.collapsed .chev{transform:rotate(-90deg)}
+.bid-section-body{padding:1.25rem 1.5rem;font-size:.88rem;line-height:1.7;color:var(--text)}
+.bid-section.collapsed .bid-section-body{display:none}
+.bid-section-body h2,.bid-section-body h3{color:var(--gold);font-weight:700;margin:1rem 0 .5rem;letter-spacing:-.01em}
+.bid-section-body h2{font-size:1rem}
+.bid-section-body h3{font-size:.9rem}
+.bid-section-body p{margin-bottom:.65rem}
+.bid-section-body ul,.bid-section-body ol{padding-left:1.5rem;margin:.5rem 0}
+.bid-section-body li{margin-bottom:.3rem}
+.bid-section-body strong{color:var(--gold-light);font-weight:600}
+.bid-section-body table{width:100%;border-collapse:collapse;margin:.75rem 0;font-size:.82rem}
+.bid-section-body th{text-align:left;padding:.5rem .7rem;border-bottom:1.5px solid var(--border-gold);color:var(--gold);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.bid-section-body td{padding:.5rem .7rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.bid-section-body textarea{width:100%;min-height:240px;background:#0D0D0D;border:1px solid var(--border-gold);border-radius:.5rem;padding:.85rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.88rem;line-height:1.7;resize:vertical;outline:none}
+.bid-section-body textarea:focus{box-shadow:0 0 0 3px rgba(232,160,32,.08)}
+.bid-section-body .empty{color:var(--text3);font-style:italic;font-size:.85rem;padding:.5rem 0}
+
+/* CAPTURE CARD (shared with other tools) */
+.capture-card{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1.25rem;padding:1.75rem;margin-top:1rem;position:relative;overflow:hidden}
+.capture-card::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(232,160,32,.1),transparent 70%);pointer-events:none}
+.capture-head{display:flex;align-items:flex-start;gap:.85rem;margin-bottom:1.25rem;position:relative}
+.capture-icon{width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.capture-title{font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.25rem}
+.capture-sub{font-size:.85rem;color:var(--text2);line-height:1.55}
+.capture-form{position:relative}
+.capture-form .fg{margin-bottom:.85rem}
+.capture-form .fg label{font-size:.72rem;color:var(--text2);font-weight:500;margin-bottom:.3rem;letter-spacing:.02em}
+.capture-form .fg label .req{color:var(--gold);font-weight:700}
+.capture-form .fg input{background:var(--surface2);border:1px solid var(--border);padding:.7rem .95rem;font-size:.88rem;border-radius:.55rem;color:var(--text);width:100%;outline:none;font-family:'Outfit',sans-serif;transition:border-color .3s}
+.capture-form .fg input::placeholder{color:var(--text3)}
+.capture-form .fg input:focus{border-color:var(--border-gold);box-shadow:0 0 0 3px rgba(232,160,32,.08)}
+.capture-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.dl-actions-row{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.btn-capture{flex:1;min-width:180px;justify-content:center}
+.btn-capture:disabled{background:var(--surface2);color:var(--text3);border:1px solid var(--border);box-shadow:none}
+.btn-capture:disabled:hover{background:var(--surface2);color:var(--text3);transform:none;box-shadow:none}
+.dl-disabled-notice{font-size:.78rem;color:var(--text3);text-align:center;margin-top:.6rem;font-style:italic;display:block}
+.dl-disabled-notice.hidden{display:none}
+.capture-finep{font-size:.7rem;color:var(--text3);line-height:1.5;margin-top:1rem;text-align:center;max-width:500px;margin-left:auto;margin-right:auto}
+
 /* RESPONSIVE */
+@media(max-width:1100px){
+  .workspace-grid{grid-template-columns:1fr}
+  .form-pane{position:static;max-height:none}
+}
 @media(max-width:900px){
   .hiw-grid{grid-template-columns:1fr 1fr}
   .upgrade-grid{grid-template-columns:1fr}
   .nav-links,.btn-nav-desktop{display:none!important}
   .tool-hero{padding:7rem 1.25rem 2rem}
-  .panel-wrap{padding:1.5rem 1.25rem 4rem}
-  .panel-head,.panel-body{padding:1.25rem 1.5rem}
+  .workspace{padding:1.5rem 1.25rem 4rem}
   .hiw-sec,.upgrade-sec{padding:4rem 1.25rem}
-  .stepper-wrap{padding:1rem 1.25rem 0}
   .footer-cta-band,.footer-body{padding-left:1.25rem;padding-right:1.25rem}
   .row2,.row3{grid-template-columns:1fr}
+  .capture-form .row2{grid-template-columns:1fr}
+  .dl-actions-row{flex-direction:column}
+  .btn-capture{flex:unset;width:100%}
 }
-@media(max-width:600px){nav{top:.75rem}.hiw-grid{grid-template-columns:1fr}}
+@media(max-width:600px){nav{top:.75rem}.hiw-grid{grid-template-columns:1fr}.trade-checks{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -297,179 +429,241 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 
 <!-- HERO -->
 <section class="tool-hero">
-  <span class="eyebrow">Free · Beta · For Commercial MEP Contractors</span>
-  <h1>Upload the plans. AI writes<br>your <span class="accent">bid package.</span></h1>
-  <p class="lead">Drop in your mechanical, plumbing, or electrical plans and specs. In minutes you get a reviewable draft: scope of work, equipment schedule, assumptions, exclusions, alternates, RFI list, and a qualification letter. You review each section, edit what you want, download the finished Word doc.</p>
+  <span class="eyebrow">Free Forever · For Commercial MEP Contractors</span>
+  <h1>Rough budget + full bid package.<br><span class="accent">In five minutes.</span></h1>
+  <p class="lead">Tell us about your project. We'll give you a rough-order-of-magnitude budget, schedule estimate, and a complete bid package — scope, assumptions, exclusions, alternates, RFIs, qualification letter — ready to edit and send with your bid.</p>
   <div class="hero-pills">
-    <span class="hero-pill"><span class="dot"></span>Plans &amp; specs PDF</span>
-    <span class="hero-pill"><span class="dot"></span>Review step-by-step</span>
-    <span class="hero-pill"><span class="dot"></span>Edit before download</span>
+    <span class="hero-pill"><span class="dot" style="background:#6FCF97"></span>Free forever</span>
+    <span class="hero-pill"><span class="dot"></span>No signup to use</span>
+    <span class="hero-pill"><span class="dot"></span>ROM ±30% budget</span>
     <span class="hero-pill"><span class="dot"></span>Word &amp; PDF export</span>
   </div>
 </section>
 
-<!-- STEPPER -->
-<div class="stepper-wrap">
-  <div class="stepper" id="stepper"></div>
-</div>
+<!-- MAIN WORKSPACE -->
+<section class="workspace">
+  <div class="workspace-grid">
 
-<!-- PANELS -->
-<div class="panel-wrap">
+    <!-- LEFT: FORM -->
+    <div class="form-pane">
 
-  <!-- STEP 0: Project Setup -->
-  <div class="panel" id="panel-setup">
-    <div class="panel-head">
-      <div>
-        <span class="step-badge">Step 1 of 9</span>
-        <h2>Project setup</h2>
-        <div class="sub">Upload your plans and specs, then tell us a bit about the project.</div>
-      </div>
-    </div>
-    <div class="panel-body">
-
-      <div class="api-key-wrap" id="api-key-wrap">
-        <h4>🔑 Claude API key</h4>
-        <p>This tool runs on your own Anthropic API key so your plans never touch our servers — they go directly from your browser to Anthropic. Paste your API key once (stored locally in your browser). Don't have one? <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--gold);text-decoration:underline">Get one here</a> — first $5 is free.</p>
-        <div class="api-input-row">
-          <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false"/>
-          <button onclick="saveApiKey()">Save</button>
-        </div>
-        <p style="margin-top:.75rem;font-size:.72rem;color:var(--text3)">Your key is saved in localStorage on this device only. We never see it.</p>
-      </div>
-
-      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:1rem">1. Upload project documents</h3>
-      <div class="info-box">
-        <div class="ic">ℹ️</div>
-        <p><strong>Best results:</strong> upload the mechanical drawings (M-series), plumbing (P-series), or electrical (E-series) plan sheets as one PDF, and the relevant spec sections (Division 22, 23, or 26) as a second PDF. Under 32MB and 100 pages per file. Title sheet and cover help too.</p>
-      </div>
-
-      <label class="dropzone" id="plans-drop" for="plans-file">
-        <div class="dropzone-icon">📐</div>
-        <h3>Upload plan sheets <span style="color:var(--gold)">*</span></h3>
-        <p>Click to browse or drag &amp; drop a PDF — <span class="ul-label">mechanical, plumbing, or electrical drawings</span></p>
-        <input type="file" id="plans-file" accept="application/pdf"/>
-        <div id="plans-chip-wrap"></div>
-      </label>
-
-      <div class="file-sep"></div>
-
-      <label class="dropzone" id="specs-drop" for="specs-file">
-        <div class="dropzone-icon">📄</div>
-        <h3>Upload specifications <span style="color:var(--text3);font-weight:400;font-size:.8rem">(optional but recommended)</span></h3>
-        <p>Click to browse or drag &amp; drop — <span class="ul-label">Division 22 / 23 / 26 spec sections</span></p>
-        <input type="file" id="specs-file" accept="application/pdf"/>
-        <div id="specs-chip-wrap"></div>
-      </label>
-
-      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin:2.25rem 0 1rem">2. Project info</h3>
-      <div class="row2">
+      <div class="form-section">
+        <div class="form-section-title"><span class="num">1</span>Project</div>
         <div class="fg"><label>Project name</label><input type="text" id="f_project_name" placeholder="e.g. Medical Office Building — Brandon"/></div>
-        <div class="fg"><label>Bid due date</label><input type="text" id="f_bid_date" placeholder="May 15, 2026"/></div>
-      </div>
-      <div class="row2">
-        <div class="fg"><label>General Contractor</label><input type="text" id="f_gc" placeholder="e.g. Skanska USA"/></div>
-        <div class="fg"><label>Your company name</label><input type="text" id="f_contractor" placeholder="Your MEP company name"/></div>
-      </div>
-
-      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin:1.75rem 0 1rem">3. Trades you're bidding</h3>
-      <div class="trade-checks" id="trade-checks">
-        <div class="trade-check" data-trade="hvac"><span class="chk"></span>HVAC / Mechanical</div>
-        <div class="trade-check" data-trade="plumbing"><span class="chk"></span>Plumbing</div>
-        <div class="trade-check" data-trade="piping"><span class="chk"></span>Hydronic / Process Piping</div>
-        <div class="trade-check" data-trade="electrical"><span class="chk"></span>Electrical</div>
-        <div class="trade-check" data-trade="lowvoltage"><span class="chk"></span>Low Voltage / Controls</div>
-        <div class="trade-check" data-trade="fire"><span class="chk"></span>Fire Protection</div>
+        <div class="row2">
+          <div class="fg"><label>Bid due date <span class="opt">(optional)</span></label><input type="text" id="f_bid_date" placeholder="May 15, 2026"/></div>
+          <div class="fg"><label>Your company</label><input type="text" id="f_contractor" placeholder="Tampa MEP Co"/></div>
+        </div>
+        <div class="fg"><label>General Contractor / Client</label><input type="text" id="f_gc" placeholder="Skanska USA"/></div>
       </div>
 
-      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin:1.75rem 0 1rem">4. Project type</h3>
-      <div class="fg"><label>Building / occupancy type</label>
-        <select id="f_bldg_type">
-          <option value="">— Select —</option>
-          <option>Medical Office / Outpatient</option>
-          <option>Hospital / Acute Care</option>
-          <option>K-12 School</option>
-          <option>Higher Education</option>
-          <option>Office / Class A</option>
-          <option>Retail / Big-Box</option>
-          <option>Restaurant / Food Service</option>
-          <option>Industrial / Warehouse</option>
-          <option>Manufacturing / Clean Room</option>
-          <option>Multi-Family Residential</option>
-          <option>Hospitality / Hotel</option>
-          <option>Data Center</option>
-          <option>Religious / Assembly</option>
-          <option>Government / Municipal</option>
-          <option>Tenant Improvement</option>
-          <option>Other (AI will infer from plans)</option>
-        </select>
-      </div>
-      <div class="row2">
-        <div class="fg"><label>Approximate size (SF)</label><input type="text" id="f_size" placeholder="e.g. 42,000"/></div>
+      <div class="form-section">
+        <div class="form-section-title"><span class="num">2</span>Building</div>
+        <div class="fg"><label>Building type</label>
+          <select id="f_bldg_type">
+            <option value="office">Office / Class A</option>
+            <option value="medical_office">Medical Office / Outpatient</option>
+            <option value="hospital">Hospital / Acute Care</option>
+            <option value="k12">K-12 School</option>
+            <option value="higher_ed">Higher Education</option>
+            <option value="retail">Retail / Big-Box</option>
+            <option value="restaurant">Restaurant / Food Service</option>
+            <option value="warehouse">Industrial / Warehouse</option>
+            <option value="manufacturing">Manufacturing / Clean Room</option>
+            <option value="multifamily">Multi-Family Residential</option>
+            <option value="hospitality">Hospitality / Hotel</option>
+            <option value="datacenter">Data Center</option>
+            <option value="assembly">Religious / Assembly</option>
+            <option value="government">Government / Municipal</option>
+            <option value="ti">Tenant Improvement</option>
+          </select>
+        </div>
+        <div class="row2">
+          <div class="fg"><label>Size (SF)</label><input type="number" id="f_size" placeholder="42000" min="0" step="500"/></div>
+          <div class="fg"><label>Floors</label><input type="number" id="f_floors" placeholder="2" min="1" max="200" value="1"/></div>
+        </div>
         <div class="fg"><label>Project delivery</label>
           <select id="f_delivery">
-            <option value="">— Select —</option>
-            <option>Design-Bid-Build (Hard Bid)</option>
-            <option>Design-Assist</option>
-            <option>Design-Build</option>
-            <option>CM at Risk</option>
-            <option>IPD</option>
-            <option>Negotiated</option>
+            <option value="dbb">Design-Bid-Build (Hard Bid)</option>
+            <option value="da">Design-Assist</option>
+            <option value="db">Design-Build</option>
+            <option value="cmar">CM at Risk</option>
+            <option value="ipd">IPD</option>
+            <option value="neg">Negotiated</option>
+          </select>
+        </div>
+        <div class="fg"><label>Region</label>
+          <select id="f_region">
+            <option value="fl">Florida / Southeast</option>
+            <option value="us">US Average</option>
+            <option value="ne">Northeast (Boston/NYC metro)</option>
+            <option value="se">Southeast (non-FL)</option>
+            <option value="mw">Midwest</option>
+            <option value="sw">Southwest / Texas</option>
+            <option value="w">West (CA/OR/WA)</option>
+            <option value="mtn">Mountain West</option>
           </select>
         </div>
       </div>
 
-      <div class="fg"><label>Anything else the AI should know? <span style="color:var(--text3);font-weight:400">(optional)</span></label>
-        <textarea id="f_notes" placeholder="e.g. Phased occupancy, existing building renovation, specific manufacturers basis of design, known long-lead items..."></textarea>
-      </div>
+      <div class="form-section">
+        <div class="form-section-title"><span class="num">3</span>Trades &amp; ROM inputs</div>
+        <div class="trade-checks" id="trade-checks">
+          <div class="trade-check" data-trade="hvac"><span class="chk"></span>HVAC / Mechanical</div>
+          <div class="trade-check" data-trade="plumbing"><span class="chk"></span>Plumbing</div>
+          <div class="trade-check" data-trade="piping"><span class="chk"></span>Process Piping</div>
+          <div class="trade-check" data-trade="electrical"><span class="chk"></span>Electrical</div>
+          <div class="trade-check" data-trade="lowvoltage"><span class="chk"></span>Low Voltage</div>
+          <div class="trade-check" data-trade="fire"><span class="chk"></span>Fire Protection</div>
+        </div>
 
-      <div class="action-row">
-        <div class="action-row-left"></div>
-        <div class="action-row-right">
-          <button class="btn-gold" id="btn-start" onclick="startGeneration()">Start Bid Package <span class="icon-wrap">→</span></button>
+        <div class="trade-rom" data-rom="hvac">
+          <div class="trade-rom-head">HVAC / Mechanical <button class="override-toggle" onclick="toggleOverride('hvac')">Override costs</button></div>
+          <div class="row2">
+            <div class="fg"><label>Total tons cooling</label><input type="number" id="hvac_tons" placeholder="140" min="0" step="1"/></div>
+            <div class="fg"><label>System type</label>
+              <select id="hvac_system">
+                <option value="rtu">Rooftop Units (RTU)</option>
+                <option value="chw">Chilled Water</option>
+                <option value="vrf">VRF / VRV</option>
+                <option value="wshp">Water Source Heat Pump</option>
+                <option value="split">Splits / Mini-Splits</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>VAV boxes <span class="opt">(if any)</span></label><input type="number" id="hvac_vav" placeholder="24" min="0" step="1"/></div>
+            <div class="fg"><label>Total CFM <span class="opt">(optional)</span></label><input type="number" id="hvac_cfm" placeholder="42000" min="0" step="500"/></div>
+          </div>
+          <div class="unit-row"><span class="lbl">$/ton installed</span><span class="val" data-display="hvac_ton_rate">$2,800</span><input type="number" id="hvac_ton_rate" style="display:none" placeholder="2800"/></div>
+          <div class="unit-row"><span class="lbl">$/VAV installed</span><span class="val" data-display="hvac_vav_rate">$1,850</span><input type="number" id="hvac_vav_rate" style="display:none" placeholder="1850"/></div>
+          <div class="unit-row"><span class="lbl">$/CFM ductwork</span><span class="val" data-display="hvac_cfm_rate">$11</span><input type="number" id="hvac_cfm_rate" style="display:none" placeholder="11" step="0.5"/></div>
+        </div>
+
+        <div class="trade-rom" data-rom="plumbing">
+          <div class="trade-rom-head">Plumbing <button class="override-toggle" onclick="toggleOverride('plumbing')">Override costs</button></div>
+          <div class="row2">
+            <div class="fg"><label>Fixtures <span class="opt">(WC/lav/sink)</span></label><input type="number" id="plb_fixtures" placeholder="32" min="0" step="1"/></div>
+            <div class="fg"><label>Floor drains</label><input type="number" id="plb_drains" placeholder="8" min="0" step="1"/></div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>Water heater (gal)</label><input type="number" id="plb_wh" placeholder="120" min="0" step="10"/></div>
+            <div class="fg"><label>Main line (LF)</label><input type="number" id="plb_lf" placeholder="400" min="0" step="10"/></div>
+          </div>
+          <div class="unit-row"><span class="lbl">$/fixture installed</span><span class="val" data-display="plb_fix_rate">$1,650</span><input type="number" id="plb_fix_rate" style="display:none" placeholder="1650"/></div>
+          <div class="unit-row"><span class="lbl">$/floor drain</span><span class="val" data-display="plb_drain_rate">$480</span><input type="number" id="plb_drain_rate" style="display:none" placeholder="480"/></div>
+          <div class="unit-row"><span class="lbl">$/gallon (heater)</span><span class="val" data-display="plb_wh_rate">$22</span><input type="number" id="plb_wh_rate" style="display:none" placeholder="22" step="0.5"/></div>
+          <div class="unit-row"><span class="lbl">$/LF main (avg)</span><span class="val" data-display="plb_lf_rate">$48</span><input type="number" id="plb_lf_rate" style="display:none" placeholder="48"/></div>
+        </div>
+
+        <div class="trade-rom" data-rom="piping">
+          <div class="trade-rom-head">Process Piping <button class="override-toggle" onclick="toggleOverride('piping')">Override costs</button></div>
+          <div class="row2">
+            <div class="fg"><label>Hydronic (LF)</label><input type="number" id="pip_hyd" placeholder="800" min="0" step="10"/></div>
+            <div class="fg"><label>Steam / high-pres (LF)</label><input type="number" id="pip_steam" placeholder="0" min="0" step="10"/></div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>Nat gas / med gas (LF)</label><input type="number" id="pip_gas" placeholder="120" min="0" step="10"/></div>
+            <div class="fg"><label>Compressed air (LF)</label><input type="number" id="pip_air" placeholder="0" min="0" step="10"/></div>
+          </div>
+          <div class="unit-row"><span class="lbl">$/LF hydronic (avg)</span><span class="val" data-display="pip_hyd_rate">$55</span><input type="number" id="pip_hyd_rate" style="display:none" placeholder="55"/></div>
+          <div class="unit-row"><span class="lbl">$/LF steam/high-press</span><span class="val" data-display="pip_steam_rate">$95</span><input type="number" id="pip_steam_rate" style="display:none" placeholder="95"/></div>
+          <div class="unit-row"><span class="lbl">$/LF nat gas / med gas</span><span class="val" data-display="pip_gas_rate">$42</span><input type="number" id="pip_gas_rate" style="display:none" placeholder="42"/></div>
+          <div class="unit-row"><span class="lbl">$/LF compressed air</span><span class="val" data-display="pip_air_rate">$38</span><input type="number" id="pip_air_rate" style="display:none" placeholder="38"/></div>
+        </div>
+
+        <div class="trade-rom" data-rom="electrical">
+          <div class="trade-rom-head">Electrical <button class="override-toggle" onclick="toggleOverride('electrical')">Override costs</button></div>
+          <div class="row2">
+            <div class="fg"><label>Service size (amps)</label><input type="number" id="elec_amps" placeholder="1200" min="0" step="100"/></div>
+            <div class="fg"><label>Panels (subpanels)</label><input type="number" id="elec_panels" placeholder="8" min="0" step="1"/></div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>Light fixtures <span class="opt">(approx)</span></label><input type="number" id="elec_fixtures" placeholder="120" min="0" step="5"/></div>
+            <div class="fg"><label>Emergency gen (kW)</label><input type="number" id="elec_gen" placeholder="0" min="0" step="5"/></div>
+          </div>
+          <div class="unit-row"><span class="lbl">$/amp service</span><span class="val" data-display="elec_amp_rate">$185</span><input type="number" id="elec_amp_rate" style="display:none" placeholder="185"/></div>
+          <div class="unit-row"><span class="lbl">$/panel installed</span><span class="val" data-display="elec_pnl_rate">$4,200</span><input type="number" id="elec_pnl_rate" style="display:none" placeholder="4200"/></div>
+          <div class="unit-row"><span class="lbl">$/LED fixture</span><span class="val" data-display="elec_fix_rate">$265</span><input type="number" id="elec_fix_rate" style="display:none" placeholder="265"/></div>
+          <div class="unit-row"><span class="lbl">$/kW emergency gen</span><span class="val" data-display="elec_gen_rate">$650</span><input type="number" id="elec_gen_rate" style="display:none" placeholder="650"/></div>
+        </div>
+
+        <div class="trade-rom" data-rom="lowvoltage">
+          <div class="trade-rom-head">Low Voltage <button class="override-toggle" onclick="toggleOverride('lowvoltage')">Override costs</button></div>
+          <div class="row2">
+            <div class="fg"><label>Data drops</label><input type="number" id="lv_data" placeholder="80" min="0" step="5"/></div>
+            <div class="fg"><label>IP cameras</label><input type="number" id="lv_cam" placeholder="16" min="0" step="1"/></div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>Access control doors</label><input type="number" id="lv_acc" placeholder="6" min="0" step="1"/></div>
+            <div class="fg"><label>A/V outlets</label><input type="number" id="lv_av" placeholder="12" min="0" step="1"/></div>
+          </div>
+          <div class="unit-row"><span class="lbl">$/data drop</span><span class="val" data-display="lv_data_rate">$185</span><input type="number" id="lv_data_rate" style="display:none" placeholder="185"/></div>
+          <div class="unit-row"><span class="lbl">$/IP camera installed</span><span class="val" data-display="lv_cam_rate">$950</span><input type="number" id="lv_cam_rate" style="display:none" placeholder="950"/></div>
+          <div class="unit-row"><span class="lbl">$/access control door</span><span class="val" data-display="lv_acc_rate">$1,850</span><input type="number" id="lv_acc_rate" style="display:none" placeholder="1850"/></div>
+          <div class="unit-row"><span class="lbl">$/AV outlet</span><span class="val" data-display="lv_av_rate">$425</span><input type="number" id="lv_av_rate" style="display:none" placeholder="425"/></div>
+        </div>
+
+        <div class="trade-rom" data-rom="fire">
+          <div class="trade-rom-head">Fire Protection <button class="override-toggle" onclick="toggleOverride('fire')">Override costs</button></div>
+          <div class="row2">
+            <div class="fg"><label>Sprinkler coverage (SF)</label><input type="number" id="fp_sf" placeholder="42000" min="0" step="500"/></div>
+            <div class="fg"><label>Fire alarm devices</label><input type="number" id="fp_dev" placeholder="95" min="0" step="5"/></div>
+          </div>
+          <div class="row2">
+            <div class="fg"><label>Fire pump <span class="opt">(yes/no)</span></label>
+              <select id="fp_pump"><option value="0">No fire pump</option><option value="1">Yes — fire pump required</option></select>
+            </div>
+            <div class="fg"><label>Standpipes (count)</label><input type="number" id="fp_sp" placeholder="0" min="0" step="1"/></div>
+          </div>
+          <div class="unit-row"><span class="lbl">$/SF sprinkler (wet)</span><span class="val" data-display="fp_sf_rate">$3.80</span><input type="number" id="fp_sf_rate" style="display:none" placeholder="3.80" step="0.1"/></div>
+          <div class="unit-row"><span class="lbl">$/fire alarm device</span><span class="val" data-display="fp_dev_rate">$385</span><input type="number" id="fp_dev_rate" style="display:none" placeholder="385"/></div>
+          <div class="unit-row"><span class="lbl">$/fire pump package</span><span class="val" data-display="fp_pump_rate">$28,000</span><input type="number" id="fp_pump_rate" style="display:none" placeholder="28000"/></div>
+          <div class="unit-row"><span class="lbl">$/standpipe system</span><span class="val" data-display="fp_sp_rate">$14,500</span><input type="number" id="fp_sp_rate" style="display:none" placeholder="14500"/></div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- DYNAMIC STEP PANEL -->
-  <div class="panel" id="panel-step" style="display:none">
-    <div class="panel-head">
+      <div class="form-section">
+        <div class="form-section-title"><span class="num">4</span>Plans &amp; Specs <span style="color:var(--text3);font-weight:400;text-transform:none;letter-spacing:0;font-size:.7rem;margin-left:auto">Optional</span></div>
+        <label class="mini-drop" id="plans-drop" for="plans-file">
+          <span class="emj">📐</span>Plan sheets — drag, drop, or click
+          <input type="file" id="plans-file" accept="application/pdf"/>
+        </label>
+        <div id="plans-chip"></div>
+        <div style="height:.6rem"></div>
+        <label class="mini-drop" id="specs-drop" for="specs-file">
+          <span class="emj">📄</span>Specifications — drag, drop, or click
+          <input type="file" id="specs-file" accept="application/pdf"/>
+        </label>
+        <div id="specs-chip"></div>
+        <p style="color:var(--text3);font-size:.7rem;margin-top:.75rem;line-height:1.5">We keep plans on your device only. Attach them to your bid email separately when you send to the GC.</p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: LIVE PREVIEW -->
+    <div class="preview-pane">
+
+      <div class="rom-card">
+        <div class="rom-head">
+          <div>
+            <h3 id="rom-title">Rough Order of Magnitude</h3>
+            <div style="color:var(--text3);font-size:.78rem;margin-top:.15rem" id="rom-project-line">Fill in the form to see your estimate update live.</div>
+          </div>
+          <span class="pill-badge">ROM ±30%</span>
+        </div>
+        <div id="rom-content">
+          <div class="rom-empty">Select at least one trade and enter the size and quantities to see the estimate.</div>
+        </div>
+      </div>
+
       <div>
-        <span class="step-badge" id="step-badge">Step X of 10</span>
-        <h2 id="step-title">Project Summary</h2>
-        <div class="sub" id="step-sub">AI is reading your plans and writing a concise project summary.</div>
-      </div>
-    </div>
-    <div class="panel-body">
-      <div class="gen-output" id="gen-output">
-        <div class="gen-empty">Click "Generate" to begin.</div>
-      </div>
-      <div id="gen-error" style="display:none"></div>
-      <div class="action-row">
-        <div class="action-row-left">
-          <button class="btn-ghost btn-sm" id="btn-back" onclick="goBack()">← Back</button>
-          <button class="btn-ghost btn-sm" id="btn-regen" onclick="generateStep(true)" style="display:none">↻ Regenerate</button>
-          <button class="btn-ghost btn-sm" id="btn-edit" onclick="toggleEdit()" style="display:none">✎ Edit</button>
+        <div class="bid-head">
+          <h3>Bid Package</h3>
+          <span class="note">Click any section to expand · click Edit to tweak</span>
         </div>
-        <div class="action-row-right">
-          <button class="btn-gold btn-sm" id="btn-generate" onclick="generateStep(false)">Generate →</button>
-          <button class="btn-gold btn-sm" id="btn-approve" onclick="approveStep()" style="display:none">Approve &amp; Continue →</button>
-        </div>
+        <div id="bid-sections"></div>
       </div>
-    </div>
-  </div>
-
-  <!-- FINAL REVIEW PANEL -->
-  <div class="panel" id="panel-final" style="display:none">
-    <div class="panel-head">
-      <div>
-        <span class="step-badge" style="background:rgba(111,207,151,.12);color:var(--ok)">✓ Bid package complete</span>
-        <h2>Your complete bid package</h2>
-        <div class="sub" id="final-project-name">Review below, then download as Word or PDF to send with your bid.</div>
-      </div>
-    </div>
-    <div class="panel-body">
-      <div id="final-sections"></div>
 
       <div class="capture-card">
         <div class="capture-head">
@@ -492,12 +686,10 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 
           <div class="dl-actions-row">
             <button class="btn-gold btn-capture" id="dl-word-btn" onclick="downloadWord()" disabled>
-              <span class="dl-btn-label">Download Word</span>
-              <span class="icon-wrap">↓</span>
+              <span>Download Word</span><span class="icon-wrap">↓</span>
             </button>
             <button class="btn-gold btn-capture" id="dl-pdf-btn" onclick="downloadPDF()" disabled>
-              <span class="dl-btn-label">Download PDF</span>
-              <span class="icon-wrap">↓</span>
+              <span>Download PDF</span><span class="icon-wrap">↓</span>
             </button>
           </div>
           <div class="dl-disabled-notice" id="dl-notice">Fill in fields above to enable downloads</div>
@@ -506,22 +698,9 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
         </div>
       </div>
 
-      <div class="action-row" style="margin-top:1rem">
-        <div class="action-row-left">
-          <button class="btn-ghost btn-sm" onclick="startOver()">← Start a new bid package</button>
-        </div>
-        <div class="action-row-right"></div>
-      </div>
     </div>
   </div>
-
-</div>
-
-<style>
-.final-section{background:var(--surface2);border:1px solid var(--border);border-radius:.85rem;padding:1.5rem 1.75rem;margin-bottom:1rem}
-.final-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
-.final-section-head h4{font-size:.95rem;font-weight:700;color:var(--gold);letter-spacing:.02em;text-transform:uppercase;font-size:.8rem;letter-spacing:.1em}
-</style>
+</section>
 
 <!-- HOW IT WORKS -->
 <section class="hiw-sec">
@@ -638,113 +817,185 @@ footer{border-top:1px solid rgba(255,255,255,.06)}
 </footer>
 
 <script>
-// ============================================================
-// NAV
-// ============================================================
+/* ===================================================================
+   NAV
+=================================================================== */
 const navEl=document.getElementById('main-nav');
 window.addEventListener('scroll',()=>{navEl.classList.toggle('scrolled',window.scrollY>20)});
 const ham=document.getElementById('hamburger'),menu=document.getElementById('mobile-menu');
 ham.addEventListener('click',()=>{ham.classList.toggle('open');menu.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':''});
 function closeMenu(){ham.classList.remove('open');menu.classList.remove('open');document.body.style.overflow=''}
 
-// ============================================================
-// CONSTANTS: The 10-step pipeline
-// ============================================================
-const STEPS = [
-  { id:'setup',    label:'Setup',            title:'Project setup' },
-  { id:'summary',  label:'Summary',          title:'Project Summary',
-    sub:'A 2-3 paragraph executive overview of the project — so anyone reading your bid instantly gets what this job is.',
-    systemExtra:`You are a senior commercial MEP estimator writing the PROJECT SUMMARY section of a bid package. Based on the uploaded plans/specs and project info, write a crisp 2-3 paragraph summary that covers: (1) what the project is and its scope in plain language, (2) the key mechanical/plumbing/electrical systems involved with basis of design, (3) the delivery method, schedule constraints, and any notable project characteristics (phasing, occupancy, site logistics). Write it like a senior estimator briefing their team — confident, specific to THIS job based on what you actually see in the plans, never generic. Reference specific system types, capacities, or tags from the drawings when possible. No preamble, no "I" statements, no "based on the documents." Start directly with the content.`
-  },
-  { id:'scope',    label:'Scope',            title:'Scope of Work',
-    sub:'The full scope narrative — organized by CSI Division for the trades you are bidding.',
-    systemExtra:`You are writing the SCOPE OF WORK section. For each trade selected by the contractor (HVAC/Mech, Plumbing, Piping, Electrical, Low Voltage, Fire Protection), produce a structured scope narrative organized by CSI Division (22 Plumbing, 23 HVAC, 26 Electrical, 27 Comms, 28 Security, 21 Fire). Under each division use h3 subsections with specific bullet points for included work: major equipment, piping/ductwork systems, distribution, controls, testing, commissioning. Be SPECIFIC. Pull actual equipment tags, system types, and sizes from the plans. Use markdown: h2 for divisions, h3 for subsections, bulleted lists for items. Do NOT include exclusions, assumptions, or pricing — those come later. Start with a brief 1-sentence preface then go straight into Division headers.`
-  },
-  { id:'equipment',label:'Equipment',        title:'Equipment Schedule',
-    sub:'Every tagged unit pulled from the drawings, with capacity and manufacturer basis of design.',
-    systemExtra:`You are extracting the EQUIPMENT SCHEDULE from the uploaded plans. Find every tagged mechanical, plumbing, or electrical equipment unit on the drawings and schedules (AHU, RTU, FCU, VAV, pumps, boilers, chillers, water heaters, electrical panels, switchgear, transformers, fire pumps, etc.). Output as a markdown table with columns: Tag | Equipment Type | Capacity/Size | Manufacturer (Basis of Design) | Location/Service | Notes. If the plans show a legend or schedule, use it. If not, extract what's visible. Group by trade (HVAC equipment, Plumbing fixtures, Electrical equipment). Before the table, note the source (e.g. "Pulled from Mechanical Schedule on sheet M-501"). If a field is not visible on the plans, write "Per plans" or "Per spec Section 23XX" — never fabricate. Add a sentence at the bottom: "Final equipment selections to be per contractor standard stocking; substitutions per specification Section 012500."`
-  },
-  { id:'assumptions',label:'Assumptions',     title:'Assumptions',
-    sub:'Every assumption the bid is based on — the things that if untrue, would change the price.',
-    systemExtra:`You are writing the ASSUMPTIONS section. These are the things the contractor is ASSUMING to be true in order to hold their price. If any of these turn out false, there's a change order. Pull from the plans/specs and think like a senior estimator who's been burned before. Cover: site access, working hours, phasing, existing conditions (if renovation), utility tie-in locations, temporary services, scaffolding/lifts provided, coordination with other trades, shop drawing review turnaround, permit fees responsibility, sales tax, bonds, special inspections, commissioning scope, O&M manual scope, warranty start date trigger, manufacturer substitution acceptance. Format as numbered markdown list with bold lead-in phrases. Be specific to THIS project based on the plans. 15-25 assumptions is typical. Start directly — no preamble.`
-  },
-  { id:'exclusions',label:'Exclusions',      title:'Exclusions',
-    sub:'What is explicitly NOT in the bid — protect yourself from scope creep.',
-    systemExtra:`You are writing the EXCLUSIONS section — what is explicitly NOT included. These protect the contractor from "but I thought that was in your bid." Think like a senior estimator who has been through claim fights. Cover typical MEP exclusions: cutting/patching of existing construction (unless clearly in scope), painting of exposed piping/ductwork (unless specified), access panels in architectural finishes, housekeeping pads (by GC), roof curbs and flashing (by roofer), structural supports for rooftop equipment, fire-stopping at penetrations in rated walls (unless in trade scope), core drilling, dewatering, rock excavation, hazardous materials abatement, test and balance report review/commissioning agent fees, owner-furnished equipment installation (call out specifically if applicable), temporary heat/cooling/power beyond specific duration, overtime/weekend labor unless specifically approved, performance bonds if not quoted separately, premium time for accelerated schedule, sales/use tax on materials if tax-exempt. Format as numbered markdown list with bold lead-in phrases. Be specific to THIS project. 15-30 exclusions is typical.`
-  },
-  { id:'alternates',label:'Alternates',      title:'Alternates / Value Engineering',
-    sub:'Options you can offer the GC to move price up or down — show you thought about it.',
-    systemExtra:`You are writing the ALTERNATES / VALUE ENGINEERING section. These are optional cost ADDS or DEDUCTS the contractor offers the GC to give them flexibility. Review the plans and specs to identify 5-10 realistic alternates specific to this project. Examples: upgrade to higher-efficiency equipment (SEER/IEER bump), premium controls package, extended warranty, alternate manufacturer offering savings, piping material substitution (Type L vs Type M copper, PVC vs cast iron), fixture upgrade/downgrade, variable primary flow vs constant, LED fixture grade changes, generator size up/down, panel quality tier, etc. Format each as: "**Alternate #N: [Name]** — ADD/DEDUCT — Description explaining what changes and why the GC might want it." Number them. Don't quote prices (contractor fills those in). Lead with the highest-leverage VE moves. Start directly, no preamble.`
-  },
-  { id:'rfis',     label:'RFIs',             title:'RFI List',
-    sub:'The questions the contractor should ask before finalizing — issues spotted in the plans/specs.',
-    systemExtra:`You are writing the RFI (Request For Information) LIST. Review the plans and specs and identify real questions that need clarification before the bid is final. Think like an estimator who has seen plans conflict with specs, missing dimensions, vague notes, or details that would change price. Look for: plan-spec conflicts, missing equipment schedules, ambiguous scope ("by others" without clarity), missing details (roof curb type, seismic requirements, etc.), vague commissioning scope, unclear phasing, unclear temporary work expectations, missing fire-stopping details, unspecified controls sequences, conflicts between mechanical and structural (beams vs ductwork), utility tie-in questions, owner-furnished equipment scope, cost for permit / tap fees by which party. Format as numbered list: "**RFI #N:** Question text. *(Reference: Sheet/Spec section)*" — cite the specific drawing or spec section when possible. 8-15 RFIs is typical. Real, specific questions only — not generic boilerplate. Start directly, no preamble.`
-  },
-  { id:'qual',     label:'Qual Letter',      title:'Qualification Letter',
-    sub:'The cover letter for your bid — summarizes your qualifications, the scope, and the terms.',
-    systemExtra:`You are writing the QUALIFICATION LETTER — the cover letter that accompanies the contractor's bid form. It should be a formal business letter. Include: (1) Date, addressed to the General Contractor by name. (2) Re: line with the project name. (3) Opening paragraph: thanking them for the opportunity, confirming the bid is submitted per the documents. (4) Second paragraph: brief confirmation of what's included at a high level — trades bid, major systems, delivery method. (5) Third paragraph: "This bid is based on the following assumptions and exclusions — see attached schedules." (6) Fourth paragraph: note that alternates are provided for GC consideration and that RFI responses may affect final price. (7) Qualifications / contractor capabilities — 2-3 sentences on the contractor's experience and fit for this project type. (8) Bid validity period (30-60 days typical). (9) Sign-off with the contractor's company name. Use the contractor company name and GC name from the project info. Format as a real letter — not markdown headings. Professional, confident, and NOT verbose. ~250-400 words.`
-  },
-];
-
-// ============================================================
-// STATE
-// ============================================================
-const state = {
-  currentStepIdx: 0, // index into STEPS
-  apiKey: localStorage.getItem('lwc_anthropic_key') || '',
-  plansFile: null,      // { name, size, base64 }
-  specsFile: null,      // { name, size, base64 }
-  projectInfo: {
-    project_name:'', bid_date:'', gc:'', contractor:'',
-    trades:[], bldg_type:'', size:'', delivery:'', notes:''
-  },
-  results: {},     // { summary:'...', scope:'...', etc. }
-  editing: false,
-  currentGeneration: null, // { raw, approved:false }
-  userInfo: null   // captured lead info (from inline capture form at final step)
+/* ===================================================================
+   UNIT COST DEFAULTS + REGIONAL MULTIPLIERS
+   All labeled ROM +/-30%. Sourced from public industry averages
+   (RSMeans city cost indices, ENR construction cost data,
+   MCAA/NECA/NFPA trade publications, 2023-2024 baseline).
+=================================================================== */
+const DEFAULTS = {
+  hvac_ton_rate:  {rtu:2800, chw:4500, vrf:5200, wshp:3400, split:2200},
+  hvac_vav_rate:  1850,
+  hvac_cfm_rate:  11,
+  plb_fix_rate:   1650,
+  plb_drain_rate: 480,
+  plb_wh_rate:    22,
+  plb_lf_rate:    48,
+  pip_hyd_rate:   55,
+  pip_steam_rate: 95,
+  pip_gas_rate:   42,
+  pip_air_rate:   38,
+  elec_amp_rate:  185,
+  elec_pnl_rate:  4200,
+  elec_fix_rate:  265,
+  elec_gen_rate:  650,
+  lv_data_rate:   185,
+  lv_cam_rate:    950,
+  lv_acc_rate:    1850,
+  lv_av_rate:     425,
+  fp_sf_rate:     3.80,
+  fp_dev_rate:    385,
+  fp_pump_rate:   28000,
+  fp_sp_rate:     14500,
 };
 
-// Restore prior session if any
+const REGIONAL = { fl:0.92, us:1.00, ne:1.18, se:0.93, mw:0.97, sw:0.95, w:1.16, mtn:1.02 };
+
+const BLDG_MULT = {
+  office:1.00, medical_office:1.15, hospital:1.35, k12:1.05, higher_ed:1.10,
+  retail:0.90, restaurant:1.10, warehouse:0.80, manufacturing:1.20,
+  multifamily:0.95, hospitality:1.05, datacenter:1.45, assembly:1.00,
+  government:1.10, ti:0.85
+};
+
+const BLDG_LABELS = {
+  office:'Office / Class A', medical_office:'Medical Office / Outpatient',
+  hospital:'Hospital / Acute Care', k12:'K-12 School', higher_ed:'Higher Education',
+  retail:'Retail / Big-Box', restaurant:'Restaurant / Food Service',
+  warehouse:'Industrial / Warehouse', manufacturing:'Manufacturing / Clean Room',
+  multifamily:'Multi-Family Residential', hospitality:'Hospitality / Hotel',
+  datacenter:'Data Center', assembly:'Religious / Assembly',
+  government:'Government / Municipal', ti:'Tenant Improvement'
+};
+
+const DELIVERY_LABELS = {
+  dbb:'Design-Bid-Build (Hard Bid)', da:'Design-Assist', db:'Design-Build',
+  cmar:'CM at Risk', ipd:'IPD', neg:'Negotiated'
+};
+
+const TRADE_LABELS = {
+  hvac:'HVAC / Mechanical', plumbing:'Plumbing', piping:'Process Piping',
+  electrical:'Electrical', lowvoltage:'Low Voltage', fire:'Fire Protection'
+};
+
+/* ===================================================================
+   STATE
+=================================================================== */
+const state = {
+  plansFile: null,
+  specsFile: null,
+  selectedTrades: [],
+  overrides: {},
+  edits: {},
+  currentEdit: null,
+  userInfo: null
+};
+
 try {
-  const saved = localStorage.getItem('lwc_commercial_session');
+  const saved = localStorage.getItem('lwc_commercial_v2');
   if (saved) {
     const prev = JSON.parse(saved);
-    if (prev.results) state.results = prev.results;
-    if (prev.projectInfo) Object.assign(state.projectInfo, prev.projectInfo);
     if (prev.userInfo) state.userInfo = prev.userInfo;
   }
 } catch(e){}
 
 function persist(){
   try{
-    localStorage.setItem('lwc_commercial_session', JSON.stringify({
-      results: state.results,
-      projectInfo: state.projectInfo,
-      userInfo: state.userInfo
-    }));
+    localStorage.setItem('lwc_commercial_v2', JSON.stringify({ userInfo: state.userInfo }));
   }catch(e){}
 }
 
-// ============================================================
-// API KEY UI
-// ============================================================
-if (!state.apiKey) {
-  document.getElementById('api-key-wrap').classList.add('shown');
-}
-function saveApiKey(){
-  const v = document.getElementById('api-key-input').value.trim();
-  if (!v.startsWith('sk-ant-')) {
-    alert('That does not look like a valid Anthropic API key. It should start with sk-ant-');
-    return;
+/* ===================================================================
+   HELPERS
+=================================================================== */
+function numVal(id){ const el = document.getElementById(id); if (!el) return 0; const v = parseFloat(el.value); return isNaN(v) ? 0 : v; }
+function txtVal(id){ const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function fmtMoney(n){ if (!n || isNaN(n)) return '$0'; return '$'+Math.round(n).toLocaleString('en-US'); }
+function fmtMoneyRange(low, high){ return `${fmtMoney(low)} – ${fmtMoney(high)}`; }
+function fmtNum(n){ return (n||0).toLocaleString('en-US'); }
+function escapeHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+function getCurrentDefaultRate(rateId){
+  if (rateId === 'hvac_ton_rate'){
+    const sys = (document.getElementById('hvac_system')||{}).value || 'rtu';
+    return DEFAULTS.hvac_ton_rate[sys] || DEFAULTS.hvac_ton_rate.rtu;
   }
-  state.apiKey = v;
-  localStorage.setItem('lwc_anthropic_key', v);
-  document.getElementById('api-key-wrap').classList.remove('shown');
+  return DEFAULTS[rateId];
 }
 
-// ============================================================
-// FILE UPLOADS
-// ============================================================
+function getRate(id){
+  const inp = document.getElementById(id);
+  if (inp && inp.style.display === 'inline-block'){
+    const v = parseFloat(inp.value);
+    if (!isNaN(v) && v > 0) return v;
+  }
+  return getCurrentDefaultRate(id);
+}
+
+function regionLabel(r){
+  return ({fl:'Florida',us:'US average',ne:'Northeast',se:'Southeast',mw:'Midwest',sw:'Southwest',w:'West Coast',mtn:'Mountain West'})[r] || r;
+}
+
+function listTrades(trades){
+  if (!trades.length) return '';
+  const labels = trades.map(t=>TRADE_LABELS[t]);
+  if (labels.length === 1) return labels[0];
+  if (labels.length === 2) return `${labels[0]} and ${labels[1]}`;
+  return `${labels.slice(0,-1).join(', ')}, and ${labels[labels.length-1]}`;
+}
+
+/* ===================================================================
+   TRADE SELECTION + ROM ROW TOGGLE
+=================================================================== */
+document.querySelectorAll('.trade-check').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    el.classList.toggle('sel');
+    const trade = el.dataset.trade;
+    if (el.classList.contains('sel')) {
+      if (!state.selectedTrades.includes(trade)) state.selectedTrades.push(trade);
+    } else {
+      state.selectedTrades = state.selectedTrades.filter(t=>t!==trade);
+    }
+    document.querySelector(`.trade-rom[data-rom="${trade}"]`).classList.toggle('active', el.classList.contains('sel'));
+    rerender();
+  });
+});
+
+function toggleOverride(trade){
+  const btn = event.target;
+  const active = btn.classList.toggle('on');
+  state.overrides[trade] = active;
+  btn.textContent = active ? 'Use defaults' : 'Override costs';
+  const block = document.querySelector(`.trade-rom[data-rom="${trade}"]`);
+  block.querySelectorAll('.unit-row').forEach(row=>{
+    const display = row.querySelector('.val');
+    const input = row.querySelector('input[type="number"]');
+    if (!input) return;
+    if (active){
+      display.style.display='none';
+      input.style.display='inline-block';
+      const currentDefault = getCurrentDefaultRate(input.id);
+      if (!input.value) input.value = currentDefault;
+    } else {
+      display.style.display='inline-block';
+      input.style.display='none';
+    }
+  });
+  rerender();
+}
+
+/* ===================================================================
+   FILE UPLOADS
+=================================================================== */
 ['plans','specs'].forEach(kind=>{
   const drop = document.getElementById(`${kind}-drop`);
   const input = document.getElementById(`${kind}-file`);
@@ -759,345 +1010,530 @@ function saveApiKey(){
   });
 });
 
-async function handleFile(kind, file){
-  if (file.type !== 'application/pdf') {
-    alert('Please upload a PDF file.');
-    return;
-  }
-  if (file.size > 32*1024*1024) {
-    alert('File is larger than 32 MB. Please upload a smaller PDF or split it.');
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = () => {
-    const base64 = reader.result.split(',')[1];
-    state[`${kind}File`] = { name: file.name, size: file.size, base64 };
-    renderFileChip(kind);
-  };
-  reader.readAsDataURL(file);
+function handleFile(kind, file){
+  if (file.type !== 'application/pdf') { alert('Please upload a PDF.'); return; }
+  state[`${kind}File`] = { name: file.name, size: file.size };
+  renderChip(kind);
+  rerender();
 }
 
-function renderFileChip(kind){
-  const wrap = document.getElementById(`${kind}-chip-wrap`);
+function renderChip(kind){
+  const wrap = document.getElementById(`${kind}-chip`);
   const f = state[`${kind}File`];
-  if (!f) { wrap.innerHTML=''; return; }
-  const sizeKB = Math.round(f.size/1024);
-  const sizeDisplay = sizeKB > 1024 ? `${(sizeKB/1024).toFixed(1)} MB` : `${sizeKB} KB`;
-  wrap.innerHTML = `<div class="file-chip">📎 <span>${escapeHtml(f.name)}</span> <span style="color:var(--text3);font-size:.7rem">${sizeDisplay}</span> <button class="x" onclick="event.preventDefault();event.stopPropagation();removeFile('${kind}')">×</button></div>`;
+  if (!f){ wrap.innerHTML=''; return; }
+  const sz = f.size > 1024*1024 ? `${(f.size/1024/1024).toFixed(1)} MB` : `${Math.round(f.size/1024)} KB`;
+  wrap.innerHTML = `<div class="file-chip">📎 <span class="name">${escapeHtml(f.name)}</span> <span class="meta">${sz}</span> <button class="x" onclick="event.preventDefault();removeFile('${kind}')">×</button></div>`;
 }
+
 function removeFile(kind){
   state[`${kind}File`] = null;
   document.getElementById(`${kind}-file`).value='';
-  renderFileChip(kind);
+  renderChip(kind);
+  rerender();
 }
 
-// ============================================================
-// TRADE CHECKS
-// ============================================================
-document.querySelectorAll('.trade-check').forEach(el=>{
-  el.addEventListener('click', ()=>{
-    el.classList.toggle('sel');
-    const trade = el.dataset.trade;
-    if (el.classList.contains('sel')) {
-      if (!state.projectInfo.trades.includes(trade)) state.projectInfo.trades.push(trade);
-    } else {
-      state.projectInfo.trades = state.projectInfo.trades.filter(t=>t!==trade);
+/* ===================================================================
+   ROM CALCULATION
+=================================================================== */
+function calcTrade(trade){
+  const r = {};
+  switch(trade){
+    case 'hvac': {
+      r.equipment = numVal('hvac_tons') * getRate('hvac_ton_rate');
+      r.vav = numVal('hvac_vav') * getRate('hvac_vav_rate');
+      r.ductwork = numVal('hvac_cfm') * getRate('hvac_cfm_rate');
+      r.subtotal = r.equipment + r.vav + r.ductwork;
+      break;
     }
-  });
-});
+    case 'plumbing': {
+      r.fixtures = numVal('plb_fixtures') * getRate('plb_fix_rate');
+      r.drains = numVal('plb_drains') * getRate('plb_drain_rate');
+      r.wh = numVal('plb_wh') * getRate('plb_wh_rate');
+      r.mains = numVal('plb_lf') * getRate('plb_lf_rate');
+      r.subtotal = r.fixtures + r.drains + r.wh + r.mains;
+      break;
+    }
+    case 'piping': {
+      r.hyd = numVal('pip_hyd') * getRate('pip_hyd_rate');
+      r.steam = numVal('pip_steam') * getRate('pip_steam_rate');
+      r.gas = numVal('pip_gas') * getRate('pip_gas_rate');
+      r.air = numVal('pip_air') * getRate('pip_air_rate');
+      r.subtotal = r.hyd + r.steam + r.gas + r.air;
+      break;
+    }
+    case 'electrical': {
+      r.service = numVal('elec_amps') * getRate('elec_amp_rate');
+      r.panels = numVal('elec_panels') * getRate('elec_pnl_rate');
+      r.fixtures = numVal('elec_fixtures') * getRate('elec_fix_rate');
+      r.gen = numVal('elec_gen') * getRate('elec_gen_rate');
+      r.subtotal = r.service + r.panels + r.fixtures + r.gen;
+      break;
+    }
+    case 'lowvoltage': {
+      r.data = numVal('lv_data') * getRate('lv_data_rate');
+      r.cam = numVal('lv_cam') * getRate('lv_cam_rate');
+      r.acc = numVal('lv_acc') * getRate('lv_acc_rate');
+      r.av = numVal('lv_av') * getRate('lv_av_rate');
+      r.subtotal = r.data + r.cam + r.acc + r.av;
+      break;
+    }
+    case 'fire': {
+      r.sprinkler = numVal('fp_sf') * getRate('fp_sf_rate');
+      r.alarm = numVal('fp_dev') * getRate('fp_dev_rate');
+      const pumpYes = parseInt((document.getElementById('fp_pump')||{}).value || '0');
+      r.pump = pumpYes * getRate('fp_pump_rate');
+      r.standpipes = numVal('fp_sp') * getRate('fp_sp_rate');
+      r.subtotal = r.sprinkler + r.alarm + r.pump + r.standpipes;
+      break;
+    }
+  }
+  return r;
+}
 
-// ============================================================
-// STEPPER RENDERING
-// ============================================================
-function renderStepper(){
-  const wrap = document.getElementById('stepper');
-  wrap.innerHTML = STEPS.map((s,i)=>{
-    let cls = 'step-pill';
-    if (i < state.currentStepIdx) cls += ' done';
-    else if (i === state.currentStepIdx) cls += ' active';
-    return `<div class="${cls}"><span class="num">${i < state.currentStepIdx ? '✓' : i+1}</span>${s.label}</div>`;
+function calcROM(){
+  const region = (document.getElementById('f_region')||{}).value || 'fl';
+  const bldg = (document.getElementById('f_bldg_type')||{}).value || 'office';
+  const regMult = REGIONAL[region] || 1.0;
+  const bldgMult = BLDG_MULT[bldg] || 1.0;
+  const combined = regMult * bldgMult;
+
+  const tradeTotals = {};
+  let subtotal = 0;
+  state.selectedTrades.forEach(t=>{
+    const r = calcTrade(t);
+    const adjusted = r.subtotal * combined;
+    tradeTotals[t] = { raw: r.subtotal, adjusted, detail: r };
+    subtotal += adjusted;
+  });
+
+  const low = subtotal * 0.85;
+  const high = subtotal * 1.30;
+  const scheduleBase = subtotal / 100000 * 0.8;
+  const schedLow = Math.max(2, Math.round(scheduleBase * 0.9));
+  const schedHigh = Math.max(3, Math.round(scheduleBase * 1.3));
+  const laborBudget = subtotal * 0.45;
+  const laborHours = Math.round(laborBudget / 95);
+
+  return { subtotal, low, high, tradeTotals, scheduleLow: schedLow, scheduleHigh: schedHigh, laborHours, region, bldg, regMult, bldgMult, combined };
+}
+
+/* ===================================================================
+   RENDER ROM SUMMARY
+=================================================================== */
+function renderROM(){
+  const rom = calcROM();
+  const container = document.getElementById('rom-content');
+  const projName = txtVal('f_project_name');
+  const gc = txtVal('f_gc');
+  const sf = numVal('f_size');
+  const bldgLabel = BLDG_LABELS[rom.bldg];
+  document.getElementById('rom-project-line').textContent =
+    projName ? `${projName}${gc?' · for '+gc:''}` :
+    (state.selectedTrades.length && rom.subtotal>0 ? `${bldgLabel}${sf?' · '+fmtNum(sf)+' SF':''}` : 'Fill in the form to see your estimate update live.');
+
+  if (!state.selectedTrades.length || rom.subtotal === 0){
+    container.innerHTML = `<div class="rom-empty">Select at least one trade and enter the size and quantities to see the estimate.</div>`;
+    return;
+  }
+
+  const perTradeRows = state.selectedTrades.map(t=>{
+    const amt = rom.tradeTotals[t].adjusted;
+    return `<div class="rom-item"><div class="tl">${TRADE_LABELS[t]}</div><div class="vl">${fmtMoney(amt)}</div></div>`;
   }).join('');
-}
-renderStepper();
 
-// ============================================================
-// FLOW CONTROL
-// ============================================================
-function startGeneration(){
-  // Validate
-  if (!state.apiKey) {
-    document.getElementById('api-key-wrap').classList.add('shown');
-    document.getElementById('api-key-wrap').scrollIntoView({behavior:'smooth',block:'center'});
-    return;
-  }
-  if (!state.plansFile) { alert('Please upload the plan sheets first.'); return; }
-  // Capture project info
-  state.projectInfo.project_name = document.getElementById('f_project_name').value.trim();
-  state.projectInfo.bid_date = document.getElementById('f_bid_date').value.trim();
-  state.projectInfo.gc = document.getElementById('f_gc').value.trim();
-  state.projectInfo.contractor = document.getElementById('f_contractor').value.trim();
-  state.projectInfo.bldg_type = document.getElementById('f_bldg_type').value;
-  state.projectInfo.size = document.getElementById('f_size').value.trim();
-  state.projectInfo.delivery = document.getElementById('f_delivery').value;
-  state.projectInfo.notes = document.getElementById('f_notes').value.trim();
-  if (!state.projectInfo.project_name) { alert('Please enter a project name.'); return; }
-  if (state.projectInfo.trades.length === 0) { alert('Please select at least one trade.'); return; }
-  persist();
-  state.currentStepIdx = 1;
-  showStepPanel();
+  const costPerSF = sf > 0 ? rom.subtotal / sf : 0;
+
+  container.innerHTML = `
+    <div class="rom-total"><span class="amt">${fmtMoneyRange(rom.low, rom.high)}</span></div>
+    <p class="rom-caveat">Rough order of magnitude, <strong>&plusmn;30%</strong>. ${sf > 0 ? `That's about ${fmtMoney(costPerSF)}/SF for MEP scope. ` : ''}Based on ${bldgLabel}${rom.region!=='us' ? ` in ${regionLabel(rom.region)}` : ''}. Use as a sanity check before takeoff — <strong>not</strong> a bid-ready number.</p>
+    <div class="rom-grid">
+      ${perTradeRows}
+      <div class="rom-item total"><div class="tl">MEP Total (midpoint)</div><div class="vl">${fmtMoney(rom.subtotal)}</div></div>
+    </div>
+    <div class="rom-sched">
+      <div class="rom-item"><div class="tl">Schedule (MEP rough-in → commissioning)</div><div class="vl">${rom.scheduleLow}–${rom.scheduleHigh} weeks</div></div>
+      <div class="rom-item"><div class="tl">Labor hours (all trades combined)</div><div class="vl">~${fmtNum(rom.laborHours)} hrs</div></div>
+    </div>
+  `;
 }
 
-function showStepPanel(){
-  document.getElementById('panel-setup').style.display='none';
-  document.getElementById('panel-final').style.display='none';
-  document.getElementById('panel-step').style.display='block';
-  const step = STEPS[state.currentStepIdx];
-  document.getElementById('step-badge').textContent = `Step ${state.currentStepIdx+1} of ${STEPS.length}`;
-  document.getElementById('step-title').textContent = step.title;
-  document.getElementById('step-sub').textContent = step.sub || '';
-  state.editing = false;
-  state.currentGeneration = null;
+/* ===================================================================
+   BID PACKAGE TEMPLATE LIBRARY
+=================================================================== */
+function tpl_summary(ctx){
+  const project = ctx.projectName || '[Project Name]';
+  const gcLine = ctx.gc ? ` for ${ctx.gc}` : '';
+  const sizeLine = ctx.size > 0 ? `The project is approximately ${fmtNum(ctx.size)} square feet across ${ctx.floors||1} floor${ctx.floors>1?'s':''}. ` : '';
+  const tradeScope = ctx.trades.length ?
+    `The scope of work covers ${listTrades(ctx.trades)} systems, delivered under a ${ctx.deliveryLabel} arrangement.` :
+    `The scope of work will cover MEP systems, delivered under a ${ctx.deliveryLabel} arrangement.`;
+  const romLine = ctx.rom.subtotal > 0 ?
+    `Our preliminary budget range for the combined MEP scope is **${fmtMoneyRange(ctx.rom.low, ctx.rom.high)}**, representing a rough order of magnitude pending final takeoff and pricing.` :
+    `Our preliminary budget will be developed pending final takeoff, vendor pricing, and subcontractor input.`;
+  const docLine = (ctx.plansUploaded || ctx.specsUploaded) ?
+    `This proposal is based on our review of the ${ctx.plansUploaded ? 'plans' : ''}${ctx.plansUploaded && ctx.specsUploaded ? ' and ' : ''}${ctx.specsUploaded ? 'specifications' : ''} provided.` :
+    'This proposal is based on our review of the bid documents provided.';
 
-  // If we already have a result, show it and offer approve/regen/edit
-  const existing = state.results[step.id];
-  if (existing) {
-    renderOutput(existing);
-    setButtons({generate:false, regen:true, edit:true, approve:true});
-  } else {
-    document.getElementById('gen-output').innerHTML = '<div class="gen-empty">Click "Generate" to analyze your plans and build this section.</div>';
-    setButtons({generate:true, regen:false, edit:false, approve:false});
-  }
-  renderStepper();
-  window.scrollTo({top:0,behavior:'smooth'});
+  return `${ctx.contractor || '[Your Company]'} is pleased to submit this bid proposal for **${project}**${gcLine}. This proposal covers our scope of work as a ${ctx.bldgLabel} project. ${sizeLine}${tradeScope}\n\n${docLine} ${romLine}\n\nWe are prepared to execute this project in accordance with the schedule requirements, applicable codes, and the technical specifications referenced herein. Our team has evaluated the project requirements, identified key coordination interfaces, and incorporated our recommended assumptions, exclusions, and alternates into this submission.`;
 }
 
-function setButtons({generate,regen,edit,approve}){
-  document.getElementById('btn-generate').style.display = generate ? '' : 'none';
-  document.getElementById('btn-regen').style.display = regen ? '' : 'none';
-  document.getElementById('btn-edit').style.display = edit ? '' : 'none';
-  document.getElementById('btn-approve').style.display = approve ? '' : 'none';
-  document.getElementById('btn-back').style.display = state.currentStepIdx > 1 ? '' : 'none';
+function tpl_scope(ctx){
+  const { trades, bldg } = ctx;
+  if (!trades.length) return `*Select at least one trade in the form to see scope details.*`;
+  let out = `Our scope of work includes the following, organized by CSI division. All work will be performed in accordance with the contract documents, applicable codes, and the technical specifications.\n\n`;
+
+  if (trades.includes('hvac')){
+    const sys = (document.getElementById('hvac_system')||{}).value || 'rtu';
+    const sysLabel = {rtu:'rooftop unit (RTU)', chw:'chilled water', vrf:'variable refrigerant flow (VRF)', wshp:'water source heat pump', split:'ductless split'}[sys] || 'HVAC';
+    out += `## Division 23 — HVAC / Mechanical\n\n`;
+    out += `- Complete ${sysLabel} HVAC system including equipment, ductwork, piping, controls, and accessories per drawings and specifications\n`;
+    out += `- Supply and installation of primary equipment including air-handling units, terminal units, pumps, boilers/chillers, and accessories as indicated\n`;
+    out += `- Sheet metal ductwork with insulation, fittings, dampers, access doors, and test/balance\n`;
+    if (numVal('hvac_vav') > 0) out += `- Variable Air Volume (VAV) terminal boxes with reheat coils, controls, and diffusers\n`;
+    out += `- Refrigerant and hydronic piping, insulation, hangers, and supports per code\n`;
+    out += `- HVAC controls integration with building automation system, including sequence of operations\n`;
+    out += `- Start-up, testing, adjusting, and balancing (TAB) by certified TAB contractor\n`;
+    out += `- Commissioning participation per specification Section 019113\n`;
+    out += `- Equipment warranties per manufacturer standard, 1-year workmanship from final acceptance\n\n`;
+  }
+  if (trades.includes('plumbing')){
+    out += `## Division 22 — Plumbing\n\n`;
+    out += `- Complete plumbing system including domestic water (hot/cold), sanitary waste and vent, and storm drainage per drawings\n`;
+    out += `- Plumbing fixtures per schedule: water closets, lavatories, sinks, urinals, and associated trim\n`;
+    if (numVal('plb_wh') > 0) out += `- Domestic water heater(s) with recirculation pump, expansion tank, and temperature/pressure relief\n`;
+    if (numVal('plb_drains') > 0) out += `- Floor drains and floor sinks with trap primers as indicated\n`;
+    out += `- Copper, PVC, and cast iron piping as specified with insulation, hangers, and supports\n`;
+    out += `- Fixture carriers, cleanouts, and access panels as required by code\n`;
+    out += `- Connection to utility at five (5) feet outside building unless otherwise noted\n`;
+    if (bldg === 'medical_office' || bldg === 'hospital') out += `- Medical gas systems per NFPA 99, including bulk storage, distribution, and zone valves\n`;
+    if (bldg === 'restaurant') out += `- Grease waste system with interceptor and venting per local plumbing code\n`;
+    out += `- Testing per code (pressure test, flow test, bacteriological) and final disinfection\n\n`;
+  }
+  if (trades.includes('piping')){
+    out += `## Division 22/23 — Process &amp; Hydronic Piping\n\n`;
+    if (numVal('pip_hyd') > 0) out += `- Hydronic piping (chilled water and/or heating water) with insulation, valves, strainers, and accessories\n`;
+    if (numVal('pip_steam') > 0) out += `- Steam and condensate piping with pressure reducing stations, traps, and condensate return\n`;
+    if (numVal('pip_gas') > 0) out += `- Natural gas and/or medical gas piping per NFPA 54 / NFPA 99, including regulators and shutoffs\n`;
+    if (numVal('pip_air') > 0) out += `- Compressed air piping with filtration, drains, and distribution manifolds\n`;
+    out += `- Welded, threaded, and grooved connections per specification\n`;
+    out += `- All pipe labeling, flow arrows, and system identification per code\n`;
+    out += `- Pressure testing and commissioning of all installed piping systems\n\n`;
+  }
+  if (trades.includes('electrical')){
+    out += `## Division 26 — Electrical\n\n`;
+    if (numVal('elec_amps') > 0) out += `- Service and distribution including ${fmtNum(numVal('elec_amps'))}-amp service, switchgear, transformers, and feeders\n`;
+    if (numVal('elec_panels') > 0) out += `- ${numVal('elec_panels')} panelboards with all circuiting per drawings\n`;
+    out += `- Branch circuit wiring, conduit, junction boxes, and device boxes\n`;
+    if (numVal('elec_fixtures') > 0) out += `- Lighting fixtures, lamps, drivers, and lighting controls per schedule and specifications\n`;
+    out += `- Wiring devices including receptacles, switches, and cover plates\n`;
+    if (numVal('elec_gen') > 0) out += `- Emergency power system: ${numVal('elec_gen')} kW standby generator with ATS, code-required feeders, and fuel storage\n`;
+    out += `- Grounding and bonding per NEC 250, including equipment grounding conductors throughout\n`;
+    out += `- Fire alarm system interface, equipment connections, and disconnects by this contractor\n`;
+    out += `- Commissioning support, system testing, and final inspection turnover\n\n`;
+  }
+  if (trades.includes('lowvoltage')){
+    out += `## Division 27 — Communications / Low Voltage\n\n`;
+    if (numVal('lv_data') > 0) out += `- Structured cabling: Cat 6/6A data drops, patch panels, rack-mounted cable management\n`;
+    if (numVal('lv_cam') > 0) out += `- IP video surveillance: cameras, NVR/VMS server, storage, software licensing\n`;
+    if (numVal('lv_acc') > 0) out += `- Access control system: readers, locks, controllers, and head-end software integration\n`;
+    if (numVal('lv_av') > 0) out += `- Audio-visual outlets and low-voltage backboxes at locations indicated\n`;
+    out += `- Cable pathways, penetration firestopping, and device boxes for low-voltage systems\n`;
+    out += `- System programming, user training, and as-built documentation\n\n`;
+  }
+  if (trades.includes('fire')){
+    out += `## Division 21 — Fire Suppression\n\n`;
+    if (numVal('fp_sf') > 0) out += `- Complete wet-pipe automatic sprinkler system with coverage for ${fmtNum(numVal('fp_sf'))} SF per NFPA 13\n`;
+    if (numVal('fp_dev') > 0) out += `- Fire alarm system with ${numVal('fp_dev')} initiating and notification appliances per NFPA 72\n`;
+    if ((document.getElementById('fp_pump')||{}).value === '1') out += `- Fire pump package with controller, test header, and pressure maintenance pump per NFPA 20\n`;
+    if (numVal('fp_sp') > 0) out += `- Standpipe system (${numVal('fp_sp')} risers) with fire department connections\n`;
+    out += `- Hydraulic calculations, shop drawings, and AHJ approval submissions\n`;
+    out += `- Testing, certification, and final inspection turnover including NFPA 25-style startup\n\n`;
+  }
+  return out.trim();
 }
 
-function goBack(){
-  if (state.currentStepIdx > 1) { state.currentStepIdx--; showStepPanel(); }
-  else if (state.currentStepIdx === 1) {
-    state.currentStepIdx = 0;
-    document.getElementById('panel-step').style.display='none';
-    document.getElementById('panel-setup').style.display='block';
-    renderStepper();
-    window.scrollTo({top:0,behavior:'smooth'});
+function tpl_equipment(ctx){
+  const { trades } = ctx;
+  if (!trades.length) return `*Select at least one trade in the form to see the equipment schedule.*`;
+  let out = `The following equipment is included in this bid package, based on the scope selected. Final equipment selections, model numbers, and manufacturers are to be per contract documents and approved submittals.\n\n`;
+
+  const rows = [];
+  if (trades.includes('hvac')){
+    const sys = (document.getElementById('hvac_system')||{}).value || 'rtu';
+    const sysTag = {rtu:'RTU', chw:'AHU', vrf:'VRF', wshp:'WSHP', split:'FC'}[sys] || 'HVAC';
+    const tons = numVal('hvac_tons');
+    const vav = numVal('hvac_vav');
+    if (tons > 0) rows.push({tag:`${sysTag}-1`, type:`Primary HVAC Equipment`, cap:`${tons} tons total cooling`, notes:`Per schedule`});
+    if (vav > 0) rows.push({tag:`VAV-1 to VAV-${vav}`, type:`Variable Air Volume Terminal`, cap:`Per schedule`, notes:`With reheat coils`});
   }
+  if (trades.includes('plumbing')){
+    if (numVal('plb_fixtures') > 0) rows.push({tag:`WC/LAV/SK`, type:`Plumbing Fixtures`, cap:`${numVal('plb_fixtures')} total`, notes:`Per fixture schedule`});
+    if (numVal('plb_wh') > 0) rows.push({tag:`WH-1`, type:`Water Heater`, cap:`${numVal('plb_wh')} gallons`, notes:`With recirc pump`});
+    if (numVal('plb_drains') > 0) rows.push({tag:`FD`, type:`Floor Drains`, cap:`${numVal('plb_drains')} total`, notes:`With trap primers`});
+  }
+  if (trades.includes('electrical')){
+    if (numVal('elec_amps') > 0) rows.push({tag:`MSB`, type:`Main Service Switchgear`, cap:`${fmtNum(numVal('elec_amps'))} amps`, notes:`Per one-line`});
+    if (numVal('elec_panels') > 0) rows.push({tag:`PNL-1 to PNL-${numVal('elec_panels')}`, type:`Panelboards`, cap:`Per schedule`, notes:`NEMA 1 unless noted`});
+    if (numVal('elec_gen') > 0) rows.push({tag:`GEN-1`, type:`Standby Generator`, cap:`${numVal('elec_gen')} kW`, notes:`With ATS and day tank`});
+  }
+  if (trades.includes('fire')){
+    if ((document.getElementById('fp_pump')||{}).value === '1') rows.push({tag:`FP-1`, type:`Fire Pump Package`, cap:`Per NFPA 20`, notes:`With controller & jockey`});
+    if (numVal('fp_sp') > 0) rows.push({tag:`SP-1 to SP-${numVal('fp_sp')}`, type:`Standpipe Risers`, cap:`Per NFPA 14`, notes:`With FD connections`});
+  }
+
+  if (!rows.length) return `*Enter quantities in the form to populate the equipment schedule.*`;
+
+  out += `| Tag | Equipment Type | Capacity / Size | Notes |\n|-----|---------------|-----------------|-------|\n`;
+  rows.forEach(r=>{ out += `| ${r.tag} | ${r.type} | ${r.cap} | ${r.notes} |\n`; });
+  out += `\n\n*Final equipment selections to be per contractor standard stocking; substitutions per specification Section 012500.*`;
+  return out;
 }
 
-function approveStep(){
-  // Persist any final edits first
-  if (state.editing) toggleEdit();
-  if (!state.results[STEPS[state.currentStepIdx].id]) {
-    alert('Please generate content first.');
-    return;
+function tpl_assumptions(ctx){
+  const { trades, bldg, deliveryLabel } = ctx;
+  const items = [
+    `**Documents.** This bid is based on the plans, specifications, and addenda listed in our qualification letter. Revisions issued after our bid date are not included unless specifically acknowledged.`,
+    `**Site access.** Normal working hours (Monday–Friday, 7:00 AM to 4:00 PM) are assumed. Overtime, weekend, and holiday premium labor is excluded unless specifically requested and priced.`,
+    `**Temporary services.** Temporary power, water, lighting, and sanitation facilities will be provided by the General Contractor for our trades' use at no cost to us.`,
+    `**Utility tie-ins.** All permanent utility connections (water, sewer, gas, electric, data) are assumed available at the building line or as shown on civil drawings. Tap and connection fees are by Owner.`,
+    `**Permits &amp; fees.** Trade-specific permits required for our scope are included; all other permits, plan review fees, tap fees, and impact fees are excluded and by Owner.`,
+    `**Sales &amp; use tax.** Applicable state and local sales tax is included at current published rates.`,
+    `**Bonds &amp; insurance.** Payment and performance bonds (if required) are excluded unless quoted as a separate line item. Our standard general liability, auto, and workers' compensation coverage is included.`,
+    `**Coordination.** All coordination with other trades is assumed to occur within normal working hours. Our bid excludes extraordinary coordination required due to late-arriving design information.`,
+    `**Shop drawing turnaround.** We assume a maximum 10-business-day review turnaround on shop drawings and submittals. Delays beyond that may result in schedule and/or cost impact.`,
+    `**Commissioning.** Our trades will participate in commissioning per specification but will not serve as commissioning agent. Commissioning agent fees are by Owner.`,
+    `**Warranty.** Standard manufacturer warranties plus 1-year workmanship warranty from date of substantial completion are included.`,
+  ];
+  if (deliveryLabel === 'Design-Bid-Build (Hard Bid)') items.push(`**Design basis.** This bid is based on the design documents as issued. Design clarifications or modifications after bid date may result in change orders.`);
+  if (deliveryLabel === 'Design-Assist' || deliveryLabel === 'Design-Build') items.push(`**Design responsibility.** Design development beyond the current level of documentation is the responsibility of the design team. Our scope is limited to installation of the final design.`);
+  if (bldg === 'hospital' || bldg === 'medical_office'){
+    items.push(`**Infection control.** ICRA (Infection Control Risk Assessment) barriers and protocols are by General Contractor unless specifically noted.`);
+    items.push(`**Phased occupancy.** If the facility will remain operational during construction, phasing plans are assumed to be provided by the Owner with 10 business days notice before each phase.`);
   }
-  persist();
-  if (state.currentStepIdx < STEPS.length - 1) {
-    state.currentStepIdx++;
-    showStepPanel();
-  } else {
-    showFinal();
-  }
+  if (bldg === 'ti') items.push(`**Existing conditions.** Our bid is based on existing conditions as observed at site walk or as represented in the plans. Concealed conditions discovered during demolition are excluded.`);
+  if (trades.includes('hvac')) items.push(`**HVAC equipment availability.** Equipment pricing is valid for 30 days. Manufacturer lead times for major equipment (chillers, air handlers, RTUs) are assumed to be acceptable to the project schedule.`);
+  if (trades.includes('electrical')) items.push(`**Electrical gear lead time.** Switchgear and large transformer lead times are currently 30+ weeks and are assumed to be acceptable to the project schedule. Expediting fees are excluded.`);
+  if (trades.includes('fire')) items.push(`**Fire sprinkler hydraulic data.** Available water supply data provided by the Owner or AHJ is assumed accurate. Any supplementary flow tests beyond what has been provided are excluded.`);
+  return items.map((txt,i)=>`${i+1}. ${txt}`).join('\n\n');
 }
 
-// ============================================================
-// GENERATION (calls Anthropic API)
-// ============================================================
-async function generateStep(regen){
-  if (!state.apiKey) {
-    document.getElementById('api-key-wrap').classList.add('shown');
-    return;
-  }
-  const step = STEPS[state.currentStepIdx];
-  setButtons({generate:false, regen:false, edit:false, approve:false});
-  document.getElementById('gen-output').innerHTML = '<div class="gen-loading"><span class="dot1"></span><span class="dot2"></span><span class="dot3"></span> Analyzing plans and drafting ' + step.title.toLowerCase() + '...</div>';
-  document.getElementById('gen-error').style.display = 'none';
-
-  try {
-    const result = await callClaude(step);
-    state.results[step.id] = result;
-    state.currentGeneration = { raw: result, approved: false };
-    renderOutput(result);
-    setButtons({generate:false, regen:true, edit:true, approve:true});
-    persist();
-  } catch (err) {
-    showError(err.message || String(err));
-    setButtons({generate:true, regen:false, edit:false, approve:false});
-  }
+function tpl_exclusions(ctx){
+  const { trades, bldg } = ctx;
+  const items = [
+    `Cutting, patching, and repair of existing construction except where specifically required by our trades`,
+    `Painting of exposed piping, ductwork, equipment, and accessories unless specified as a finished surface`,
+    `Access panels in architectural finishes (by finish trades)`,
+    `Housekeeping pads, equipment bases, and structural supports below rooftop equipment (by GC)`,
+    `Roof curbs, flashing, and final weather-tight roofing connections (by roofer)`,
+    `Firestopping at penetrations of rated walls and floors unless specifically in our trade scope`,
+    `Core drilling, saw cutting, and X-ray scanning of existing structure`,
+    `Dewatering, shoring, and underpinning`,
+    `Rock excavation, blasting, and hazardous material abatement`,
+    `Test and balance report review, commissioning agent services, and third-party consulting fees`,
+    `Owner-furnished equipment rigging, setting, and wiring unless specifically included`,
+    `Temporary heat, cooling, and dehumidification beyond standard building systems`,
+    `Overtime, weekend, and holiday premium labor unless specifically approved in writing`,
+    `Performance and payment bonds if not quoted as a separate line item`,
+    `Premium time or acceleration costs due to schedule compression`,
+    `Liquidated damages and consequential damages of any kind`,
+    `Sales and use tax exemption administration (if project is tax exempt, Owner provides certificates)`,
+    `Design services, stamped engineering drawings, and shop drawing engineer fees unless specifically noted`,
+  ];
+  if (trades.includes('hvac')) items.push(`Duct cleaning of existing ductwork being reused (unless in scope)`, `Refrigerant reclamation fees for existing equipment removal`, `HVAC controls programming and commissioning beyond our specific scope`);
+  if (trades.includes('plumbing')) items.push(`Grease trap/interceptor pumping and maintenance (Owner's responsibility)`, `Water softener and water treatment system (unless specifically included)`, `Backflow preventer annual testing after commissioning`);
+  if (trades.includes('electrical')) items.push(`Utility company service extensions, transformers, and CT cabinets (by utility)`, `Specialty device programming (lighting control systems, shade control) unless specifically included`, `Infrared thermography testing unless specifically requested`);
+  if (trades.includes('lowvoltage')) items.push(`Internet service provisioning and ISP coordination (by Owner)`, `Software licensing and annual maintenance fees beyond first year (by Owner)`, `Telephone service, VoIP configuration, and carrier coordination (by Owner)`);
+  if (trades.includes('fire')) items.push(`Fire marshal plan review fees and annual inspection fees`, `5-year internal inspection of piping per NFPA 25 (occurs post-warranty)`, `Monitoring service subscription and central station charges (by Owner)`);
+  if (bldg === 'hospital' || bldg === 'medical_office') items.push(`Medical equipment, imaging equipment, and specialized power connections (unless specifically noted)`);
+  if (bldg === 'restaurant') items.push(`Kitchen equipment connections beyond rough-in to within 5 feet of equipment location`);
+  return items.map((txt,i)=>`${i+1}. ${txt}`).join('\n\n');
 }
 
-function showError(msg){
-  const box = document.getElementById('gen-error');
-  box.className = 'error-box';
-  box.innerHTML = `<span style="font-size:1rem">⚠️</span><div><strong>Generation failed.</strong><br>${escapeHtml(msg)}<br><br>Common causes: API key is invalid, rate limit hit, PDF too large (>32MB), or more than 100 pages. Try regenerating or check your API key.</div>`;
-  box.style.display = 'flex';
-  document.getElementById('gen-output').innerHTML = '<div class="gen-empty">Generation failed. Fix the issue above and try again.</div>';
+function tpl_alternates(ctx){
+  const { trades } = ctx;
+  const alts = [];
+  if (trades.includes('hvac')){
+    const sys = (document.getElementById('hvac_system')||{}).value || 'rtu';
+    alts.push({title:'Higher-efficiency HVAC equipment (SEER/IEER upgrade)', type:'ADD', desc:'Upgrade primary cooling equipment to next-tier efficiency rating (+1-2 IEER points). Reduces operating cost, may qualify for utility rebates, extends equipment life.'});
+    if (sys === 'rtu' || sys === 'chw') alts.push({title:'Premium variable-speed drives on all major motors', type:'ADD', desc:'Add VFDs on pumps, fans, and cooling tower motors for improved part-load efficiency and reduced peak demand.'});
+    alts.push({title:'Extended HVAC equipment warranty (5 years parts + labor)', type:'ADD', desc:'Upgrade from manufacturer standard to 5-year parts and labor warranty on all major equipment.'});
+    alts.push({title:'Alternate HVAC manufacturer (basis-of-design substitution)', type:'DEDUCT', desc:'Substitute acceptable alternate manufacturer (Trane/Carrier/Daikin/York) for cost reduction while maintaining specified performance.'});
+  }
+  if (trades.includes('plumbing')){
+    alts.push({title:'Upgrade to Type L copper (from Type M)', type:'ADD', desc:'Thicker-wall copper domestic water piping for extended life and reduced maintenance risk.'});
+    alts.push({title:'Tankless water heater system (in lieu of storage)', type:'DEDUCT', desc:'High-efficiency on-demand water heaters reduce footprint and standby loss. Deduct depends on hot water load profile.'});
+    alts.push({title:'Upgrade fixtures to WaterSense / commercial-grade', type:'ADD', desc:'Premium fixtures with 20% lower flow rates, reduced water/sewer charges, may qualify for LEED points.'});
+  }
+  if (trades.includes('electrical')){
+    alts.push({title:'LED fixtures upgraded to tunable white / daylight harvesting', type:'ADD', desc:'Premium controllable LED fixtures for improved occupant wellness and energy savings via daylight sensing.'});
+    alts.push({title:'Emergency generator size increase (additional 25 kW)', type:'ADD', desc:'Expand standby capacity to support future growth or additional life safety loads.'});
+    alts.push({title:'Aluminum feeders in lieu of copper (where code permits)', type:'DEDUCT', desc:'Aluminum feeder conductors for larger runs where lifecycle economics favor the material tradeoff.'});
+  }
+  if (trades.includes('lowvoltage')){
+    alts.push({title:'Upgrade to Cat 6A cabling (from Cat 6)', type:'ADD', desc:'Future-proof 10G-capable cabling throughout; minimal cost delta for significant future flexibility.'});
+    alts.push({title:'IP cameras with AI-based analytics', type:'ADD', desc:'Upgrade to cameras with motion/object recognition, license plate recognition, and intrusion detection.'});
+  }
+  if (trades.includes('fire')){
+    alts.push({title:'Fire sprinkler system with ECS smoke notification', type:'ADD', desc:'Enhanced Emergency Communication System tied to sprinkler activation for improved occupant notification.'});
+    alts.push({title:'Fire alarm voice evacuation system upgrade', type:'ADD', desc:'Upgrade from tone-only to voice evac system for faster occupant response in emergencies.'});
+  }
+  if (trades.includes('piping')){
+    alts.push({title:'Pre-insulated hydronic piping assemblies', type:'ADD', desc:'Factory pre-insulated piping reduces field labor and improves insulation quality consistency.'});
+  }
+  if (!alts.length) return `*Select trades in the form to see relevant value-engineering alternates for your project.*`;
+  return alts.map((a,i)=>`**Alternate #${i+1}: ${a.title}** — ${a.type} — ${a.desc}`).join('\n\n');
 }
 
-async function callClaude(step){
-  const projInfoText = formatProjectInfo(state.projectInfo);
-  const priorContext = Object.entries(state.results)
-    .filter(([k,v])=>k !== step.id && v)
-    .map(([k,v])=>{
-      const s = STEPS.find(x=>x.id===k);
-      return `=== PRIOR APPROVED SECTION: ${s.title} ===\n${v}`;
-    }).join('\n\n');
-
-  const systemPrompt = `You are a senior commercial MEP (Mechanical, Electrical, Plumbing) estimator with 25 years of experience bidding jobs from $500K to $50M. You have seen every trick, every claim, every missed detail. You write bid package content the way a top-tier commercial contractor writes it — precise, trade-specific, never generic, never hedging unnecessarily.
-
-Always:
-- Pull specific details, tags, capacities, and notes from the uploaded plans/specs — don't make things up
-- Use the contractor's trade selection and building type to focus your content
-- Write in the voice of a confident senior estimator — no "AI" tells, no "based on the provided documents", no preamble
-- Use markdown formatting (headers, lists, tables, bold) — NO code blocks unless specifically needed
-- If the plans don't show something you would normally include, note "per architectural plans" or "per spec section X" rather than inventing
-
-${step.systemExtra}`;
-
-  const userContent = [];
-
-  // Attach plans PDF with cache_control to save tokens on repeat calls
-  userContent.push({
-    type: 'document',
-    source: {
-      type: 'base64',
-      media_type: 'application/pdf',
-      data: state.plansFile.base64
-    },
-    cache_control: { type: 'ephemeral' }
-  });
-
-  // Attach specs PDF if present
-  if (state.specsFile) {
-    userContent.push({
-      type: 'document',
-      source: {
-        type: 'base64',
-        media_type: 'application/pdf',
-        data: state.specsFile.base64
-      },
-      cache_control: { type: 'ephemeral' }
-    });
+function tpl_rfis(ctx){
+  const { trades, bldg } = ctx;
+  const rfis = [
+    `Confirm the basis of design manufacturer for major equipment. Are substitutions permitted, and what is the process for substitution requests?`,
+    `Confirm the schedule for shop drawing review turnaround and whether expedited review is available for long-lead items.`,
+    `Clarify whether the commissioning agent is retained by the Owner, and what level of participation is expected from trade contractors.`,
+    `Confirm the phasing requirements, particularly for occupied areas. When will detailed phasing plans be available?`,
+    `Clarify the scope of temporary utilities provided by the General Contractor versus individual trades.`,
+  ];
+  if (trades.includes('hvac')){
+    rfis.push(`Confirm the test and balance contractor selection and whether TAB responsibility includes hydronic systems.`);
+    rfis.push(`Clarify the sequence of operations for mixed-mode / economizer operation, particularly during shoulder seasons.`);
   }
+  if (trades.includes('plumbing')){
+    rfis.push(`Confirm the location and size of the water service, gas service, and sanitary tie-in points.`);
+    rfis.push(`Clarify whether the Owner will provide an allowance for plumbing fixture trim (deducted from our scope if applicable).`);
+  }
+  if (trades.includes('electrical')){
+    rfis.push(`Confirm the utility transformer location, pad size, and primary cable routing. Has the utility released a work order?`);
+    rfis.push(`Clarify whether photometric calculations are required for submittal and the methodology (AGi32, DIALux, etc.).`);
+    rfis.push(`Confirm emergency generator fuel type (diesel vs. natural gas) and fuel storage capacity requirements.`);
+  }
+  if (trades.includes('fire')){
+    rfis.push(`Confirm the available water supply per a current flow test. Does the design account for standpipe demand when applicable?`);
+    rfis.push(`Clarify the fire alarm monitoring requirements and whether central station service is by Owner or in our scope.`);
+  }
+  if (trades.includes('lowvoltage')){
+    rfis.push(`Confirm whether low-voltage cabling shall be run in conduit or open on J-hooks in accessible ceiling plenums.`);
+    rfis.push(`Clarify IT/IDF room cooling, power, and grounding requirements and which trade is responsible for coordination.`);
+  }
+  if (bldg === 'hospital' || bldg === 'medical_office'){
+    rfis.push(`Clarify the ICRA (Infection Control Risk Assessment) class requirements for each phase of the work.`);
+    rfis.push(`Confirm medical gas certification requirements and which party is responsible for ASSE 6010 certification of installers.`);
+  }
+  if (bldg === 'datacenter') rfis.push(`Clarify N+1/N+2/2N redundancy requirements for each system (power, cooling, fire suppression).`);
+  return rfis.map((r,i)=>`**RFI #${i+1}:** ${r}`).join('\n\n');
+}
 
-  userContent.push({
-    type: 'text',
-    text: `PROJECT INFORMATION:
-${projInfoText}
+function tpl_qual_letter(ctx){
+  const today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const project = ctx.projectName || '[Project Name]';
+  const gcLine = ctx.gc || '[General Contractor]';
+  const myCompany = ctx.contractor || '[Your Company]';
+  const tradeList = ctx.trades.length ? listTrades(ctx.trades) : 'the MEP systems';
+  const sizeLine = ctx.size > 0 ? `approximately ${fmtNum(ctx.size)} square feet of ${ctx.bldgLabel.toLowerCase()} space` : `the ${ctx.bldgLabel.toLowerCase()} scope`;
+  const romLine = ctx.rom.subtotal > 0 ? ` Our rough order of magnitude pricing for the combined MEP scope falls in the range of **${fmtMoneyRange(ctx.rom.low,ctx.rom.high)}**, pending final takeoff.` : '';
+  return `${today}\n\n**${gcLine}**\nRe: ${project} — MEP Bid Submission\n\nDear Estimating Team,\n\nThank you for the opportunity to submit this bid proposal for **${project}**. ${myCompany} is pleased to provide pricing for ${tradeList} covering ${sizeLine} delivered under a ${ctx.deliveryLabel} arrangement.\n\nThis bid has been prepared based on our review of the plans, specifications, and addenda provided. Our proposal includes the full scope of work as outlined in the attached scope summary and is based on the assumptions and exclusions listed in the companion schedules.${romLine}\n\nWe have identified several alternates for your consideration that may provide value engineering opportunities or upgrade options. Please see the alternates schedule. Additionally, we have prepared a list of clarifications (RFIs) that we recommend be addressed prior to finalizing pricing — see the attached RFI schedule.\n\n${myCompany} brings years of experience delivering commercial MEP projects of this type and scale. Our team is prepared to meet the project schedule, coordinate with all other trades, and execute the work to meet the specified quality and code requirements.\n\nThis bid is valid for 45 days from the bid due date. Pricing is subject to adjustment for any scope modifications, RFI responses that materially change our assumptions, or delays in award beyond the stated validity period.\n\nWe look forward to the opportunity to partner with your team on this project.\n\nRespectfully submitted,\n\n**${myCompany}**\n\n*[Estimator name, title, phone, email]*`;
+}
 
-${priorContext ? `PRIOR SECTIONS ALREADY APPROVED BY THE ESTIMATOR (for consistency):\n${priorContext}\n\n` : ''}TASK: Generate the "${step.title}" section of the bid package following the instructions in the system prompt.`
-  });
-
-  const body = {
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 4096,
-    system: systemPrompt,
-    messages: [{ role: 'user', content: userContent }]
+/* ===================================================================
+   BUILD CONTEXT & RENDER BID SECTIONS
+=================================================================== */
+function buildContext(){
+  const trades = [...state.selectedTrades];
+  const rom = calcROM();
+  const bldg = (document.getElementById('f_bldg_type')||{}).value || 'office';
+  const delivery = (document.getElementById('f_delivery')||{}).value || 'dbb';
+  return {
+    projectName: txtVal('f_project_name'),
+    gc: txtVal('f_gc'),
+    contractor: txtVal('f_contractor'),
+    bidDate: txtVal('f_bid_date'),
+    bldg, bldgLabel: BLDG_LABELS[bldg],
+    size: numVal('f_size'),
+    floors: numVal('f_floors') || 1,
+    deliveryLabel: DELIVERY_LABELS[delivery], delivery,
+    trades, rom,
+    plansUploaded: !!state.plansFile,
+    specsUploaded: !!state.specsFile,
   };
-
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': state.apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (!res.ok) {
-    const errText = await res.text();
-    let parsed;
-    try { parsed = JSON.parse(errText); } catch { parsed = { error: { message: errText } }; }
-    throw new Error(`API error ${res.status}: ${parsed.error?.message || errText}`);
-  }
-
-  const data = await res.json();
-  const textBlocks = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n\n');
-  return textBlocks.trim();
 }
 
-function formatProjectInfo(p){
-  const tradeNames = {
-    hvac:'HVAC / Mechanical', plumbing:'Plumbing', piping:'Hydronic / Process Piping',
-    electrical:'Electrical', lowvoltage:'Low Voltage / Controls', fire:'Fire Protection'
-  };
-  return [
-    `Project Name: ${p.project_name || '—'}`,
-    `Bid Due: ${p.bid_date || '—'}`,
-    `General Contractor: ${p.gc || '—'}`,
-    `Bidding Contractor: ${p.contractor || '—'}`,
-    `Trades Being Bid: ${p.trades.map(t=>tradeNames[t]).join(', ') || '—'}`,
-    `Building Type: ${p.bldg_type || '—'}`,
-    `Approx Size: ${p.size || '—'} SF`,
-    `Project Delivery: ${p.delivery || '—'}`,
-    p.notes ? `Additional Notes: ${p.notes}` : ''
-  ].filter(Boolean).join('\n');
+const BID_SECTIONS = [
+  {id:'summary',    title:'Project Summary',            tpl: tpl_summary},
+  {id:'scope',      title:'Scope of Work',              tpl: tpl_scope},
+  {id:'equipment',  title:'Equipment Schedule',         tpl: tpl_equipment},
+  {id:'assumptions',title:'Assumptions',                tpl: tpl_assumptions},
+  {id:'exclusions', title:'Exclusions',                 tpl: tpl_exclusions},
+  {id:'alternates', title:'Alternates / Value Engineering', tpl: tpl_alternates},
+  {id:'rfis',       title:'RFI List',                   tpl: tpl_rfis},
+  {id:'qual',       title:'Qualification Letter',       tpl: tpl_qual_letter},
+];
+
+function renderBidSections(){
+  const ctx = buildContext();
+  const wrap = document.getElementById('bid-sections');
+  const collapsed = new Set();
+  wrap.querySelectorAll('.bid-section.collapsed').forEach(el=>collapsed.add(el.dataset.sid));
+  const html = BID_SECTIONS.map((s,i)=>{
+    const rawContent = state.edits[s.id] != null ? state.edits[s.id] : s.tpl(ctx);
+    const isEdit = state.currentEdit === s.id;
+    const isCollapsed = collapsed.has(s.id);
+    const body = isEdit
+      ? `<textarea data-edit="${s.id}" oninput="onEditInput('${s.id}',this.value)">${escapeHtml(rawContent)}</textarea>`
+      : mdToHtml(rawContent);
+    return `<div class="bid-section${isCollapsed?' collapsed':''}" data-sid="${s.id}">
+      <div class="bid-section-head" onclick="toggleCollapse('${s.id}', event)">
+        <div class="l"><span class="num">${i+1}</span><h4>${s.title}</h4></div>
+        <div class="r">
+          <button class="edit-btn${isEdit?' editing':''}" onclick="event.stopPropagation();toggleEdit('${s.id}')">${isEdit?'✓ Done':'✎ Edit'}</button>
+          <span class="chev">▼</span>
+        </div>
+      </div>
+      <div class="bid-section-body">${body}</div>
+    </div>`;
+  }).join('');
+  wrap.innerHTML = html;
 }
 
-// ============================================================
-// OUTPUT RENDERING (simple markdown -> HTML)
-// ============================================================
-function renderOutput(md){
-  document.getElementById('gen-output').innerHTML = mdToHtml(md);
-  document.getElementById('gen-output').classList.remove('editing');
+function toggleCollapse(sid, ev){
+  if (ev && ev.target.closest('.edit-btn')) return;
+  const el = document.querySelector(`.bid-section[data-sid="${sid}"]`);
+  if (el) el.classList.toggle('collapsed');
 }
 
-function toggleEdit(){
-  const outEl = document.getElementById('gen-output');
-  const step = STEPS[state.currentStepIdx];
-  if (!state.editing) {
-    // Enter edit mode
-    state.editing = true;
-    const raw = state.results[step.id] || '';
-    outEl.classList.add('editing');
-    outEl.innerHTML = `<textarea id="edit-ta">${escapeHtml(raw)}</textarea>`;
-    document.getElementById('btn-edit').textContent = '✓ Save edits';
-    document.getElementById('btn-regen').disabled = true;
+function toggleEdit(sid){
+  if (state.currentEdit === sid){
+    state.currentEdit = null;
   } else {
-    // Save edits
-    const newVal = document.getElementById('edit-ta').value;
-    state.results[step.id] = newVal;
-    state.editing = false;
-    renderOutput(newVal);
-    document.getElementById('btn-edit').textContent = '✎ Edit';
-    document.getElementById('btn-regen').disabled = false;
-    persist();
+    const ctx = buildContext();
+    if (state.edits[sid] == null){
+      const sec = BID_SECTIONS.find(s=>s.id===sid);
+      state.edits[sid] = sec.tpl(ctx);
+    }
+    state.currentEdit = sid;
   }
+  renderBidSections();
 }
 
-// Minimal markdown → HTML (safe enough for our content)
+function onEditInput(sid, val){ state.edits[sid] = val; }
+
+/* ===================================================================
+   MARKDOWN -> HTML (simple)
+=================================================================== */
 function mdToHtml(md){
-  if (!md) return '<div class="gen-empty">No content yet.</div>';
-  let html = md;
-  // Escape HTML first
+  if (!md) return '<div class="empty">Nothing here yet — fill in the form to populate.</div>';
+  let html = String(md);
   html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  // Code blocks (just wrap in pre for now)
-  html = html.replace(/```[\s\S]*?```/g, m=>`<pre style="background:#000;padding:.75rem;border-radius:.4rem;overflow-x:auto;font-size:.8rem;margin:.5rem 0">${m.replace(/```/g,'')}</pre>`);
-  // Tables (basic)
-  html = html.replace(/(^\|.+\|\n\|[-:\s|]+\|\n(?:\|.+\|\n?)+)/gm, tableMatch=>{
-    const lines = tableMatch.trim().split('\n');
-    const headerCells = lines[0].split('|').slice(1,-1).map(c=>c.trim());
-    const rows = lines.slice(2).map(l=>l.split('|').slice(1,-1).map(c=>c.trim()));
-    return `<table><thead><tr>${headerCells.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  html = html.replace(/(^\|.+\|\n\|[-:\s|]+\|\n(?:\|.+\|\n?)+)/gm, m=>{
+    const lines = m.trim().split('\n');
+    const head = lines[0].split('|').slice(1,-1).map(c=>c.trim());
+    const body = lines.slice(2).map(l=>l.split('|').slice(1,-1).map(c=>c.trim()));
+    return `<table><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
   });
-  // Headers
   html = html.replace(/^### (.+)$/gm,'<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm,'<h2>$1</h2>');
   html = html.replace(/^# (.+)$/gm,'<h1>$1</h1>');
-  // Bold / italic
   html = html.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
   html = html.replace(/(?<!\*)\*(?!\*)([^*\n]+)\*(?!\*)/g,'<em>$1</em>');
-  // Horizontal rules
   html = html.replace(/^---+$/gm,'<hr>');
-  // Lists
   html = html.replace(/((?:^[ \t]*[-*] .+\n?)+)/gm, block=>{
     const items = block.trim().split('\n').map(l=>l.replace(/^[ \t]*[-*] /,''));
     return `<ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
@@ -1106,7 +1542,6 @@ function mdToHtml(md){
     const items = block.trim().split('\n').map(l=>l.replace(/^[ \t]*\d+\. /,''));
     return `<ol>${items.map(i=>`<li>${i}</li>`).join('')}</ol>`;
   });
-  // Paragraphs: wrap remaining non-block text chunks separated by blank lines
   html = html.split(/\n{2,}/).map(chunk=>{
     if (/^<(h\d|ul|ol|table|pre|hr)/.test(chunk.trim())) return chunk;
     if (!chunk.trim()) return '';
@@ -1115,63 +1550,52 @@ function mdToHtml(md){
   return html;
 }
 
-function escapeHtml(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
-
-// ============================================================
-// FINAL REVIEW
-// ============================================================
-function showFinal(){
-  document.getElementById('panel-step').style.display='none';
-  document.getElementById('panel-final').style.display='block';
-  const proj = state.projectInfo.project_name || 'Untitled Project';
-  document.getElementById('final-project-name').textContent = `${proj} · prepared for ${state.projectInfo.gc || '[GC]'}`;
-
-  const sections = STEPS.filter(s=>s.id!=='setup').map(s=>{
-    const content = state.results[s.id];
-    if (!content) return '';
-    return `<div class="final-section"><div class="final-section-head"><h4>${s.title}</h4></div>${mdToHtml(content)}</div>`;
-  }).join('');
-  document.getElementById('final-sections').innerHTML = sections;
-
-  // Fire webhook: tool completed (anonymous event — helps track tool-completion rate)
-  fireWebhook({ event: 'bid_package_complete', project_name: proj });
-
-  // Pre-fill capture form if we have prior userInfo (returning visitor UX)
-  if (state.userInfo) {
-    if (state.userInfo.first_name) document.getElementById('cap_first_name').value = state.userInfo.first_name;
-    if (state.userInfo.last_name) document.getElementById('cap_last_name').value = state.userInfo.last_name;
-    if (state.userInfo.email) document.getElementById('cap_email').value = state.userInfo.email;
-    if (state.userInfo.phone) document.getElementById('cap_phone').value = state.userInfo.phone;
-    if (state.userInfo.business_name) document.getElementById('cap_business').value = state.userInfo.business_name;
+/* ===================================================================
+   LIVE RE-RENDER
+=================================================================== */
+function updateUnitRateDisplays(){
+  const el = document.querySelector('[data-display="hvac_ton_rate"]');
+  if (el){
+    const sys = (document.getElementById('hvac_system')||{}).value || 'rtu';
+    const rate = DEFAULTS.hvac_ton_rate[sys] || DEFAULTS.hvac_ton_rate.rtu;
+    el.textContent = fmtMoney(rate);
   }
-
-  // Wire up the inline capture validation
-  const capFields = ['cap_first_name','cap_last_name','cap_email','cap_phone','cap_business'];
-  capFields.forEach(id=>{
-    const el = document.getElementById(id);
-    if (el && !el._wired) {
-      el.addEventListener('input', validateCapture);
-      el.addEventListener('blur', validateCapture);
-      el._wired = true;
-    }
-  });
-  validateCapture();
-
-  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ============================================================
-// INLINE LEAD CAPTURE VALIDATION
-// ============================================================
+function rerender(){
+  updateUnitRateDisplays();
+  renderROM();
+  renderBidSections();
+}
+
+document.querySelectorAll('.form-pane input, .form-pane select').forEach(el=>{
+  if (el.type === 'file') return;
+  el.addEventListener('input', rerender);
+  el.addEventListener('change', rerender);
+});
+
+/* ===================================================================
+   LEAD CAPTURE
+=================================================================== */
+const capFields = ['cap_first_name','cap_last_name','cap_email','cap_phone','cap_business'];
+if (state.userInfo){
+  capFields.forEach(id=>{
+    const key = id.replace('cap_','');
+    if (state.userInfo[key]) document.getElementById(id).value = state.userInfo[key];
+  });
+}
+capFields.forEach(id=>{
+  document.getElementById(id).addEventListener('input', validateCapture);
+  document.getElementById(id).addEventListener('blur', validateCapture);
+});
+
 function validateCapture(){
   const vals = {
-    first_name: document.getElementById('cap_first_name').value.trim(),
-    last_name: document.getElementById('cap_last_name').value.trim(),
-    email: document.getElementById('cap_email').value.trim(),
-    phone: document.getElementById('cap_phone').value.trim(),
-    business_name: document.getElementById('cap_business').value.trim()
+    first_name: txtVal('cap_first_name'),
+    last_name: txtVal('cap_last_name'),
+    email: txtVal('cap_email'),
+    phone: txtVal('cap_phone'),
+    business_name: txtVal('cap_business')
   };
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vals.email);
   const phoneDigits = vals.phone.replace(/\D/g,'');
@@ -1182,82 +1606,58 @@ function validateCapture(){
   document.getElementById('dl-notice').classList.toggle('hidden', allFilled);
   return allFilled ? vals : null;
 }
+validateCapture();
 
-// Atomic capture: called by each download button BEFORE generating the file.
-// Captures lead, fires webhook, saves to state+localStorage.
-// Returns true if capture succeeded; false otherwise (shouldn't happen since buttons are disabled).
 function captureLeadAtomic(){
   const vals = validateCapture();
   if (!vals) return false;
+  const ctx = buildContext();
   state.userInfo = {
     ...vals,
     lead_source: 'commercial-estimate-builder',
-    lead_magnet: 'Commercial MEP Bid Package Builder',
-    project_name: state.projectInfo.project_name,
-    trades_bid: state.projectInfo.trades.join(','),
-    bldg_type: state.projectInfo.bldg_type,
-    gc_name: state.projectInfo.gc,
+    lead_magnet: 'Commercial MEP Bid Package Builder (Free)',
+    project_name: ctx.projectName,
+    trades_bid: ctx.trades.join(','),
+    bldg_type: ctx.bldgLabel,
+    gc_name: ctx.gc,
+    rom_midpoint: Math.round(ctx.rom.subtotal),
+    rom_low: Math.round(ctx.rom.low),
+    rom_high: Math.round(ctx.rom.high),
     page_url: window.location.href,
     submitted_at: new Date().toISOString()
   };
   persist();
-  // Fire-and-forget webhook (doesn't block download)
   try {
     fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify(state.userInfo)
     }).catch(()=>{});
   } catch(e){}
   return true;
 }
 
-function fireWebhook(payload){
+function fireWebhook(extra){
   try {
     fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
-      method:'POST',headers:{'Content-Type':'application/json'},
+      method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         ...(state.userInfo || {}),
         lead_source:'commercial-estimate-builder',
-        lead_magnet:'Commercial MEP Bid Package Builder',
-        project_name: state.projectInfo.project_name,
-        ...payload,
+        lead_magnet:'Commercial MEP Bid Package Builder (Free)',
+        ...extra,
         at: new Date().toISOString()
       })
     }).catch(()=>{});
   } catch(e){}
 }
 
-// ============================================================
-// DOWNLOADS
-// ============================================================
-function buildBidPackageText(){
-  const proj = state.projectInfo;
-  const tradeNames = {
-    hvac:'HVAC / Mechanical', plumbing:'Plumbing', piping:'Hydronic / Process Piping',
-    electrical:'Electrical', lowvoltage:'Low Voltage / Controls', fire:'Fire Protection'
-  };
-  const header = `BID PACKAGE — ${proj.project_name || 'Untitled Project'}
-Prepared for: ${proj.gc || '—'}
-Submitted by: ${proj.contractor || '—'}
-Bid Due: ${proj.bid_date || '—'}
-Trades: ${proj.trades.map(t=>tradeNames[t]).join(', ')}
-Building Type: ${proj.bldg_type || '—'}   ·   Size: ${proj.size || '—'} SF
-Delivery: ${proj.delivery || '—'}
-
-`;
-  const body = STEPS.filter(s=>s.id!=='setup').map(s=>{
-    const c = state.results[s.id];
-    if (!c) return '';
-    return `\n\n============================================================\n${s.title.toUpperCase()}\n============================================================\n\n${c}`;
-  }).join('');
-  const footer = '\n\n---\nGenerated with LeadWise Connect · https://leadwiseconnect.com';
-  return header + body + footer;
-}
-
+/* ===================================================================
+   DOWNLOADS
+=================================================================== */
 function downloadPDF(){
-  // Atomic lead capture: must succeed before we generate anything
   if (!captureLeadAtomic()) return;
+  fireWebhook({ event: 'pdf_downloaded' });
+  const ctx = buildContext();
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({unit:'pt',format:'letter'});
@@ -1267,8 +1667,6 @@ function downloadPDF(){
   const usable = pageW - 2*margin;
   let y = margin;
 
-  const proj = state.projectInfo;
-
   function addPage(){ doc.addPage(); y = margin; }
   function checkBreak(need){ if (y + need > pageH - margin) addPage(); }
   function addLine(text, opts={}){
@@ -1276,106 +1674,92 @@ function downloadPDF(){
     doc.setFontSize(opts.size || 10);
     doc.setTextColor(opts.color || 30);
     const lines = doc.splitTextToSize(text, opts.width || usable);
-    lines.forEach(l=>{
-      checkBreak((opts.lh || 13));
-      doc.text(l, margin, y);
-      y += (opts.lh || 13);
-    });
+    lines.forEach(l=>{ checkBreak(opts.lh || 13); doc.text(l, margin, y); y += (opts.lh || 13); });
   }
   function addSpace(n){ y += n; }
 
-  // Cover header
   doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor(20);
   doc.text('BID PACKAGE', margin, y); y += 26;
   doc.setFont('helvetica','bold');doc.setFontSize(15);doc.setTextColor(50);
-  doc.text(proj.project_name || 'Untitled Project', margin, y); y += 20;
+  doc.text(ctx.projectName || 'Untitled Project', margin, y); y += 20;
   doc.setDrawColor(232,160,32);doc.setLineWidth(2);
   doc.line(margin, y, margin+180, y); y += 18;
   doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(60);
-  const tradeNames = {hvac:'HVAC / Mechanical',plumbing:'Plumbing',piping:'Hydronic / Process Piping',electrical:'Electrical',lowvoltage:'Low Voltage / Controls',fire:'Fire Protection'};
   [
-    `Prepared for: ${proj.gc || '—'}`,
-    `Submitted by: ${proj.contractor || '—'}`,
-    `Bid Due: ${proj.bid_date || '—'}`,
-    `Trades: ${proj.trades.map(t=>tradeNames[t]).join(', ') || '—'}`,
-    `Building Type: ${proj.bldg_type || '—'}  ·  Size: ${proj.size || '—'} SF`,
-    `Delivery: ${proj.delivery || '—'}`
-  ].forEach(l=>{ doc.text(l, margin, y); y += 14; });
-  y += 10;
+    `Prepared for: ${ctx.gc || '—'}`,
+    `Submitted by: ${ctx.contractor || '—'}`,
+    ctx.bidDate ? `Bid Due: ${ctx.bidDate}` : null,
+    `Trades: ${ctx.trades.map(t=>TRADE_LABELS[t]).join(', ') || '—'}`,
+    `Building Type: ${ctx.bldgLabel}  ·  Size: ${ctx.size>0?fmtNum(ctx.size)+' SF':'—'}`,
+    `Delivery: ${ctx.deliveryLabel}`,
+    ctx.rom.subtotal>0 ? `Rough Order of Magnitude: ${fmtMoneyRange(ctx.rom.low, ctx.rom.high)}` : null,
+  ].filter(Boolean).forEach(l=>{ doc.text(l, margin, y); y += 14; });
+  y += 12;
 
-  // Sections
-  STEPS.filter(s=>s.id!=='setup').forEach(s=>{
-    const content = state.results[s.id];
-    if (!content) return;
+  BID_SECTIONS.forEach(s=>{
+    const content = state.edits[s.id] != null ? state.edits[s.id] : s.tpl(ctx);
+    if (!content || content.trim().startsWith('*Select') || content.trim().startsWith('*Enter')) return;
     checkBreak(60);
-    // Section header
     doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(184,120,24);
     doc.text(s.title.toUpperCase(), margin, y); y += 6;
     doc.setDrawColor(232,160,32);doc.setLineWidth(.8);
     doc.line(margin, y, pageW - margin, y); y += 16;
-    // Strip markdown crudely for PDF
     const clean = content
       .replace(/^#+\s+/gm,'')
       .replace(/\*\*(.+?)\*\*/g,'$1')
       .replace(/\*(.+?)\*/g,'$1')
       .replace(/^[-*]\s+/gm,'• ')
-      .replace(/^\d+\.\s+/gm,(m)=>m)
-      .replace(/^\|.*\|$/gm,(m)=>m.replace(/\|/g,'  '));
+      .replace(/^\|.*\|$/gm, m=>m.replace(/\|/g,'  '));
     addLine(clean,{size:10,lh:13});
     addSpace(16);
   });
 
-  // Footer on every page (subtle attribution, not a watermark)
   const totalPages = doc.internal.getNumberOfPages();
   for (let i=1; i<=totalPages; i++) {
     doc.setPage(i);
     doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(140);
-    doc.text(`${proj.project_name || 'Bid Package'}  ·  Page ${i} of ${totalPages}`, margin, pageH - 24);
+    doc.text(`${ctx.projectName || 'Bid Package'}  ·  Page ${i} of ${totalPages}`, margin, pageH - 24);
     doc.setTextColor(184,120,24);
     doc.text('Made with LeadWise · leadwiseconnect.com', pageW - margin, pageH - 24, {align:'right'});
   }
 
-  const filename = `Bid-Package-${(proj.project_name||'project').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.pdf`;
+  const filename = `Bid-Package-${(ctx.projectName||'project').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.pdf`;
   doc.save(filename);
-  fireWebhook({ event: 'pdf_downloaded' });
 }
 
 function downloadWord(){
-  // Atomic lead capture: must succeed before we generate anything
   if (!captureLeadAtomic()) return;
-
-  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = window.docx;
-  const proj = state.projectInfo;
-  const tradeNames = {hvac:'HVAC / Mechanical',plumbing:'Plumbing',piping:'Hydronic / Process Piping',electrical:'Electrical',lowvoltage:'Low Voltage / Controls',fire:'Fire Protection'};
+  fireWebhook({ event: 'word_downloaded' });
+  const ctx = buildContext();
+  const { Document, Packer, Paragraph, HeadingLevel, AlignmentType } = window.docx;
 
   const children = [];
   children.push(new Paragraph({text:'BID PACKAGE', heading: HeadingLevel.TITLE}));
-  children.push(new Paragraph({text: proj.project_name || 'Untitled Project', heading: HeadingLevel.HEADING_1}));
+  children.push(new Paragraph({text: ctx.projectName || 'Untitled Project', heading: HeadingLevel.HEADING_1}));
   children.push(new Paragraph({text:''}));
   [
-    `Prepared for: ${proj.gc || '—'}`,
-    `Submitted by: ${proj.contractor || '—'}`,
-    `Bid Due: ${proj.bid_date || '—'}`,
-    `Trades: ${proj.trades.map(t=>tradeNames[t]).join(', ') || '—'}`,
-    `Building Type: ${proj.bldg_type || '—'}`,
-    `Size: ${proj.size || '—'} SF`,
-    `Delivery: ${proj.delivery || '—'}`,
-  ].forEach(l=>children.push(new Paragraph({text:l})));
+    `Prepared for: ${ctx.gc || '—'}`,
+    `Submitted by: ${ctx.contractor || '—'}`,
+    ctx.bidDate ? `Bid Due: ${ctx.bidDate}` : null,
+    `Trades: ${ctx.trades.map(t=>TRADE_LABELS[t]).join(', ') || '—'}`,
+    `Building Type: ${ctx.bldgLabel}`,
+    `Size: ${ctx.size>0?fmtNum(ctx.size)+' SF':'—'}`,
+    `Delivery: ${ctx.deliveryLabel}`,
+    ctx.rom.subtotal>0 ? `Rough Order of Magnitude: ${fmtMoneyRange(ctx.rom.low, ctx.rom.high)}` : null
+  ].filter(Boolean).forEach(l=>children.push(new Paragraph({text:l})));
   children.push(new Paragraph({text:''}));
 
-  STEPS.filter(s=>s.id!=='setup').forEach(s=>{
-    const content = state.results[s.id];
-    if (!content) return;
+  BID_SECTIONS.forEach(s=>{
+    const content = state.edits[s.id] != null ? state.edits[s.id] : s.tpl(ctx);
+    if (!content || content.trim().startsWith('*Select') || content.trim().startsWith('*Enter')) return;
     children.push(new Paragraph({text: s.title.toUpperCase(), heading: HeadingLevel.HEADING_1, spacing:{before:400,after:200}}));
-    // Very simple line-by-line conversion
     content.split('\n').forEach(line=>{
-      if (/^#### /.test(line)) children.push(new Paragraph({text: line.replace(/^#### /,''), heading: HeadingLevel.HEADING_4}));
-      else if (/^### /.test(line)) children.push(new Paragraph({text: line.replace(/^### /,''), heading: HeadingLevel.HEADING_3}));
+      if (/^### /.test(line)) children.push(new Paragraph({text: line.replace(/^### /,''), heading: HeadingLevel.HEADING_3}));
       else if (/^## /.test(line)) children.push(new Paragraph({text: line.replace(/^## /,''), heading: HeadingLevel.HEADING_2}));
       else if (/^# /.test(line)) children.push(new Paragraph({text: line.replace(/^# /,''), heading: HeadingLevel.HEADING_2}));
       else if (/^[-*] /.test(line)) children.push(new Paragraph({text: line.replace(/^[-*] /,'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1'), bullet:{level:0}}));
       else if (/^\d+\.\s/.test(line)) children.push(new Paragraph({text: line.replace(/^\d+\.\s/,'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1'), numbering:{reference:'bid-numbering',level:0}}));
-      else if (/^\|/.test(line)) {/* skip table pipe lines for now, content still there as text */}
+      else if (/^\|/.test(line)) {/* skip pipe table lines */}
       else {
         const clean = line.replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1');
         children.push(new Paragraph({text: clean}));
@@ -1385,7 +1769,7 @@ function downloadWord(){
 
   const doc = new Document({
     creator:'LeadWise Connect',
-    title: proj.project_name || 'Bid Package',
+    title: ctx.projectName || 'Bid Package',
     sections:[{children}],
     numbering:{config:[{reference:'bid-numbering',levels:[{level:0,format:'decimal',text:'%1.',alignment:AlignmentType.START}]}]}
   });
@@ -1394,38 +1778,16 @@ function downloadWord(){
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Bid-Package-${(proj.project_name||'project').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.docx`;
+    a.download = `Bid-Package-${(ctx.projectName||'project').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.docx`;
     a.click();
     setTimeout(()=>URL.revokeObjectURL(url), 1000);
   });
-  fireWebhook({ event: 'word_downloaded' });
 }
 
-function startOver(){
-  if (!confirm('Start over? This will clear your current bid package (your API key and contact info are kept).')) return;
-  state.results = {};
-  state.projectInfo = {project_name:'',bid_date:'',gc:'',contractor:'',trades:[],bldg_type:'',size:'',delivery:'',notes:''};
-  state.currentStepIdx = 0;
-  localStorage.removeItem('lwc_commercial_session');
-  location.reload();
-}
-
-// Restore UI state on load
-window.addEventListener('load', ()=>{
-  // Restore project info text fields
-  if (state.projectInfo.project_name) document.getElementById('f_project_name').value = state.projectInfo.project_name;
-  if (state.projectInfo.bid_date) document.getElementById('f_bid_date').value = state.projectInfo.bid_date;
-  if (state.projectInfo.gc) document.getElementById('f_gc').value = state.projectInfo.gc;
-  if (state.projectInfo.contractor) document.getElementById('f_contractor').value = state.projectInfo.contractor;
-  if (state.projectInfo.bldg_type) document.getElementById('f_bldg_type').value = state.projectInfo.bldg_type;
-  if (state.projectInfo.size) document.getElementById('f_size').value = state.projectInfo.size;
-  if (state.projectInfo.delivery) document.getElementById('f_delivery').value = state.projectInfo.delivery;
-  if (state.projectInfo.notes) document.getElementById('f_notes').value = state.projectInfo.notes;
-  state.projectInfo.trades.forEach(t=>{
-    const el = document.querySelector(`.trade-check[data-trade="${t}"]`);
-    if (el) el.classList.add('sel');
-  });
-});
+/* ===================================================================
+   INIT
+=================================================================== */
+rerender();
 </script>
 
 </body>
