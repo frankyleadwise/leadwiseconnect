@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Commercial MEP Bid Package Builder — AI Scope, Assumptions & Exclusions | LeadWise Connect</title>
+<meta name="description" content="Upload your plans and specs. AI reads them and builds a professional bid package — scope of work, equipment schedule, assumptions, exclusions, alternates, RFIs, and qualification letter. Free for commercial MEP contractors."/>
+<meta property="og:title" content="Commercial MEP Bid Package Builder | LeadWise Connect"/>
+<meta property="og:description" content="Upload plans. AI builds your scope, assumptions, exclusions, and qualification letter in minutes."/>
+<meta property="og:url" content="https://leadwiseconnect.com/tools/commercial-estimate-builder.html"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://leadwiseconnect.com/tools/commercial-estimate-builder.html"/>
+<link rel="icon" type="image/png" href="../favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#E8A020;--gold-light:#F5C060;--gold-dark:#B87818;
+  --black:#080808;--surface:#111111;--surface2:#1A1A1A;
+  --border:rgba(255,255,255,0.07);--border-gold:rgba(232,160,32,0.25);
+  --text:#F5F5F0;--text2:#9A9890;--text3:#5A5856;
+  --ok:#6FCF97;--ok-bg:rgba(111,207,151,.08);
+  --err:#F87171;--err-bg:rgba(248,113,113,.08);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:2px}
+.serif{font-family:'DM Serif Display',serif}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:1.25rem;left:50%;transform:translateX(-50%);z-index:100;width:min(860px,calc(100vw - 2rem));transition:all .5s cubic-bezier(.22,1,.36,1)}
+nav.scrolled{width:min(680px,calc(100vw - 2rem))}
+.nav-inner{background:rgba(8,8,8,.6);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:9999px;padding:.6rem .75rem .6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .5s cubic-bezier(.22,1,.36,1)}
+nav.scrolled .nav-inner{background:rgba(8,8,8,.92);box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.nav-logo{display:flex;align-items:center;gap:.4rem;font-weight:700;font-size:1rem;letter-spacing:-.02em;color:var(--text)}
+.nav-logo .gold{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-links a{color:rgba(245,245,240,.65);font-size:.8rem;font-weight:500;padding:.4rem .65rem;border-radius:9999px;transition:all .3s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.btn-nav{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold);color:#080808;font-weight:600;font-size:.8rem;padding:.5rem 1rem;border-radius:9999px;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif;white-space:nowrap;line-height:1}
+.btn-nav:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,160,32,.3)}
+.hamburger{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:50%;width:2.25rem;height:2.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;padding:.55rem}
+.hamburger span{display:block;width:14px;height:1.5px;background:var(--text);transition:all .4s cubic-bezier(.22,1,.36,1);transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+.menu-overlay{position:fixed;inset:0;z-index:99;background:rgba(8,8,8,.97);backdrop-filter:blur(24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.22,1,.36,1)}
+.menu-overlay.open{opacity:1;pointer-events:all}
+.menu-overlay a{font-size:clamp(2rem,8vw,3.5rem);font-weight:700;letter-spacing:-.03em;opacity:0;transform:translateY(24px);transition:all .5s cubic-bezier(.22,1,.36,1)}
+.menu-overlay.open a{opacity:1;transform:translateY(0)}
+.menu-overlay a.gold{color:var(--gold)}
+
+/* BUTTONS */
+.btn-gold{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--gold);color:#080808;font-weight:600;font-size:1rem;padding:.95rem 1.85rem;border-radius:9999px;border:none;cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);font-family:'Outfit',sans-serif}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 12px 32px rgba(232,160,32,.3)}
+.btn-gold:active{transform:scale(.98)}
+.btn-gold:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text);font-weight:500;font-size:.9rem;padding:.7rem 1.4rem;border-radius:9999px;border:1px solid var(--border);cursor:pointer;transition:all .3s;font-family:'Outfit',sans-serif}
+.btn-ghost:hover{border-color:var(--border-gold);color:var(--gold-light)}
+.btn-ghost:disabled{opacity:.4;cursor:not-allowed}
+.btn-sm{padding:.55rem 1.1rem;font-size:.85rem}
+.icon-wrap{width:1.75rem;height:1.75rem;border-radius:50%;background:rgba(0,0,0,.15);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+
+/* LAYOUT */
+.container{max-width:1280px;margin:0 auto}
+.container-narrow{max-width:980px;margin:0 auto}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+
+/* HERO */
+.tool-hero{padding:9rem 2rem 2.5rem;text-align:center;background:radial-gradient(ellipse at top,rgba(232,160,32,.06),transparent 60%)}
+.tool-hero h1{font-size:clamp(2.25rem,5vw,3.75rem);line-height:1.02;letter-spacing:-.02em;max-width:920px;margin:0 auto 1.5rem;color:var(--text)}
+.tool-hero h1 .accent{color:var(--gold);font-style:italic;font-family:'DM Serif Display',serif}
+.tool-hero p.lead{color:var(--text2);font-size:1.1rem;max-width:680px;margin:0 auto 1.75rem;line-height:1.7}
+.hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem}
+.hero-pill{font-size:.78rem;color:var(--text2);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:.4rem .95rem;border-radius:9999px;display:inline-flex;align-items:center;gap:.4rem}
+.hero-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+/* STEPPER */
+.stepper-wrap{padding:1.5rem 2rem 0}
+.stepper{max-width:980px;margin:0 auto;display:flex;gap:.35rem;align-items:center;overflow-x:auto;padding:.5rem .25rem;scrollbar-width:none}
+.stepper::-webkit-scrollbar{display:none}
+.step-pill{flex-shrink:0;display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .85rem;border-radius:9999px;font-size:.75rem;font-weight:500;color:var(--text3);background:transparent;border:1px solid transparent;transition:all .3s;cursor:default;white-space:nowrap}
+.step-pill .num{width:1.2rem;height:1.2rem;border-radius:50%;background:rgba(255,255,255,.05);display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700}
+.step-pill.active{color:var(--gold);background:rgba(232,160,32,.08);border-color:var(--border-gold)}
+.step-pill.active .num{background:var(--gold);color:#080808}
+.step-pill.done{color:var(--ok);background:var(--ok-bg);border-color:rgba(111,207,151,.2)}
+.step-pill.done .num{background:var(--ok);color:#080808}
+
+/* MAIN PANEL */
+.panel-wrap{padding:2rem 2rem 5rem}
+.panel{max-width:980px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:1.5rem;overflow:hidden}
+.panel-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);background:rgba(232,160,32,.02);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.panel-head h2{font-size:1.25rem;font-weight:700;color:var(--text);line-height:1.2}
+.panel-head .sub{font-size:.82rem;color:var(--text2);margin-top:.2rem}
+.panel-head .step-badge{display:inline-block;background:rgba(232,160,32,.1);color:var(--gold);font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;border-radius:9999px;margin-bottom:.5rem}
+.panel-body{padding:2rem}
+
+/* UPLOAD DROPZONE */
+.dropzone{border:2px dashed rgba(232,160,32,.25);background:rgba(232,160,32,.02);border-radius:1rem;padding:2.5rem 2rem;text-align:center;cursor:pointer;transition:all .3s}
+.dropzone:hover,.dropzone.dragover{border-color:var(--gold);background:rgba(232,160,32,.05)}
+.dropzone-icon{width:3rem;height:3rem;border-radius:50%;background:rgba(232,160,32,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.2rem}
+.dropzone h3{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.dropzone p{font-size:.82rem;color:var(--text2);line-height:1.6}
+.dropzone .ul-label{color:var(--gold);font-weight:500}
+.dropzone input{display:none}
+.file-chip{display:inline-flex;align-items:center;gap:.6rem;background:rgba(232,160,32,.06);border:1px solid var(--border-gold);border-radius:.6rem;padding:.55rem .85rem;margin-top:.85rem;font-size:.82rem;color:var(--text)}
+.file-chip .x{background:rgba(255,255,255,.06);border:none;color:var(--text3);width:1.1rem;height:1.1rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:.7rem;line-height:1;transition:all .2s}
+.file-chip .x:hover{background:rgba(255,107,107,.15);color:#ff6b6b}
+.file-sep{height:1px;background:var(--border);margin:1.25rem 0}
+
+/* FORM */
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.75rem;font-weight:500;color:var(--text2);margin-bottom:.4rem;letter-spacing:.02em}
+.fg input,.fg select,.fg textarea{background:var(--surface2);border:1px solid var(--border);border-radius:.65rem;color:var(--text);padding:.75rem 1rem;outline:none;font-family:'Outfit',sans-serif;font-size:.9rem;width:100%;transition:border-color .3s}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text3)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--border-gold);box-shadow:0 0 0 3px rgba(232,160,32,.08)}
+.fg select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239A9890' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.fg select option{background:#1A1A1A}
+.fg textarea{resize:vertical;min-height:88px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+
+/* TRADE CHECKS */
+.trade-checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem}
+.trade-check{background:var(--surface2);border:1px solid var(--border);border-radius:.65rem;padding:.75rem 1rem;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:.55rem;font-size:.88rem;color:var(--text2);user-select:none}
+.trade-check:hover{border-color:rgba(232,160,32,.2)}
+.trade-check.sel{background:rgba(232,160,32,.06);border-color:var(--border-gold);color:var(--text)}
+.trade-check .chk{width:1.1rem;height:1.1rem;border-radius:.3rem;border:1.5px solid var(--text3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem;font-weight:700;background:transparent;transition:all .25s}
+.trade-check.sel .chk{background:var(--gold);border-color:var(--gold);color:#080808}
+
+/* GENERATION OUTPUT */
+.gen-output{background:var(--surface2);border:1px solid var(--border);border-radius:1rem;padding:1.5rem 1.75rem;min-height:200px;font-size:.95rem;line-height:1.75;color:var(--text);position:relative;white-space:pre-wrap;font-family:'Outfit',sans-serif}
+.gen-output.editing{background:#0D0D0D;border-color:var(--border-gold)}
+.gen-output textarea{background:transparent;border:none;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;line-height:1.75;width:100%;min-height:400px;resize:vertical;outline:none;padding:0;white-space:pre-wrap}
+.gen-output h1,.gen-output h2,.gen-output h3{color:var(--gold);font-weight:700;margin:1.25rem 0 .5rem;letter-spacing:-.01em}
+.gen-output h1{font-size:1.2rem}
+.gen-output h2{font-size:1.05rem}
+.gen-output h3{font-size:.95rem}
+.gen-output ul,.gen-output ol{padding-left:1.5rem;margin:.5rem 0}
+.gen-output li{margin-bottom:.35rem;color:var(--text)}
+.gen-output strong{color:var(--gold-light);font-weight:600}
+.gen-output p{margin-bottom:.75rem}
+.gen-output hr{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+.gen-output table{width:100%;border-collapse:collapse;margin:.75rem 0;font-size:.87rem}
+.gen-output th{text-align:left;padding:.55rem .7rem;border-bottom:1.5px solid var(--border-gold);color:var(--gold);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.gen-output td{padding:.55rem .7rem;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+
+.gen-empty{color:var(--text3);font-style:italic;text-align:center;padding:2rem 1rem}
+.gen-loading{display:flex;align-items:center;gap:.65rem;color:var(--gold-light);font-size:.88rem;padding:1rem 0}
+.gen-loading .dot1,.gen-loading .dot2,.gen-loading .dot3{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse-gold 1.4s infinite ease-in-out both}
+.gen-loading .dot2{animation-delay:.2s}
+.gen-loading .dot3{animation-delay:.4s}
+@keyframes pulse-gold{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+.action-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;justify-content:space-between;align-items:center}
+.action-row-left{display:flex;gap:.6rem;flex-wrap:wrap}
+.action-row-right{display:flex;gap:.6rem;flex-wrap:wrap}
+
+/* HELPER / INFO STYLE */
+.info-box{background:rgba(232,160,32,.04);border:1px solid rgba(232,160,32,.12);border-radius:.8rem;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;gap:.8rem;align-items:flex-start}
+.info-box .ic{color:var(--gold);font-size:1rem;margin-top:.1rem;flex-shrink:0}
+.info-box p{font-size:.82rem;color:var(--text2);line-height:1.6}
+.info-box p strong{color:var(--text)}
+
+.error-box{background:var(--err-bg);border:1px solid rgba(248,113,113,.3);border-radius:.7rem;padding:.85rem 1.1rem;color:var(--err);font-size:.85rem;margin-top:1rem;display:flex;gap:.6rem;align-items:flex-start}
+
+/* HOW IT WORKS */
+.hiw-sec{padding:5rem 2rem;border-top:1px solid var(--border)}
+.hiw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem}
+.hiw-card{background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;padding:1.5rem}
+.hiw-num{width:1.9rem;height:1.9rem;border-radius:50%;background:rgba(232,160,32,.1);border:1px solid var(--border-gold);color:var(--gold);font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;margin-bottom:.85rem}
+.hiw-card h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.45rem;line-height:1.25}
+.hiw-card p{color:var(--text2);font-size:.83rem;line-height:1.6}
+
+/* UPGRADE */
+.upgrade-sec{padding:5rem 2rem;background:radial-gradient(ellipse at center,rgba(232,160,32,.05),transparent 70%)}
+.upgrade-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.upgrade-text h2{font-size:clamp(1.75rem,3.5vw,2.75rem);line-height:1.05;color:var(--text);margin-bottom:1.25rem;letter-spacing:-.02em}
+.upgrade-text h2 .accent{color:var(--gold);font-style:italic;font-family:'DM Serif Display',serif}
+.upgrade-text p{color:var(--text2);font-size:1rem;line-height:1.7;margin-bottom:1.5rem}
+.upgrade-checks{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.upgrade-check{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:var(--text)}
+.upgrade-check .ch{color:var(--gold);font-weight:700;flex-shrink:0;width:1.1rem;height:1.1rem;display:inline-flex;align-items:center;justify-content:center;background:rgba(232,160,32,.1);border-radius:50%;font-size:.7rem;margin-top:.15rem}
+.upgrade-card{background:var(--surface);border:1px solid var(--border-gold);border-radius:1.5rem;padding:2.25rem;position:relative;overflow:hidden}
+.upgrade-card::before{content:'';position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(232,160,32,.15),transparent 70%);pointer-events:none}
+.upgrade-card .badge{display:inline-block;background:rgba(232,160,32,.12);color:var(--gold);font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.35rem .8rem;border-radius:9999px;margin-bottom:1rem}
+.upgrade-card h3{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.75rem;line-height:1.15}
+.upgrade-card p{color:var(--text2);font-size:.92rem;line-height:1.65;margin-bottom:1.5rem}
+.upgrade-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.75rem;font-size:.88rem;color:var(--text)}
+.upgrade-list li{display:flex;align-items:flex-start;gap:.6rem;list-style:none}
+.upgrade-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:.55rem;flex-shrink:0}
+
+/* API KEY PROMPT */
+.api-key-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:.85rem;padding:1rem 1.25rem;margin-bottom:1.5rem;display:none}
+.api-key-wrap.shown{display:block}
+.api-key-wrap h4{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
+.api-key-wrap p{font-size:.78rem;color:var(--text2);line-height:1.55;margin-bottom:.75rem}
+.api-key-wrap .api-input-row{display:flex;gap:.5rem}
+.api-key-wrap input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:.55rem;color:var(--text);padding:.6rem .85rem;font-family:'Outfit',sans-serif;font-size:.82rem;outline:none;font-variant-ligatures:none}
+.api-key-wrap input:focus{border-color:var(--border-gold)}
+.api-key-wrap button{background:var(--gold);color:#080808;border:none;border-radius:.55rem;padding:.6rem 1rem;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer}
+
+/* DOWNLOAD GATE */
+.dl-gate{background:linear-gradient(135deg,rgba(232,160,32,.08),rgba(232,160,32,.02));border:1px solid var(--border-gold);border-radius:1rem;padding:1.75rem;margin-top:1.5rem}
+.dl-gate h3{font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.dl-gate p{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:1.25rem}
+.dl-gate .gate-form{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem}
+.dl-gate .gate-form .full{grid-column:1/-1}
+.dl-gate .btn-gold{width:100%}
+.dl-gate.unlocked{background:rgba(111,207,151,.05);border-color:rgba(111,207,151,.25)}
+
+/* WATERMARK ON PREVIEW */
+.watermark-tag{display:inline-block;background:rgba(232,160,32,.08);color:var(--gold);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .55rem;border-radius:9999px;margin-left:.5rem;vertical-align:middle}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.06)}
+.footer-cta-band{background:rgba(232,160,32,.06);border-bottom:1px solid rgba(232,160,32,.12);padding:4rem 2rem}
+.footer-cta-inner{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem}
+.footer-cta-inner h3{font-size:clamp(1.75rem,3vw,2.5rem);color:var(--text);line-height:1.1}
+.footer-body{max-width:1280px;margin:0 auto;padding:4rem 2rem 2rem}
+.footer-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3rem;margin-bottom:3rem}
+.footer-col-label{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;display:block}
+.footer-col-links{display:flex;flex-direction:column;gap:.6rem}
+.footer-col-links a{color:var(--text2);font-size:.875rem;transition:color .2s}
+.footer-col-links a:hover{color:var(--gold)}
+.footer-brand-desc{color:var(--text3);font-size:.875rem;line-height:1.7;max-width:220px;margin-top:1rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.footer-bottom p,.footer-bottom a{color:#3A3836;font-size:.8rem}
+.footer-bottom-links{display:flex;gap:1.5rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hiw-grid{grid-template-columns:1fr 1fr}
+  .upgrade-grid{grid-template-columns:1fr}
+  .nav-links,.btn-nav-desktop{display:none!important}
+  .tool-hero{padding:7rem 1.25rem 2rem}
+  .panel-wrap{padding:1.5rem 1.25rem 4rem}
+  .panel-head,.panel-body{padding:1.25rem 1.5rem}
+  .hiw-sec,.upgrade-sec{padding:4rem 1.25rem}
+  .stepper-wrap{padding:1rem 1.25rem 0}
+  .footer-cta-band,.footer-body{padding-left:1.25rem;padding-right:1.25rem}
+  .row2,.row3{grid-template-columns:1fr}
+  .dl-gate .gate-form{grid-template-columns:1fr}
+}
+@media(max-width:600px){nav{top:.75rem}.hiw-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>
+      LEADWISE<span class="gold">.</span>
+    </a>
+    <div class="nav-links">
+      <a href="../services.html">Services</a>
+      <a href="../hvac-marketing.html">HVAC</a>
+      <a href="../results.html">Results</a>
+      <a href="../about.html">About</a>
+      <a href="../blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <a href="../contact.html" class="btn-nav btn-nav-desktop">Get Free Audit <span style="font-size:.75rem">↗</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="menu-overlay" id="mobile-menu">
+  <a href="../services.html" onclick="closeMenu()">Services</a>
+  <a href="../hvac-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">HVAC</a>
+  <a href="../plumber-marketing.html" onclick="closeMenu()" style="font-size:clamp(1.25rem,4vw,2rem)!important;opacity:.7">Plumbing</a>
+  <a href="../results.html" onclick="closeMenu()">Results</a>
+  <a href="../about.html" onclick="closeMenu()">About</a>
+  <a href="../blog.html" onclick="closeMenu()">Blog</a>
+  <a href="../contact.html" class="gold" onclick="closeMenu()">Get Free Audit →</a>
+</div>
+
+<!-- HERO -->
+<section class="tool-hero">
+  <span class="eyebrow">Free · Beta · For Commercial MEP Contractors</span>
+  <h1>Upload the plans. AI writes<br>your <span class="accent">bid package.</span></h1>
+  <p class="lead">Drop in your mechanical, plumbing, or electrical plans and specs. In minutes you get a reviewable draft: scope of work, equipment schedule, assumptions, exclusions, alternates, RFI list, and a qualification letter. You review each section, edit what you want, download the finished Word doc.</p>
+  <div class="hero-pills">
+    <span class="hero-pill"><span class="dot"></span>Plans &amp; specs PDF</span>
+    <span class="hero-pill"><span class="dot"></span>Review step-by-step</span>
+    <span class="hero-pill"><span class="dot"></span>Edit before download</span>
+    <span class="hero-pill"><span class="dot"></span>Word &amp; PDF export</span>
+  </div>
+</section>
+
+<!-- STEPPER -->
+<div class="stepper-wrap">
+  <div class="stepper" id="stepper"></div>
+</div>
+
+<!-- PANELS -->
+<div class="panel-wrap">
+
+  <!-- STEP 0: Project Setup -->
+  <div class="panel" id="panel-setup">
+    <div class="panel-head">
+      <div>
+        <span class="step-badge">Step 1 of 9</span>
+        <h2>Project setup</h2>
+        <div class="sub">Upload your plans and specs, then tell us a bit about the project.</div>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="api-key-wrap" id="api-key-wrap">
+        <h4>🔑 Claude API key</h4>
+        <p>This tool runs on your own Anthropic API key so your plans never touch our servers — they go directly from your browser to Anthropic. Paste your API key once (stored locally in your browser). Don't have one? <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--gold);text-decoration:underline">Get one here</a> — first $5 is free.</p>
+        <div class="api-input-row">
+          <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false"/>
+          <button onclick="saveApiKey()">Save</button>
+        </div>
+        <p style="margin-top:.75rem;font-size:.72rem;color:var(--text3)">Your key is saved in localStorage on this device only. We never see it.</p>
+      </div>
+
+      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:1rem">1. Upload project documents</h3>
+      <div class="info-box">
+        <div class="ic">ℹ️</div>
+        <p><strong>Best results:</strong> upload the mechanical drawings (M-series), plumbing (P-series), or electrical (E-series) plan sheets as one PDF, and the relevant spec sections (Division 22, 23, or 26) as a second PDF. Under 32MB and 100 pages per file. Title sheet and cover help too.</p>
+      </div>
+
+      <label class="dropzone" id="plans-drop" for="plans-file">
+        <div class="dropzone-icon">📐</div>
+        <h3>Upload plan sheets <span style="color:var(--gold)">*</span></h3>
+        <p>Click to browse or drag &amp; drop a PDF — <span class="ul-label">mechanical, plumbing, or electrical drawings</span></p>
+        <input type="file" id="plans-file" accept="application/pdf"/>
+        <div id="plans-chip-wrap"></div>
+      </label>
+
+      <div class="file-sep"></div>
+
+      <label class="dropzone" id="specs-drop" for="specs-file">
+        <div class="dropzone-icon">📄</div>
+        <h3>Upload specifications <span style="color:var(--text3);font-weight:400;font-size:.8rem">(optional but recommended)</span></h3>
+        <p>Click to browse or drag &amp; drop — <span class="ul-label">Division 22 / 23 / 26 spec sections</span></p>
+        <input type="file" id="specs-file" accept="application/pdf"/>
+        <div id="specs-chip-wrap"></div>
+      </label>
+
+      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin:2.25rem 0 1rem">2. Project info</h3>
+      <div class="row2">
+        <div class="fg"><label>Project name</label><input type="text" id="f_project_name" placeholder="e.g. Medical Office Building — Brandon"/></div>
+        <div class="fg"><label>Bid due date</label><input type="text" id="f_bid_date" placeholder="May 15, 2026"/></div>
+      </div>
+      <div class="row2">
+        <div class="fg"><label>General Contractor</label><input type="text" id="f_gc" placeholder="e.g. Skanska USA"/></div>
+        <div class="fg"><label>Your company name</label><input type="text" id="f_contractor" placeholder="Your MEP company name"/></div>
+      </div>
+
+      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin:1.75rem 0 1rem">3. Trades you're bidding</h3>
+      <div class="trade-checks" id="trade-checks">
+        <div class="trade-check" data-trade="hvac"><span class="chk"></span>HVAC / Mechanical</div>
+        <div class="trade-check" data-trade="plumbing"><span class="chk"></span>Plumbing</div>
+        <div class="trade-check" data-trade="piping"><span class="chk"></span>Hydronic / Process Piping</div>
+        <div class="trade-check" data-trade="electrical"><span class="chk"></span>Electrical</div>
+        <div class="trade-check" data-trade="lowvoltage"><span class="chk"></span>Low Voltage / Controls</div>
+        <div class="trade-check" data-trade="fire"><span class="chk"></span>Fire Protection</div>
+      </div>
+
+      <h3 style="font-size:.95rem;font-weight:600;color:var(--text);margin:1.75rem 0 1rem">4. Project type</h3>
+      <div class="fg"><label>Building / occupancy type</label>
+        <select id="f_bldg_type">
+          <option value="">— Select —</option>
+          <option>Medical Office / Outpatient</option>
+          <option>Hospital / Acute Care</option>
+          <option>K-12 School</option>
+          <option>Higher Education</option>
+          <option>Office / Class A</option>
+          <option>Retail / Big-Box</option>
+          <option>Restaurant / Food Service</option>
+          <option>Industrial / Warehouse</option>
+          <option>Manufacturing / Clean Room</option>
+          <option>Multi-Family Residential</option>
+          <option>Hospitality / Hotel</option>
+          <option>Data Center</option>
+          <option>Religious / Assembly</option>
+          <option>Government / Municipal</option>
+          <option>Tenant Improvement</option>
+          <option>Other (AI will infer from plans)</option>
+        </select>
+      </div>
+      <div class="row2">
+        <div class="fg"><label>Approximate size (SF)</label><input type="text" id="f_size" placeholder="e.g. 42,000"/></div>
+        <div class="fg"><label>Project delivery</label>
+          <select id="f_delivery">
+            <option value="">— Select —</option>
+            <option>Design-Bid-Build (Hard Bid)</option>
+            <option>Design-Assist</option>
+            <option>Design-Build</option>
+            <option>CM at Risk</option>
+            <option>IPD</option>
+            <option>Negotiated</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fg"><label>Anything else the AI should know? <span style="color:var(--text3);font-weight:400">(optional)</span></label>
+        <textarea id="f_notes" placeholder="e.g. Phased occupancy, existing building renovation, specific manufacturers basis of design, known long-lead items..."></textarea>
+      </div>
+
+      <div class="action-row">
+        <div class="action-row-left"></div>
+        <div class="action-row-right">
+          <button class="btn-gold" id="btn-start" onclick="startGeneration()">Start Bid Package <span class="icon-wrap">→</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DYNAMIC STEP PANEL -->
+  <div class="panel" id="panel-step" style="display:none">
+    <div class="panel-head">
+      <div>
+        <span class="step-badge" id="step-badge">Step X of 10</span>
+        <h2 id="step-title">Project Summary</h2>
+        <div class="sub" id="step-sub">AI is reading your plans and writing a concise project summary.</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="gen-output" id="gen-output">
+        <div class="gen-empty">Click "Generate" to begin.</div>
+      </div>
+      <div id="gen-error" style="display:none"></div>
+      <div class="action-row">
+        <div class="action-row-left">
+          <button class="btn-ghost btn-sm" id="btn-back" onclick="goBack()">← Back</button>
+          <button class="btn-ghost btn-sm" id="btn-regen" onclick="generateStep(true)" style="display:none">↻ Regenerate</button>
+          <button class="btn-ghost btn-sm" id="btn-edit" onclick="toggleEdit()" style="display:none">✎ Edit</button>
+        </div>
+        <div class="action-row-right">
+          <button class="btn-gold btn-sm" id="btn-generate" onclick="generateStep(false)">Generate →</button>
+          <button class="btn-gold btn-sm" id="btn-approve" onclick="approveStep()" style="display:none">Approve &amp; Continue →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL REVIEW PANEL -->
+  <div class="panel" id="panel-final" style="display:none">
+    <div class="panel-head">
+      <div>
+        <span class="step-badge" style="background:rgba(111,207,151,.12);color:var(--ok)">✓ Bid package complete</span>
+        <h2>Your complete bid package <span class="watermark-tag" id="wm-tag">LeadWise · Watermark</span></h2>
+        <div class="sub" id="final-project-name">Review below, then download Word or PDF to send with your bid.</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div id="final-sections"></div>
+
+      <div class="dl-gate" id="dl-gate">
+        <h3>📩 Enter your email to remove the watermark and download.</h3>
+        <p>Get a clean Word + PDF of your bid package. You'll also get our weekly "How to Win More Bids" email (unsubscribe anytime — we hate spam too).</p>
+        <div class="gate-form">
+          <input type="text" id="g_first_name" placeholder="First name" class="fg-input"/>
+          <input type="text" id="g_last_name" placeholder="Last name" class="fg-input"/>
+          <input type="email" id="g_email" placeholder="Work email" class="full fg-input"/>
+          <input type="text" id="g_business" placeholder="Company name" class="full fg-input"/>
+          <input type="tel" id="g_phone" placeholder="Phone (optional)" class="full fg-input"/>
+        </div>
+        <button class="btn-gold" id="btn-unlock" onclick="unlockDownload()">Unlock downloads <span class="icon-wrap">→</span></button>
+      </div>
+
+      <div id="dl-actions" style="display:none">
+        <div class="action-row" style="margin-top:.5rem">
+          <div class="action-row-left">
+            <button class="btn-ghost btn-sm" onclick="startOver()">← Start a new bid package</button>
+          </div>
+          <div class="action-row-right">
+            <button class="btn-gold btn-sm" onclick="downloadWord()">Download Word <span class="icon-wrap">↓</span></button>
+            <button class="btn-gold btn-sm" onclick="downloadPDF()">Download PDF <span class="icon-wrap">↓</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.dl-gate input.fg-input{background:var(--surface2);border:1px solid var(--border);border-radius:.55rem;color:var(--text);padding:.65rem .9rem;font-family:'Outfit',sans-serif;font-size:.85rem;outline:none;width:100%}
+.dl-gate input.fg-input:focus{border-color:var(--border-gold)}
+.final-section{background:var(--surface2);border:1px solid var(--border);border-radius:.85rem;padding:1.5rem 1.75rem;margin-bottom:1rem}
+.final-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.final-section-head h4{font-size:.95rem;font-weight:700;color:var(--gold);letter-spacing:.02em;text-transform:uppercase;font-size:.8rem;letter-spacing:.1em}
+</style>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-sec">
+  <div class="container">
+    <div style="text-align:center;max-width:720px;margin:0 auto">
+      <span class="eyebrow">How it works</span>
+      <h2 class="serif" style="font-size:clamp(1.75rem,3.5vw,2.5rem);line-height:1.1;color:var(--text)">Built for estimators who already know<br>what a good bid package looks like.</h2>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-card">
+        <div class="hiw-num">1</div>
+        <h4>Upload plans &amp; specs</h4>
+        <p>Drop in the mechanical, plumbing, or electrical plan sheets and spec excerpts. AI reads every page — drawings, schedules, notes, specs.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-num">2</div>
+        <h4>Review section-by-section</h4>
+        <p>Scope, equipment schedule, assumptions, exclusions, alternates, RFIs, qualification letter. You approve or regenerate each one.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-num">3</div>
+        <h4>Edit anything</h4>
+        <p>Rewrite AI output in-place. The tool knows how commercial estimators think — but you know your shop. Add your judgement, remove what doesn't fit.</p>
+      </div>
+      <div class="hiw-card">
+        <div class="hiw-num">4</div>
+        <h4>Download &amp; send</h4>
+        <p>Word doc you can paste into your bid form, or a polished PDF for the qualification letter. You still do takeoff and pricing — this is the writing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPGRADE -->
+<section class="upgrade-sec">
+  <div class="upgrade-grid">
+    <div class="upgrade-text">
+      <span class="eyebrow">This tool is the start.</span>
+      <h2>Estimating is the bottleneck.<br><span class="accent">Let's build you a system.</span></h2>
+      <p>If you're doing 5+ commercial bids a month, AI-drafted paragraphs aren't the real win. The win is the system behind them: historical bid data, manufacturer pricing feeds, labor units that reflect YOUR crews, and the email follow-up that closes cold bids six weeks later.</p>
+      <div class="upgrade-checks">
+        <div class="upgrade-check"><span class="ch">✓</span><span>Custom estimating workflows built into your CRM (GHL / HubSpot / Procore)</span></div>
+        <div class="upgrade-check"><span class="ch">✓</span><span>Bid follow-up automation: 24h, 72h, 168h, 30-day check-ins</span></div>
+        <div class="upgrade-check"><span class="ch">✓</span><span>Historical bid database — last 200 jobs priced and searchable</span></div>
+        <div class="upgrade-check"><span class="ch">✓</span><span>Lead-gen for commercial MEP work specifically — GCs, developers, PM firms</span></div>
+        <div class="upgrade-check"><span class="ch">✓</span><span>AI-drafted qualification packages customized to YOUR shop's language</span></div>
+      </div>
+      <a href="../contact.html" class="btn-gold">Book a 15-minute walkthrough <span class="icon-wrap">→</span></a>
+    </div>
+    <div class="upgrade-card">
+      <div class="badge">For commercial MEP contractors</div>
+      <h3>The full estimating &amp; bid-winning system, built into your business.</h3>
+      <p>This free tool saves you hours of writing. The real system saves you weeks and wins more work. Let's talk about what that looks like for your shop.</p>
+      <ul class="upgrade-list">
+        <li>Review your last 10 bids — win rate, AOV, reasons lost</li>
+        <li>Map your current estimating workflow end-to-end</li>
+        <li>Identify the 2-3 highest-leverage automations</li>
+        <li>Scoped proposal — no pressure, no obligation</li>
+      </ul>
+      <a href="../contact.html" class="btn-gold" style="width:100%">Get a free strategy session <span class="icon-wrap">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-cta-band">
+    <div class="footer-cta-inner">
+      <div>
+        <span class="eyebrow">Ready to dominate your market?</span>
+        <h3 class="serif">Let's build something that works<br>while you sleep.</h3>
+      </div>
+      <a href="../contact.html" class="btn-gold">Get Your Free Audit <span class="icon-wrap">↗</span></a>
+    </div>
+  </div>
+  <div class="footer-body">
+    <div class="footer-cols">
+      <div>
+        <a href="../index.html" class="nav-logo"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><path d="M50 90 L10 20 L50 40 L90 20 Z" fill="#E8A020" opacity=".9"/><path d="M50 40 L90 20 L70 75 Z" fill="#F5C060" opacity=".6"/></svg>LEADWISE<span class="gold">.</span></a>
+        <p class="footer-brand-desc">Premium digital marketing for local service contractors. Based in Tampa, FL. Serving the US.</p>
+      </div>
+      <div>
+        <span class="footer-col-label">Services</span>
+        <div class="footer-col-links">
+          <a href="../services/smart-websites.html">Smart Websites</a>
+          <a href="../services/ai-voice-agents.html">AI Voice Agents</a>
+          <a href="../services/lead-generation.html">Lead Generation</a>
+          <a href="../services/crm-automation.html">CRM &amp; Automation</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Free Tools</span>
+        <div class="footer-col-links">
+          <a href="hvac-estimate-generator.html">HVAC Estimate Generator</a>
+          <a href="commercial-estimate-builder.html">Commercial Bid Builder</a>
+          <a href="../contact.html">Free Website Audit</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-label">Company</span>
+        <div class="footer-col-links">
+          <a href="../about.html">About</a>
+          <a href="../results.html">Results</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 LeadWise Connect LLC. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="../sitemap.xml">Sitemap</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// NAV
+// ============================================================
+const navEl=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>{navEl.classList.toggle('scrolled',window.scrollY>20)});
+const ham=document.getElementById('hamburger'),menu=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');menu.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':''});
+function closeMenu(){ham.classList.remove('open');menu.classList.remove('open');document.body.style.overflow=''}
+
+// ============================================================
+// CONSTANTS: The 10-step pipeline
+// ============================================================
+const STEPS = [
+  { id:'setup',    label:'Setup',            title:'Project setup' },
+  { id:'summary',  label:'Summary',          title:'Project Summary',
+    sub:'A 2-3 paragraph executive overview of the project — so anyone reading your bid instantly gets what this job is.',
+    systemExtra:`You are a senior commercial MEP estimator writing the PROJECT SUMMARY section of a bid package. Based on the uploaded plans/specs and project info, write a crisp 2-3 paragraph summary that covers: (1) what the project is and its scope in plain language, (2) the key mechanical/plumbing/electrical systems involved with basis of design, (3) the delivery method, schedule constraints, and any notable project characteristics (phasing, occupancy, site logistics). Write it like a senior estimator briefing their team — confident, specific to THIS job based on what you actually see in the plans, never generic. Reference specific system types, capacities, or tags from the drawings when possible. No preamble, no "I" statements, no "based on the documents." Start directly with the content.`
+  },
+  { id:'scope',    label:'Scope',            title:'Scope of Work',
+    sub:'The full scope narrative — organized by CSI Division for the trades you are bidding.',
+    systemExtra:`You are writing the SCOPE OF WORK section. For each trade selected by the contractor (HVAC/Mech, Plumbing, Piping, Electrical, Low Voltage, Fire Protection), produce a structured scope narrative organized by CSI Division (22 Plumbing, 23 HVAC, 26 Electrical, 27 Comms, 28 Security, 21 Fire). Under each division use h3 subsections with specific bullet points for included work: major equipment, piping/ductwork systems, distribution, controls, testing, commissioning. Be SPECIFIC. Pull actual equipment tags, system types, and sizes from the plans. Use markdown: h2 for divisions, h3 for subsections, bulleted lists for items. Do NOT include exclusions, assumptions, or pricing — those come later. Start with a brief 1-sentence preface then go straight into Division headers.`
+  },
+  { id:'equipment',label:'Equipment',        title:'Equipment Schedule',
+    sub:'Every tagged unit pulled from the drawings, with capacity and manufacturer basis of design.',
+    systemExtra:`You are extracting the EQUIPMENT SCHEDULE from the uploaded plans. Find every tagged mechanical, plumbing, or electrical equipment unit on the drawings and schedules (AHU, RTU, FCU, VAV, pumps, boilers, chillers, water heaters, electrical panels, switchgear, transformers, fire pumps, etc.). Output as a markdown table with columns: Tag | Equipment Type | Capacity/Size | Manufacturer (Basis of Design) | Location/Service | Notes. If the plans show a legend or schedule, use it. If not, extract what's visible. Group by trade (HVAC equipment, Plumbing fixtures, Electrical equipment). Before the table, note the source (e.g. "Pulled from Mechanical Schedule on sheet M-501"). If a field is not visible on the plans, write "Per plans" or "Per spec Section 23XX" — never fabricate. Add a sentence at the bottom: "Final equipment selections to be per contractor standard stocking; substitutions per specification Section 012500."`
+  },
+  { id:'assumptions',label:'Assumptions',     title:'Assumptions',
+    sub:'Every assumption the bid is based on — the things that if untrue, would change the price.',
+    systemExtra:`You are writing the ASSUMPTIONS section. These are the things the contractor is ASSUMING to be true in order to hold their price. If any of these turn out false, there's a change order. Pull from the plans/specs and think like a senior estimator who's been burned before. Cover: site access, working hours, phasing, existing conditions (if renovation), utility tie-in locations, temporary services, scaffolding/lifts provided, coordination with other trades, shop drawing review turnaround, permit fees responsibility, sales tax, bonds, special inspections, commissioning scope, O&M manual scope, warranty start date trigger, manufacturer substitution acceptance. Format as numbered markdown list with bold lead-in phrases. Be specific to THIS project based on the plans. 15-25 assumptions is typical. Start directly — no preamble.`
+  },
+  { id:'exclusions',label:'Exclusions',      title:'Exclusions',
+    sub:'What is explicitly NOT in the bid — protect yourself from scope creep.',
+    systemExtra:`You are writing the EXCLUSIONS section — what is explicitly NOT included. These protect the contractor from "but I thought that was in your bid." Think like a senior estimator who has been through claim fights. Cover typical MEP exclusions: cutting/patching of existing construction (unless clearly in scope), painting of exposed piping/ductwork (unless specified), access panels in architectural finishes, housekeeping pads (by GC), roof curbs and flashing (by roofer), structural supports for rooftop equipment, fire-stopping at penetrations in rated walls (unless in trade scope), core drilling, dewatering, rock excavation, hazardous materials abatement, test and balance report review/commissioning agent fees, owner-furnished equipment installation (call out specifically if applicable), temporary heat/cooling/power beyond specific duration, overtime/weekend labor unless specifically approved, performance bonds if not quoted separately, premium time for accelerated schedule, sales/use tax on materials if tax-exempt. Format as numbered markdown list with bold lead-in phrases. Be specific to THIS project. 15-30 exclusions is typical.`
+  },
+  { id:'alternates',label:'Alternates',      title:'Alternates / Value Engineering',
+    sub:'Options you can offer the GC to move price up or down — show you thought about it.',
+    systemExtra:`You are writing the ALTERNATES / VALUE ENGINEERING section. These are optional cost ADDS or DEDUCTS the contractor offers the GC to give them flexibility. Review the plans and specs to identify 5-10 realistic alternates specific to this project. Examples: upgrade to higher-efficiency equipment (SEER/IEER bump), premium controls package, extended warranty, alternate manufacturer offering savings, piping material substitution (Type L vs Type M copper, PVC vs cast iron), fixture upgrade/downgrade, variable primary flow vs constant, LED fixture grade changes, generator size up/down, panel quality tier, etc. Format each as: "**Alternate #N: [Name]** — ADD/DEDUCT — Description explaining what changes and why the GC might want it." Number them. Don't quote prices (contractor fills those in). Lead with the highest-leverage VE moves. Start directly, no preamble.`
+  },
+  { id:'rfis',     label:'RFIs',             title:'RFI List',
+    sub:'The questions the contractor should ask before finalizing — issues spotted in the plans/specs.',
+    systemExtra:`You are writing the RFI (Request For Information) LIST. Review the plans and specs and identify real questions that need clarification before the bid is final. Think like an estimator who has seen plans conflict with specs, missing dimensions, vague notes, or details that would change price. Look for: plan-spec conflicts, missing equipment schedules, ambiguous scope ("by others" without clarity), missing details (roof curb type, seismic requirements, etc.), vague commissioning scope, unclear phasing, unclear temporary work expectations, missing fire-stopping details, unspecified controls sequences, conflicts between mechanical and structural (beams vs ductwork), utility tie-in questions, owner-furnished equipment scope, cost for permit / tap fees by which party. Format as numbered list: "**RFI #N:** Question text. *(Reference: Sheet/Spec section)*" — cite the specific drawing or spec section when possible. 8-15 RFIs is typical. Real, specific questions only — not generic boilerplate. Start directly, no preamble.`
+  },
+  { id:'qual',     label:'Qual Letter',      title:'Qualification Letter',
+    sub:'The cover letter for your bid — summarizes your qualifications, the scope, and the terms.',
+    systemExtra:`You are writing the QUALIFICATION LETTER — the cover letter that accompanies the contractor's bid form. It should be a formal business letter. Include: (1) Date, addressed to the General Contractor by name. (2) Re: line with the project name. (3) Opening paragraph: thanking them for the opportunity, confirming the bid is submitted per the documents. (4) Second paragraph: brief confirmation of what's included at a high level — trades bid, major systems, delivery method. (5) Third paragraph: "This bid is based on the following assumptions and exclusions — see attached schedules." (6) Fourth paragraph: note that alternates are provided for GC consideration and that RFI responses may affect final price. (7) Qualifications / contractor capabilities — 2-3 sentences on the contractor's experience and fit for this project type. (8) Bid validity period (30-60 days typical). (9) Sign-off with the contractor's company name. Use the contractor company name and GC name from the project info. Format as a real letter — not markdown headings. Professional, confident, and NOT verbose. ~250-400 words.`
+  },
+];
+
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  currentStepIdx: 0, // index into STEPS
+  apiKey: localStorage.getItem('lwc_anthropic_key') || '',
+  plansFile: null,      // { name, size, base64 }
+  specsFile: null,      // { name, size, base64 }
+  projectInfo: {
+    project_name:'', bid_date:'', gc:'', contractor:'',
+    trades:[], bldg_type:'', size:'', delivery:'', notes:''
+  },
+  results: {},     // { summary:'...', scope:'...', etc. }
+  editing: false,
+  currentGeneration: null, // { raw, approved:false }
+  unlocked: false,
+  userInfo: null
+};
+
+// Restore prior session if any
+try {
+  const saved = localStorage.getItem('lwc_commercial_session');
+  if (saved) {
+    const prev = JSON.parse(saved);
+    if (prev.results) state.results = prev.results;
+    if (prev.projectInfo) Object.assign(state.projectInfo, prev.projectInfo);
+    if (prev.userInfo) { state.userInfo = prev.userInfo; state.unlocked = true; }
+  }
+} catch(e){}
+
+function persist(){
+  try{
+    localStorage.setItem('lwc_commercial_session', JSON.stringify({
+      results: state.results,
+      projectInfo: state.projectInfo,
+      userInfo: state.userInfo
+    }));
+  }catch(e){}
+}
+
+// ============================================================
+// API KEY UI
+// ============================================================
+if (!state.apiKey) {
+  document.getElementById('api-key-wrap').classList.add('shown');
+}
+function saveApiKey(){
+  const v = document.getElementById('api-key-input').value.trim();
+  if (!v.startsWith('sk-ant-')) {
+    alert('That does not look like a valid Anthropic API key. It should start with sk-ant-');
+    return;
+  }
+  state.apiKey = v;
+  localStorage.setItem('lwc_anthropic_key', v);
+  document.getElementById('api-key-wrap').classList.remove('shown');
+}
+
+// ============================================================
+// FILE UPLOADS
+// ============================================================
+['plans','specs'].forEach(kind=>{
+  const drop = document.getElementById(`${kind}-drop`);
+  const input = document.getElementById(`${kind}-file`);
+  drop.addEventListener('dragover', e=>{e.preventDefault();drop.classList.add('dragover')});
+  drop.addEventListener('dragleave', ()=>drop.classList.remove('dragover'));
+  drop.addEventListener('drop', e=>{
+    e.preventDefault();drop.classList.remove('dragover');
+    if (e.dataTransfer.files.length) handleFile(kind, e.dataTransfer.files[0]);
+  });
+  input.addEventListener('change', e=>{
+    if (e.target.files.length) handleFile(kind, e.target.files[0]);
+  });
+});
+
+async function handleFile(kind, file){
+  if (file.type !== 'application/pdf') {
+    alert('Please upload a PDF file.');
+    return;
+  }
+  if (file.size > 32*1024*1024) {
+    alert('File is larger than 32 MB. Please upload a smaller PDF or split it.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    const base64 = reader.result.split(',')[1];
+    state[`${kind}File`] = { name: file.name, size: file.size, base64 };
+    renderFileChip(kind);
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderFileChip(kind){
+  const wrap = document.getElementById(`${kind}-chip-wrap`);
+  const f = state[`${kind}File`];
+  if (!f) { wrap.innerHTML=''; return; }
+  const sizeKB = Math.round(f.size/1024);
+  const sizeDisplay = sizeKB > 1024 ? `${(sizeKB/1024).toFixed(1)} MB` : `${sizeKB} KB`;
+  wrap.innerHTML = `<div class="file-chip">📎 <span>${escapeHtml(f.name)}</span> <span style="color:var(--text3);font-size:.7rem">${sizeDisplay}</span> <button class="x" onclick="event.preventDefault();event.stopPropagation();removeFile('${kind}')">×</button></div>`;
+}
+function removeFile(kind){
+  state[`${kind}File`] = null;
+  document.getElementById(`${kind}-file`).value='';
+  renderFileChip(kind);
+}
+
+// ============================================================
+// TRADE CHECKS
+// ============================================================
+document.querySelectorAll('.trade-check').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    el.classList.toggle('sel');
+    const trade = el.dataset.trade;
+    if (el.classList.contains('sel')) {
+      if (!state.projectInfo.trades.includes(trade)) state.projectInfo.trades.push(trade);
+    } else {
+      state.projectInfo.trades = state.projectInfo.trades.filter(t=>t!==trade);
+    }
+  });
+});
+
+// ============================================================
+// STEPPER RENDERING
+// ============================================================
+function renderStepper(){
+  const wrap = document.getElementById('stepper');
+  wrap.innerHTML = STEPS.map((s,i)=>{
+    let cls = 'step-pill';
+    if (i < state.currentStepIdx) cls += ' done';
+    else if (i === state.currentStepIdx) cls += ' active';
+    return `<div class="${cls}"><span class="num">${i < state.currentStepIdx ? '✓' : i+1}</span>${s.label}</div>`;
+  }).join('');
+}
+renderStepper();
+
+// ============================================================
+// FLOW CONTROL
+// ============================================================
+function startGeneration(){
+  // Validate
+  if (!state.apiKey) {
+    document.getElementById('api-key-wrap').classList.add('shown');
+    document.getElementById('api-key-wrap').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  if (!state.plansFile) { alert('Please upload the plan sheets first.'); return; }
+  // Capture project info
+  state.projectInfo.project_name = document.getElementById('f_project_name').value.trim();
+  state.projectInfo.bid_date = document.getElementById('f_bid_date').value.trim();
+  state.projectInfo.gc = document.getElementById('f_gc').value.trim();
+  state.projectInfo.contractor = document.getElementById('f_contractor').value.trim();
+  state.projectInfo.bldg_type = document.getElementById('f_bldg_type').value;
+  state.projectInfo.size = document.getElementById('f_size').value.trim();
+  state.projectInfo.delivery = document.getElementById('f_delivery').value;
+  state.projectInfo.notes = document.getElementById('f_notes').value.trim();
+  if (!state.projectInfo.project_name) { alert('Please enter a project name.'); return; }
+  if (state.projectInfo.trades.length === 0) { alert('Please select at least one trade.'); return; }
+  persist();
+  state.currentStepIdx = 1;
+  showStepPanel();
+}
+
+function showStepPanel(){
+  document.getElementById('panel-setup').style.display='none';
+  document.getElementById('panel-final').style.display='none';
+  document.getElementById('panel-step').style.display='block';
+  const step = STEPS[state.currentStepIdx];
+  document.getElementById('step-badge').textContent = `Step ${state.currentStepIdx+1} of ${STEPS.length}`;
+  document.getElementById('step-title').textContent = step.title;
+  document.getElementById('step-sub').textContent = step.sub || '';
+  state.editing = false;
+  state.currentGeneration = null;
+
+  // If we already have a result, show it and offer approve/regen/edit
+  const existing = state.results[step.id];
+  if (existing) {
+    renderOutput(existing);
+    setButtons({generate:false, regen:true, edit:true, approve:true});
+  } else {
+    document.getElementById('gen-output').innerHTML = '<div class="gen-empty">Click "Generate" to analyze your plans and build this section.</div>';
+    setButtons({generate:true, regen:false, edit:false, approve:false});
+  }
+  renderStepper();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setButtons({generate,regen,edit,approve}){
+  document.getElementById('btn-generate').style.display = generate ? '' : 'none';
+  document.getElementById('btn-regen').style.display = regen ? '' : 'none';
+  document.getElementById('btn-edit').style.display = edit ? '' : 'none';
+  document.getElementById('btn-approve').style.display = approve ? '' : 'none';
+  document.getElementById('btn-back').style.display = state.currentStepIdx > 1 ? '' : 'none';
+}
+
+function goBack(){
+  if (state.currentStepIdx > 1) { state.currentStepIdx--; showStepPanel(); }
+  else if (state.currentStepIdx === 1) {
+    state.currentStepIdx = 0;
+    document.getElementById('panel-step').style.display='none';
+    document.getElementById('panel-setup').style.display='block';
+    renderStepper();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+function approveStep(){
+  // Persist any final edits first
+  if (state.editing) toggleEdit();
+  if (!state.results[STEPS[state.currentStepIdx].id]) {
+    alert('Please generate content first.');
+    return;
+  }
+  persist();
+  if (state.currentStepIdx < STEPS.length - 1) {
+    state.currentStepIdx++;
+    showStepPanel();
+  } else {
+    showFinal();
+  }
+}
+
+// ============================================================
+// GENERATION (calls Anthropic API)
+// ============================================================
+async function generateStep(regen){
+  if (!state.apiKey) {
+    document.getElementById('api-key-wrap').classList.add('shown');
+    return;
+  }
+  const step = STEPS[state.currentStepIdx];
+  setButtons({generate:false, regen:false, edit:false, approve:false});
+  document.getElementById('gen-output').innerHTML = '<div class="gen-loading"><span class="dot1"></span><span class="dot2"></span><span class="dot3"></span> Analyzing plans and drafting ' + step.title.toLowerCase() + '...</div>';
+  document.getElementById('gen-error').style.display = 'none';
+
+  try {
+    const result = await callClaude(step);
+    state.results[step.id] = result;
+    state.currentGeneration = { raw: result, approved: false };
+    renderOutput(result);
+    setButtons({generate:false, regen:true, edit:true, approve:true});
+    persist();
+  } catch (err) {
+    showError(err.message || String(err));
+    setButtons({generate:true, regen:false, edit:false, approve:false});
+  }
+}
+
+function showError(msg){
+  const box = document.getElementById('gen-error');
+  box.className = 'error-box';
+  box.innerHTML = `<span style="font-size:1rem">⚠️</span><div><strong>Generation failed.</strong><br>${escapeHtml(msg)}<br><br>Common causes: API key is invalid, rate limit hit, PDF too large (>32MB), or more than 100 pages. Try regenerating or check your API key.</div>`;
+  box.style.display = 'flex';
+  document.getElementById('gen-output').innerHTML = '<div class="gen-empty">Generation failed. Fix the issue above and try again.</div>';
+}
+
+async function callClaude(step){
+  const projInfoText = formatProjectInfo(state.projectInfo);
+  const priorContext = Object.entries(state.results)
+    .filter(([k,v])=>k !== step.id && v)
+    .map(([k,v])=>{
+      const s = STEPS.find(x=>x.id===k);
+      return `=== PRIOR APPROVED SECTION: ${s.title} ===\n${v}`;
+    }).join('\n\n');
+
+  const systemPrompt = `You are a senior commercial MEP (Mechanical, Electrical, Plumbing) estimator with 25 years of experience bidding jobs from $500K to $50M. You have seen every trick, every claim, every missed detail. You write bid package content the way a top-tier commercial contractor writes it — precise, trade-specific, never generic, never hedging unnecessarily.
+
+Always:
+- Pull specific details, tags, capacities, and notes from the uploaded plans/specs — don't make things up
+- Use the contractor's trade selection and building type to focus your content
+- Write in the voice of a confident senior estimator — no "AI" tells, no "based on the provided documents", no preamble
+- Use markdown formatting (headers, lists, tables, bold) — NO code blocks unless specifically needed
+- If the plans don't show something you would normally include, note "per architectural plans" or "per spec section X" rather than inventing
+
+${step.systemExtra}`;
+
+  const userContent = [];
+
+  // Attach plans PDF with cache_control to save tokens on repeat calls
+  userContent.push({
+    type: 'document',
+    source: {
+      type: 'base64',
+      media_type: 'application/pdf',
+      data: state.plansFile.base64
+    },
+    cache_control: { type: 'ephemeral' }
+  });
+
+  // Attach specs PDF if present
+  if (state.specsFile) {
+    userContent.push({
+      type: 'document',
+      source: {
+        type: 'base64',
+        media_type: 'application/pdf',
+        data: state.specsFile.base64
+      },
+      cache_control: { type: 'ephemeral' }
+    });
+  }
+
+  userContent.push({
+    type: 'text',
+    text: `PROJECT INFORMATION:
+${projInfoText}
+
+${priorContext ? `PRIOR SECTIONS ALREADY APPROVED BY THE ESTIMATOR (for consistency):\n${priorContext}\n\n` : ''}TASK: Generate the "${step.title}" section of the bid package following the instructions in the system prompt.`
+  });
+
+  const body = {
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 4096,
+    system: systemPrompt,
+    messages: [{ role: 'user', content: userContent }]
+  };
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': state.apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    let parsed;
+    try { parsed = JSON.parse(errText); } catch { parsed = { error: { message: errText } }; }
+    throw new Error(`API error ${res.status}: ${parsed.error?.message || errText}`);
+  }
+
+  const data = await res.json();
+  const textBlocks = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n\n');
+  return textBlocks.trim();
+}
+
+function formatProjectInfo(p){
+  const tradeNames = {
+    hvac:'HVAC / Mechanical', plumbing:'Plumbing', piping:'Hydronic / Process Piping',
+    electrical:'Electrical', lowvoltage:'Low Voltage / Controls', fire:'Fire Protection'
+  };
+  return [
+    `Project Name: ${p.project_name || '—'}`,
+    `Bid Due: ${p.bid_date || '—'}`,
+    `General Contractor: ${p.gc || '—'}`,
+    `Bidding Contractor: ${p.contractor || '—'}`,
+    `Trades Being Bid: ${p.trades.map(t=>tradeNames[t]).join(', ') || '—'}`,
+    `Building Type: ${p.bldg_type || '—'}`,
+    `Approx Size: ${p.size || '—'} SF`,
+    `Project Delivery: ${p.delivery || '—'}`,
+    p.notes ? `Additional Notes: ${p.notes}` : ''
+  ].filter(Boolean).join('\n');
+}
+
+// ============================================================
+// OUTPUT RENDERING (simple markdown -> HTML)
+// ============================================================
+function renderOutput(md){
+  document.getElementById('gen-output').innerHTML = mdToHtml(md);
+  document.getElementById('gen-output').classList.remove('editing');
+}
+
+function toggleEdit(){
+  const outEl = document.getElementById('gen-output');
+  const step = STEPS[state.currentStepIdx];
+  if (!state.editing) {
+    // Enter edit mode
+    state.editing = true;
+    const raw = state.results[step.id] || '';
+    outEl.classList.add('editing');
+    outEl.innerHTML = `<textarea id="edit-ta">${escapeHtml(raw)}</textarea>`;
+    document.getElementById('btn-edit').textContent = '✓ Save edits';
+    document.getElementById('btn-regen').disabled = true;
+  } else {
+    // Save edits
+    const newVal = document.getElementById('edit-ta').value;
+    state.results[step.id] = newVal;
+    state.editing = false;
+    renderOutput(newVal);
+    document.getElementById('btn-edit').textContent = '✎ Edit';
+    document.getElementById('btn-regen').disabled = false;
+    persist();
+  }
+}
+
+// Minimal markdown → HTML (safe enough for our content)
+function mdToHtml(md){
+  if (!md) return '<div class="gen-empty">No content yet.</div>';
+  let html = md;
+  // Escape HTML first
+  html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Code blocks (just wrap in pre for now)
+  html = html.replace(/```[\s\S]*?```/g, m=>`<pre style="background:#000;padding:.75rem;border-radius:.4rem;overflow-x:auto;font-size:.8rem;margin:.5rem 0">${m.replace(/```/g,'')}</pre>`);
+  // Tables (basic)
+  html = html.replace(/(^\|.+\|\n\|[-:\s|]+\|\n(?:\|.+\|\n?)+)/gm, tableMatch=>{
+    const lines = tableMatch.trim().split('\n');
+    const headerCells = lines[0].split('|').slice(1,-1).map(c=>c.trim());
+    const rows = lines.slice(2).map(l=>l.split('|').slice(1,-1).map(c=>c.trim()));
+    return `<table><thead><tr>${headerCells.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  });
+  // Headers
+  html = html.replace(/^### (.+)$/gm,'<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm,'<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm,'<h1>$1</h1>');
+  // Bold / italic
+  html = html.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  html = html.replace(/(?<!\*)\*(?!\*)([^*\n]+)\*(?!\*)/g,'<em>$1</em>');
+  // Horizontal rules
+  html = html.replace(/^---+$/gm,'<hr>');
+  // Lists
+  html = html.replace(/((?:^[ \t]*[-*] .+\n?)+)/gm, block=>{
+    const items = block.trim().split('\n').map(l=>l.replace(/^[ \t]*[-*] /,''));
+    return `<ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+  });
+  html = html.replace(/((?:^[ \t]*\d+\. .+\n?)+)/gm, block=>{
+    const items = block.trim().split('\n').map(l=>l.replace(/^[ \t]*\d+\. /,''));
+    return `<ol>${items.map(i=>`<li>${i}</li>`).join('')}</ol>`;
+  });
+  // Paragraphs: wrap remaining non-block text chunks separated by blank lines
+  html = html.split(/\n{2,}/).map(chunk=>{
+    if (/^<(h\d|ul|ol|table|pre|hr)/.test(chunk.trim())) return chunk;
+    if (!chunk.trim()) return '';
+    return `<p>${chunk.replace(/\n/g,'<br>')}</p>`;
+  }).join('\n');
+  return html;
+}
+
+function escapeHtml(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ============================================================
+// FINAL REVIEW
+// ============================================================
+function showFinal(){
+  document.getElementById('panel-step').style.display='none';
+  document.getElementById('panel-final').style.display='block';
+  const proj = state.projectInfo.project_name || 'Untitled Project';
+  document.getElementById('final-project-name').textContent = `${proj} · prepared for ${state.projectInfo.gc || '[GC]'}`;
+
+  const sections = STEPS.filter(s=>s.id!=='setup').map(s=>{
+    const content = state.results[s.id];
+    if (!content) return '';
+    return `<div class="final-section"><div class="final-section-head"><h4>${s.title}</h4></div>${mdToHtml(content)}</div>`;
+  }).join('');
+  document.getElementById('final-sections').innerHTML = sections;
+
+  // Fire lead webhook event (anonymous — tool completed)
+  fireWebhook({ event: 'bid_package_complete', project_name: proj });
+
+  if (state.unlocked) {
+    document.getElementById('dl-gate').style.display='none';
+    document.getElementById('dl-actions').style.display='block';
+    document.getElementById('wm-tag').style.display='none';
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================
+// DOWNLOAD GATE
+// ============================================================
+async function unlockDownload(){
+  const data = {
+    first_name: document.getElementById('g_first_name').value.trim(),
+    last_name: document.getElementById('g_last_name').value.trim(),
+    email: document.getElementById('g_email').value.trim(),
+    business_name: document.getElementById('g_business').value.trim(),
+    phone: document.getElementById('g_phone').value.trim(),
+    lead_source:'commercial-estimate-builder',
+    lead_magnet:'Commercial MEP Bid Package Builder',
+    project_name: state.projectInfo.project_name,
+    trades_bid: state.projectInfo.trades.join(','),
+    bldg_type: state.projectInfo.bldg_type,
+    gc_name: state.projectInfo.gc,
+    page_url: window.location.href,
+    submitted_at: new Date().toISOString()
+  };
+  if (!data.email || !data.first_name || !data.business_name) {
+    alert('Please fill in first name, email, and company name.');
+    return;
+  }
+  const btn = document.getElementById('btn-unlock');
+  btn.textContent = 'Unlocking...'; btn.disabled = true;
+  try {
+    await fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)
+    });
+  } catch(e){}
+  state.userInfo = data;
+  state.unlocked = true;
+  persist();
+  document.getElementById('dl-gate').classList.add('unlocked');
+  document.getElementById('dl-gate').innerHTML = '<div style="display:flex;align-items:center;gap:.75rem;color:var(--ok)"><span style="font-size:1.25rem">✓</span><div><strong style="color:var(--text)">You\'re in.</strong> <span style="color:var(--text2)">Download your bid package below — watermark removed.</span></div></div>';
+  document.getElementById('dl-actions').style.display='block';
+  document.getElementById('wm-tag').style.display='none';
+}
+
+function fireWebhook(payload){
+  try {
+    fetch('https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        ...(state.userInfo || {}),
+        lead_source:'commercial-estimate-builder',
+        lead_magnet:'Commercial MEP Bid Package Builder',
+        project_name: state.projectInfo.project_name,
+        ...payload,
+        at: new Date().toISOString()
+      })
+    }).catch(()=>{});
+  } catch(e){}
+}
+
+// ============================================================
+// DOWNLOADS
+// ============================================================
+function buildBidPackageText(){
+  const proj = state.projectInfo;
+  const tradeNames = {
+    hvac:'HVAC / Mechanical', plumbing:'Plumbing', piping:'Hydronic / Process Piping',
+    electrical:'Electrical', lowvoltage:'Low Voltage / Controls', fire:'Fire Protection'
+  };
+  const header = `BID PACKAGE — ${proj.project_name || 'Untitled Project'}
+Prepared for: ${proj.gc || '—'}
+Submitted by: ${proj.contractor || '—'}
+Bid Due: ${proj.bid_date || '—'}
+Trades: ${proj.trades.map(t=>tradeNames[t]).join(', ')}
+Building Type: ${proj.bldg_type || '—'}   ·   Size: ${proj.size || '—'} SF
+Delivery: ${proj.delivery || '—'}
+
+`;
+  const body = STEPS.filter(s=>s.id!=='setup').map(s=>{
+    const c = state.results[s.id];
+    if (!c) return '';
+    return `\n\n============================================================\n${s.title.toUpperCase()}\n============================================================\n\n${c}`;
+  }).join('');
+  const footer = state.unlocked ? '\n\n---\nGenerated with LeadWise Connect · https://leadwiseconnect.com' : '';
+  return header + body + footer;
+}
+
+function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit:'pt',format:'letter'});
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 54;
+  const usable = pageW - 2*margin;
+  let y = margin;
+
+  const proj = state.projectInfo;
+
+  function addPage(){ doc.addPage(); y = margin; }
+  function checkBreak(need){ if (y + need > pageH - margin) addPage(); }
+  function addLine(text, opts={}){
+    doc.setFont(opts.font || 'helvetica', opts.style || 'normal');
+    doc.setFontSize(opts.size || 10);
+    doc.setTextColor(opts.color || 30);
+    const lines = doc.splitTextToSize(text, opts.width || usable);
+    lines.forEach(l=>{
+      checkBreak((opts.lh || 13));
+      doc.text(l, margin, y);
+      y += (opts.lh || 13);
+    });
+  }
+  function addSpace(n){ y += n; }
+
+  // Cover header
+  doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor(20);
+  doc.text('BID PACKAGE', margin, y); y += 26;
+  doc.setFont('helvetica','bold');doc.setFontSize(15);doc.setTextColor(50);
+  doc.text(proj.project_name || 'Untitled Project', margin, y); y += 20;
+  doc.setDrawColor(232,160,32);doc.setLineWidth(2);
+  doc.line(margin, y, margin+180, y); y += 18;
+  doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(60);
+  const tradeNames = {hvac:'HVAC / Mechanical',plumbing:'Plumbing',piping:'Hydronic / Process Piping',electrical:'Electrical',lowvoltage:'Low Voltage / Controls',fire:'Fire Protection'};
+  [
+    `Prepared for: ${proj.gc || '—'}`,
+    `Submitted by: ${proj.contractor || '—'}`,
+    `Bid Due: ${proj.bid_date || '—'}`,
+    `Trades: ${proj.trades.map(t=>tradeNames[t]).join(', ') || '—'}`,
+    `Building Type: ${proj.bldg_type || '—'}  ·  Size: ${proj.size || '—'} SF`,
+    `Delivery: ${proj.delivery || '—'}`
+  ].forEach(l=>{ doc.text(l, margin, y); y += 14; });
+  y += 10;
+
+  // Sections
+  STEPS.filter(s=>s.id!=='setup').forEach(s=>{
+    const content = state.results[s.id];
+    if (!content) return;
+    checkBreak(60);
+    // Section header
+    doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(184,120,24);
+    doc.text(s.title.toUpperCase(), margin, y); y += 6;
+    doc.setDrawColor(232,160,32);doc.setLineWidth(.8);
+    doc.line(margin, y, pageW - margin, y); y += 16;
+    // Strip markdown crudely for PDF
+    const clean = content
+      .replace(/^#+\s+/gm,'')
+      .replace(/\*\*(.+?)\*\*/g,'$1')
+      .replace(/\*(.+?)\*/g,'$1')
+      .replace(/^[-*]\s+/gm,'• ')
+      .replace(/^\d+\.\s+/gm,(m)=>m)
+      .replace(/^\|.*\|$/gm,(m)=>m.replace(/\|/g,'  '));
+    addLine(clean,{size:10,lh:13});
+    addSpace(16);
+  });
+
+  // Watermark footer if not unlocked
+  if (!state.unlocked) {
+    const totalPages = doc.internal.getNumberOfPages();
+    for (let i=1; i<=totalPages; i++) {
+      doc.setPage(i);
+      doc.saveGraphicsState();
+      doc.setGState(new doc.GState({opacity:.08}));
+      doc.setFont('helvetica','bold');doc.setFontSize(70);doc.setTextColor(232,160,32);
+      doc.text('LEADWISE', pageW/2, pageH/2, {align:'center', angle:-30});
+      doc.restoreGraphicsState();
+    }
+  }
+  // Footer on every page
+  const totalPages = doc.internal.getNumberOfPages();
+  for (let i=1; i<=totalPages; i++) {
+    doc.setPage(i);
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(140);
+    doc.text(`${proj.project_name || 'Bid Package'}  ·  Page ${i} of ${totalPages}`, margin, pageH - 24);
+    doc.setTextColor(184,120,24);
+    doc.text('Made with LeadWise · leadwiseconnect.com', pageW - margin, pageH - 24, {align:'right'});
+  }
+
+  const filename = `Bid-Package-${(proj.project_name||'project').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.pdf`;
+  doc.save(filename);
+  fireWebhook({ event: 'pdf_downloaded' });
+}
+
+function downloadWord(){
+  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = window.docx;
+  const proj = state.projectInfo;
+  const tradeNames = {hvac:'HVAC / Mechanical',plumbing:'Plumbing',piping:'Hydronic / Process Piping',electrical:'Electrical',lowvoltage:'Low Voltage / Controls',fire:'Fire Protection'};
+
+  const children = [];
+  children.push(new Paragraph({text:'BID PACKAGE', heading: HeadingLevel.TITLE}));
+  children.push(new Paragraph({text: proj.project_name || 'Untitled Project', heading: HeadingLevel.HEADING_1}));
+  children.push(new Paragraph({text:''}));
+  [
+    `Prepared for: ${proj.gc || '—'}`,
+    `Submitted by: ${proj.contractor || '—'}`,
+    `Bid Due: ${proj.bid_date || '—'}`,
+    `Trades: ${proj.trades.map(t=>tradeNames[t]).join(', ') || '—'}`,
+    `Building Type: ${proj.bldg_type || '—'}`,
+    `Size: ${proj.size || '—'} SF`,
+    `Delivery: ${proj.delivery || '—'}`,
+  ].forEach(l=>children.push(new Paragraph({text:l})));
+  children.push(new Paragraph({text:''}));
+
+  STEPS.filter(s=>s.id!=='setup').forEach(s=>{
+    const content = state.results[s.id];
+    if (!content) return;
+    children.push(new Paragraph({text: s.title.toUpperCase(), heading: HeadingLevel.HEADING_1, spacing:{before:400,after:200}}));
+    // Very simple line-by-line conversion
+    content.split('\n').forEach(line=>{
+      if (/^#### /.test(line)) children.push(new Paragraph({text: line.replace(/^#### /,''), heading: HeadingLevel.HEADING_4}));
+      else if (/^### /.test(line)) children.push(new Paragraph({text: line.replace(/^### /,''), heading: HeadingLevel.HEADING_3}));
+      else if (/^## /.test(line)) children.push(new Paragraph({text: line.replace(/^## /,''), heading: HeadingLevel.HEADING_2}));
+      else if (/^# /.test(line)) children.push(new Paragraph({text: line.replace(/^# /,''), heading: HeadingLevel.HEADING_2}));
+      else if (/^[-*] /.test(line)) children.push(new Paragraph({text: line.replace(/^[-*] /,'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1'), bullet:{level:0}}));
+      else if (/^\d+\.\s/.test(line)) children.push(new Paragraph({text: line.replace(/^\d+\.\s/,'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1'), numbering:{reference:'bid-numbering',level:0}}));
+      else if (/^\|/.test(line)) {/* skip table pipe lines for now, content still there as text */}
+      else {
+        const clean = line.replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1');
+        children.push(new Paragraph({text: clean}));
+      }
+    });
+  });
+
+  const doc = new Document({
+    creator:'LeadWise Connect',
+    title: proj.project_name || 'Bid Package',
+    sections:[{children}],
+    numbering:{config:[{reference:'bid-numbering',levels:[{level:0,format:'decimal',text:'%1.',alignment:AlignmentType.START}]}]}
+  });
+
+  Packer.toBlob(doc).then(blob=>{
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Bid-Package-${(proj.project_name||'project').replace(/[^a-z0-9]+/gi,'-').toLowerCase()}.docx`;
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(url), 1000);
+  });
+  fireWebhook({ event: 'word_downloaded' });
+}
+
+function startOver(){
+  if (!confirm('Start over? This will clear your current bid package (your API key is kept).')) return;
+  state.results = {};
+  state.projectInfo = {project_name:'',bid_date:'',gc:'',contractor:'',trades:[],bldg_type:'',size:'',delivery:'',notes:''};
+  state.currentStepIdx = 0;
+  state.unlocked = false;
+  state.userInfo = null;
+  localStorage.removeItem('lwc_commercial_session');
+  location.reload();
+}
+
+// Restore UI state on load
+window.addEventListener('load', ()=>{
+  // Restore project info text fields
+  if (state.projectInfo.project_name) document.getElementById('f_project_name').value = state.projectInfo.project_name;
+  if (state.projectInfo.bid_date) document.getElementById('f_bid_date').value = state.projectInfo.bid_date;
+  if (state.projectInfo.gc) document.getElementById('f_gc').value = state.projectInfo.gc;
+  if (state.projectInfo.contractor) document.getElementById('f_contractor').value = state.projectInfo.contractor;
+  if (state.projectInfo.bldg_type) document.getElementById('f_bldg_type').value = state.projectInfo.bldg_type;
+  if (state.projectInfo.size) document.getElementById('f_size').value = state.projectInfo.size;
+  if (state.projectInfo.delivery) document.getElementById('f_delivery').value = state.projectInfo.delivery;
+  if (state.projectInfo.notes) document.getElementById('f_notes').value = state.projectInfo.notes;
+  state.projectInfo.trades.forEach(t=>{
+    const el = document.querySelector(`.trade-check[data-trade="${t}"]`);
+    if (el) el.classList.add('sel');
+  });
+});
+</script>
+
+</body>
+</html>
