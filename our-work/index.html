@@ -371,11 +371,27 @@ nav.scrolled .nav-inner {
 /* ===== EMBLA CAROUSEL ===== */
 .embla {
   position: relative;
-  overflow: hidden;
+  /* overflow visible vertically so hover lift renders, hidden horizontally
+     so cards don't escape the rail. clip with padding/mask handles peek fade. */
+  overflow-x: clip;
+  overflow-y: visible;
   cursor: grab;
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
+  /* Mask creates a soft fade at left + right edges where cards exit
+     the viewport — transparent at the very edge, opaque in the
+     content area. Width-aware: stronger fade on wider screens. */
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0,
+    #000 5%,
+    #000 95%,
+    transparent 100%);
+          mask-image: linear-gradient(to right,
+    transparent 0,
+    #000 5%,
+    #000 95%,
+    transparent 100%);
 }
 .embla:active { cursor: grabbing; }
 
@@ -387,6 +403,9 @@ nav.scrolled .nav-inner {
 .embla__slide {
   flex: 0 0 auto;
   min-width: 0;
+  /* uniform gap — every slide gets the same right margin including
+     the last one, so the loop wrap-around doesn't create a 'sudden
+     touching' gap between slide 7 and slide 1. */
   margin-right: 1.5rem;
 }
 /* Mobile: 1 card visible, full peek of next */
@@ -399,7 +418,6 @@ nav.scrolled .nav-inner {
   /* Desktop: 3 cards visible */
   .embla__slide { width: calc(33.333% - 1rem); }
 }
-.embla__slide:last-child { margin-right: 0; }
 
 /* progress dots — always visible */
 .embla__dots {
