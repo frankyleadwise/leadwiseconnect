@@ -264,15 +264,21 @@ nav.scrolled .nav-inner {
 
 /* ===== GALLERY ===== */
 .gallery {
-  padding: 5rem 2rem 8rem;
+  padding: 5rem 0 8rem;
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: hidden;
+}
+.gallery-inner-head {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 .gallery-head {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   align-items: end;
 }
 .gallery-head h2 {
@@ -294,18 +300,131 @@ nav.scrolled .nav-inner {
   .gallery-head { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
-/* ===== CARD GRID ===== */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* ===== CAROUSEL CONTROLS ROW ===== */
+.carousel-controls-row {
+  max-width: 1280px;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
-@media (max-width: 840px) {
-  .cards { grid-template-columns: 1fr; }
+.carousel-meta {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.carousel-meta .pill {
+  background: rgba(232, 160, 32, 0.1);
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  padding: 0.35rem 0.7rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+.carousel-arrows {
+  display: flex;
+  gap: 0.65rem;
+}
+.carousel-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: inherit;
+  padding: 0;
+}
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+  transform: translateY(-1px);
+}
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.carousel-arrow svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.carousel-arrow:hover:not(:disabled) svg {
+  transform: scale(1.1);
 }
 
+/* ===== EMBLA CAROUSEL ===== */
+.embla {
+  overflow: hidden;
+  cursor: grab;
+}
+.embla:active { cursor: grabbing; }
+.embla__container {
+  display: flex;
+  gap: 0;
+  padding-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+  padding-right: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+  touch-action: pan-y pinch-zoom;
+}
+.embla__slide {
+  flex: 0 0 auto;
+  width: clamp(300px, 78vw, 460px);
+  margin-right: 1.5rem;
+  min-width: 0;
+}
+@media (min-width: 768px) {
+  .embla__slide { width: 440px; }
+}
+@media (min-width: 1024px) {
+  .embla__slide { width: 480px; }
+}
+.embla__slide:last-child { margin-right: 0; }
+
+/* progress dots — mobile only */
+.embla__dots {
+  display: none;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0 2rem;
+}
+@media (max-width: 767px) {
+  .embla__dots { display: flex; }
+}
+.embla__dot {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  border: 0;
+  cursor: pointer;
+  transition: background 0.25s;
+  padding: 0;
+}
+.embla__dot--selected { background: var(--gold); width: 36px; }
+
+.hide-on-mobile { display: inline; }
+@media (max-width: 640px) { .hide-on-mobile { display: none; } }
+
 .card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 1.5rem;
@@ -379,6 +498,9 @@ nav.scrolled .nav-inner {
 
 .card-body {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .card-title {
@@ -422,6 +544,7 @@ nav.scrolled .nav-inner {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  margin-top: auto;
 }
 .card-link {
   display: inline-flex;
@@ -1122,15 +1245,33 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
 
 <!-- GALLERY -->
 <section class="gallery">
-  <div class="gallery-head">
-    <h2>Seven trades. Seven distinct <em>design systems</em>.</h2>
-    <p>Northeast is one case study — the designs below are the range. Each template is a fully-built demo site tuned to the aesthetic that trade demands. Clean industrial for HVAC. Editorial craftsman for plumbing. Brutalist impact for excavation. Pick your style; we tailor it to your shop.</p>
+  <div class="gallery-inner-head">
+    <div class="gallery-head">
+      <h2>Seven trades. Seven distinct <em>design systems</em>.</h2>
+      <p>Northeast is one case study — the designs below are the range. Each template is a fully-built demo site tuned to the aesthetic that trade demands. Clean industrial for HVAC. Editorial craftsman for plumbing. Brutalist impact for excavation. Pick your style; we tailor it to your shop.</p>
+    </div>
   </div>
 
-  <div class="cards">
+  <div class="carousel-controls-row">
+    <div class="carousel-meta">
+      <span class="pill">Demo Library</span>
+      <span class="hide-on-mobile">Drag, swipe, or use arrows</span>
+    </div>
+    <div class="carousel-arrows">
+      <button class="carousel-arrow" id="emblaPrev" aria-label="Previous trade">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="carousel-arrow" id="emblaNext" aria-label="Next trade">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="embla" id="embla">
+    <div class="embla__container">
 
     <!-- HVAC -->
-    <a href="/our-work/hvac/" class="card">
+    <div class="embla__slide"><a href="/our-work/hvac/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/hvac.png" alt="Ironclad Heating & Cooling demo site hero" loading="lazy">
         <div class="card-badge">HVAC</div>
@@ -1152,10 +1293,10 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
     <!-- Roofing -->
-    <a href="/our-work/roofing/" class="card">
+    <div class="embla__slide"><a href="/our-work/roofing/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/roofing.png" alt="Cornerstone Roofing Co. demo site hero" loading="lazy">
         <div class="card-badge">Roofing</div>
@@ -1177,10 +1318,10 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
     <!-- Plumbing -->
-    <a href="/our-work/plumbing/" class="card">
+    <div class="embla__slide"><a href="/our-work/plumbing/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/plumbing.png" alt="Honest Work Plumbing demo site hero" loading="lazy">
         <div class="card-badge">Plumbing</div>
@@ -1202,10 +1343,10 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
     <!-- Electrical -->
-    <a href="/our-work/electrical/" class="card">
+    <div class="embla__slide"><a href="/our-work/electrical/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/electrical.png" alt="Watt &amp; Co. Electric demo site hero" loading="lazy">
         <div class="card-badge">Electrical</div>
@@ -1227,10 +1368,10 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
     <!-- Lawn Care -->
-    <a href="/our-work/lawn-care/" class="card">
+    <div class="embla__slide"><a href="/our-work/lawn-care/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/lawn-care.png" alt="Greenwell Landscape demo site hero" loading="lazy">
         <div class="card-badge">Lawn Care</div>
@@ -1252,10 +1393,10 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
     <!-- Excavation -->
-    <a href="/our-work/excavation/" class="card">
+    <div class="embla__slide"><a href="/our-work/excavation/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/excavation.png" alt="Bedrock Excavation demo site hero" loading="lazy">
         <div class="card-badge">Excavation</div>
@@ -1277,10 +1418,10 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
     <!-- Pest Control -->
-    <a href="/our-work/pest-control/" class="card">
+    <div class="embla__slide"><a href="/our-work/pest-control/" class="card">
       <div class="card-media">
         <img src="/assets/our-work-previews/mockups/pest-control.png" alt="Tideline Pest Defense demo site hero" loading="lazy">
         <div class="card-badge">Pest Control</div>
@@ -1302,9 +1443,12 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
           <span class="card-meta">5 pages</span>
         </div>
       </div>
-    </a>
+    </a></div>
 
-  </div>
+    </div><!-- /embla__container -->
+  </div><!-- /embla -->
+
+  <div class="embla__dots" id="emblaDots"></div>
 </section>
 
 <!-- HOW WE BUILD -->
@@ -1446,6 +1590,77 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
       link.addEventListener('click', () => dropdownWrap.classList.remove('open'));
     });
   }
+</script>
+
+<!-- ===== EMBLA CAROUSEL ===== -->
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script>
+(function() {
+  const viewport = document.getElementById('embla');
+  if (!viewport || !window.EmblaCarousel) return;
+
+  const prevBtn = document.getElementById('emblaPrev');
+  const nextBtn = document.getElementById('emblaNext');
+  const dotsContainer = document.getElementById('emblaDots');
+
+  const embla = window.EmblaCarousel(viewport, {
+    align: 'start',
+    containScroll: 'trimSnaps',
+    dragFree: false,
+    loop: false,
+    skipSnaps: false,
+  });
+
+  // Arrow buttons
+  function updateArrows() {
+    if (prevBtn) prevBtn.disabled = !embla.canScrollPrev();
+    if (nextBtn) nextBtn.disabled = !embla.canScrollNext();
+  }
+  if (prevBtn) prevBtn.addEventListener('click', () => embla.scrollPrev());
+  if (nextBtn) nextBtn.addEventListener('click', () => embla.scrollNext());
+
+  // Dots
+  function buildDots() {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    const snaps = embla.scrollSnapList();
+    snaps.forEach((_, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'embla__dot';
+      btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      btn.addEventListener('click', () => embla.scrollTo(i));
+      dotsContainer.appendChild(btn);
+    });
+  }
+  function updateDots() {
+    if (!dotsContainer) return;
+    const selected = embla.selectedScrollSnap();
+    dotsContainer.querySelectorAll('.embla__dot').forEach((dot, i) => {
+      dot.classList.toggle('embla__dot--selected', i === selected);
+    });
+  }
+
+  buildDots();
+  updateArrows();
+  updateDots();
+
+  embla.on('select', () => {
+    updateArrows();
+    updateDots();
+  });
+  embla.on('reInit', () => {
+    buildDots();
+    updateArrows();
+    updateDots();
+  });
+
+  // Keyboard nav when carousel is focused / hovered
+  viewport.setAttribute('tabindex', '0');
+  viewport.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); embla.scrollPrev(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); embla.scrollNext(); }
+  });
+})();
 </script>
 </body>
 </html>
