@@ -377,8 +377,6 @@ nav.scrolled .nav-inner {
 .embla__container {
   display: flex;
   gap: 0;
-  padding-left: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
-  padding-right: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
   touch-action: pan-y pinch-zoom;
 }
 .embla__slide {
@@ -395,16 +393,13 @@ nav.scrolled .nav-inner {
 }
 .embla__slide:last-child { margin-right: 0; }
 
-/* progress dots — mobile only */
+/* progress dots — always visible */
 .embla__dots {
-  display: none;
+  display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   padding: 0 2rem;
-}
-@media (max-width: 767px) {
-  .embla__dots { display: flex; }
 }
 .embla__dot {
   width: 24px;
@@ -1604,17 +1599,17 @@ footer.unified-footer{border-top:1px solid rgba(255,255,255,.06);background:var(
   const dotsContainer = document.getElementById('emblaDots');
 
   const embla = window.EmblaCarousel(viewport, {
-    align: 'start',
-    containScroll: 'trimSnaps',
+    align: 'center',
+    containScroll: false,
     dragFree: false,
-    loop: false,
+    loop: true,
     skipSnaps: false,
   });
 
-  // Arrow buttons
+  // Arrow buttons — in loop mode, both are always enabled
   function updateArrows() {
-    if (prevBtn) prevBtn.disabled = !embla.canScrollPrev();
-    if (nextBtn) nextBtn.disabled = !embla.canScrollNext();
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
   }
   if (prevBtn) prevBtn.addEventListener('click', () => embla.scrollPrev());
   if (nextBtn) nextBtn.addEventListener('click', () => embla.scrollNext());
