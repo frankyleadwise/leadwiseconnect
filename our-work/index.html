@@ -370,10 +370,15 @@ nav.scrolled .nav-inner {
 
 /* ===== EMBLA CAROUSEL ===== */
 .embla {
+  position: relative;
   overflow: hidden;
   cursor: grab;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 .embla:active { cursor: grabbing; }
+
 .embla__container {
   display: flex;
   gap: 0;
@@ -381,15 +386,18 @@ nav.scrolled .nav-inner {
 }
 .embla__slide {
   flex: 0 0 auto;
-  width: clamp(300px, 78vw, 460px);
-  margin-right: 1.5rem;
   min-width: 0;
+  margin-right: 1.5rem;
 }
-@media (min-width: 768px) {
-  .embla__slide { width: 440px; }
+/* Mobile: 1 card visible, full peek of next */
+.embla__slide { width: calc(100% - 3rem); }
+@media (min-width: 640px) {
+  /* Tablet: 2 cards visible */
+  .embla__slide { width: calc(50% - 1.125rem); }
 }
 @media (min-width: 1024px) {
-  .embla__slide { width: 480px; }
+  /* Desktop: 3 cards visible */
+  .embla__slide { width: calc(33.333% - 1rem); }
 }
 .embla__slide:last-child { margin-right: 0; }
 
