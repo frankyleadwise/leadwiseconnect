@@ -529,7 +529,7 @@ write("services/crm-automation.html", svc_subpage(
     [
         {"n":"1","t":"Missed call text-back","d":"The instant a call goes unanswered, an automated text goes out: 'Sorry we missed you — how can we help?' Recovers 30–40% of missed leads."},
         {"n":"2","t":"Lead nurture sequences","d":"Automated SMS and email sequences keep prospects warm over 7, 14, and 30 days. Most jobs are booked on the 3rd or 4th touchpoint."},
-        {"n":"3","t":"Review request automation","d":"After every completed job, a review request goes out automatically. This is how we took our HVAC client from 10 to 34 Google reviews in 6 months."},
+        {"n":"3","t":"Review request automation","d":"After every completed job, a review request goes out automatically. This is how we took our HVAC client from 10 to 34 Google reviews in 6 months — now 52 and counting."},
         {"n":"4","t":"Pipeline management","d":"Every lead lives in a visual pipeline — New, Contacted, Quoted, Booked, Complete. You always know exactly where every job stands."},
     ],
     ["Full GHL account setup","Custom pipeline stages","Automated SMS sequences","Automated email sequences","Missed call text-back","Review request automation","Appointment reminders","Two-way SMS inbox","Lead source tracking","Monthly reporting"]
