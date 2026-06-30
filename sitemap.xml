@@ -33,4 +33,6 @@
   <url><loc>https://leadwiseconnect.com/tools/</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://leadwiseconnect.com/tools/hvac-estimate-generator.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://leadwiseconnect.com/tools/commercial-estimate-builder.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://leadwiseconnect.com/privacy.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://leadwiseconnect.com/terms.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
 </urlset>

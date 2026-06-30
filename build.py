@@ -777,6 +777,8 @@ sitemap_urls = [
     ("https://leadwiseconnect.com/about.html", "0.7", "monthly"),
     ("https://leadwiseconnect.com/blog.html", "0.8", "weekly"),
     ("https://leadwiseconnect.com/contact.html", "0.9", "monthly"),
+    ("https://leadwiseconnect.com/privacy.html", "0.3", "yearly"),
+    ("https://leadwiseconnect.com/terms.html", "0.3", "yearly"),
 ] + [(f"https://leadwiseconnect.com/blog/{p['slug']}.html", "0.7", "monthly") for p in posts]
 
 sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
