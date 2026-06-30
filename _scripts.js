@@ -35,13 +35,19 @@ document.querySelectorAll('.reveal').forEach(el=>{
 
 // Form
 const form = document.getElementById('audit-form');
+const GHL_WEBHOOK='https://services.leadconnectorhq.com/hooks/ZmFrNx6X8Bl3SMB4e7Vw/webhook-trigger/c2L1PJ4lUgAMIPNKe40z';
 if(form) form.addEventListener('submit',async e=>{
   e.preventDefault();
   const btn=form.querySelector('button[type="submit"]');
   btn.textContent='Sending...';btn.disabled=true;
   try{
-    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-    if(res.ok){document.getElementById('form-card').innerHTML='<div style="text-align:center;padding:3rem 1rem"><div style="width:3.5rem;height:3.5rem;border-radius:50%;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.4rem;color:#E8A020">✓</div><h3 style="font-size:1.5rem;font-weight:700;color:#F5F5F0;margin-bottom:.75rem">You\'re on the list.</h3><p style="color:#9A9890;line-height:1.7">We\'ll review your site and reach out within 24 hours with your free audit.</p></div>'}
-    else{btn.textContent='Get My Free Audit';btn.disabled=false}
+    // Build url-encoded body (CORS-safelisted, no preflight; GHL parses cleanly)
+    const body=new URLSearchParams();
+    new FormData(form).forEach((v,k)=>{ if(k!=='sms_consent') body.append(k,v); });
+    const consent=form.querySelector('[name="sms_consent"]')?.checked===true;
+    body.set('sms_consent', consent?'true':'false');
+    body.set('sms_consent_timestamp', consent? new Date().toISOString() : '');
+    await fetch(GHL_WEBHOOK,{method:'POST',mode:'no-cors',body});
+    document.getElementById('form-card').innerHTML='<div style="text-align:center;padding:3rem 1rem"><div style="width:3.5rem;height:3.5rem;border-radius:50%;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.4rem;color:#E8A020">✓</div><h3 style="font-size:1.5rem;font-weight:700;color:#F5F5F0;margin-bottom:.75rem">You\'re on the list.</h3><p style="color:#9A9890;line-height:1.7">We\'ll review your site and reach out within 24 hours with your free audit.</p></div>';
   }catch{btn.textContent='Get My Free Audit';btn.disabled=false}
 });
