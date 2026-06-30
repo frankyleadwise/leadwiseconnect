@@ -1,3 +1,26 @@
+#!/usr/bin/env python3
+# =====================================================================
+#  ARCHIVED / DISABLED — DO NOT RUN AGAINST THE LIVE SITE
+# ---------------------------------------------------------------------
+#  This generator is OUT OF SYNC with the live leadwiseconnect.com site.
+#  The live .html files are now the source of truth and are edited
+#  directly. Running this would silently revert ~18 hand-maintained
+#  pages AND replace the working GoHighLevel contact form with a broken
+#  Formspree placeholder ("YOUR_FORM_ID").
+#
+#  It is kept only for historical reference. If you ever truly need to
+#  regenerate from scratch, you must FIRST reconcile this script with
+#  the live pages, then run with:  LWC_ALLOW_LEGACY_BUILD=1 python3 <file>
+# =====================================================================
+import os as _os, sys as _sys
+if _os.environ.get("LWC_ALLOW_LEGACY_BUILD") != "1":
+    _sys.stderr.write(
+        "\nRefusing to run: this generator is ARCHIVED and out of sync with the live site.\n"
+        "Running it would overwrite hand-maintained pages and break the contact form.\n"
+        "See the header note in this file if you genuinely need to regenerate.\n\n"
+    )
+    _sys.exit(1)
+
 import os
 
 BASE_CSS = open('_base.css').read()
